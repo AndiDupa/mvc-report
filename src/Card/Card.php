@@ -6,7 +6,7 @@ class Card
 {
     public string $value;
 
-    public function __construct(string $value="")
+    public function __construct(string $value = "")
     {
         $this->value = $value;
     }
@@ -20,8 +20,7 @@ class Card
     {
         $deck = [];
 
-        foreach (CardGraphic::$representation as $key => $unicode)
-        {
+        foreach (CardGraphic::$representation as $key => $unicode) {
             $deck[] = new Card($key);
         }
 

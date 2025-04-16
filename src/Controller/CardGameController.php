@@ -35,8 +35,7 @@ class CardGameController extends AbstractController
     #[Route("/card/deck", name: "deck_card")]
     public function showDeck(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         if (count($session) == 0) {
             $deck = Card::wholeDeck();
 
@@ -44,7 +43,7 @@ class CardGameController extends AbstractController
                 "deck" => $deck,
             ];
 
-            $session->set("deck", $deck);    
+            $session->set("deck", $deck);
         } else {
             $data = [
                 "deck" => $session->get("deck"),
@@ -57,8 +56,7 @@ class CardGameController extends AbstractController
     #[Route("/card/deck/shuffle", name: "deck_card_shuffle")]
     public function shuffledDeck(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $deck = Card::shuffleDeck();
 
         $data = [
@@ -73,8 +71,7 @@ class CardGameController extends AbstractController
     #[Route("/card/deck/draw", name: "deck_card_draw")]
     public function drawFromDeck(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $deck = $session->get("deck");
 
         if (empty($deck)) {
@@ -82,7 +79,7 @@ class CardGameController extends AbstractController
                 'warning',
                 'There are no cards left in the deck!'
             );
-            
+
             $data = [
                 "draw" => "",
             ];
@@ -98,7 +95,7 @@ class CardGameController extends AbstractController
             $session->set("deck", $deck);
 
             // print_r(array_shift($deck)->getAsString());
-            foreach($deck as $card) {
+            foreach ($deck as $card) {
                 print_r($card->getAsString());
                 print_r("<br>");
             }
