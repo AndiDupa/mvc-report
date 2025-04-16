@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Content of session{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <h1>Content of session</h1>
+        {{ include('flash.html.twig') }}
+        {% if session %}
+            <p>{{ dump(session) }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

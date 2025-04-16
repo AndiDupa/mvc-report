@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <h1>Om MVC Kursen</h1><br>
+        <div class="aside-left">
+            <p>
+                MVC kursen (objektorienterade webbteknologier) handlar om objektorienterad programmering med språket PHP. 
+                Utöver detta fokuserar kursen även på webbramverk och enhetstesting. I denna webbplats kommer jag att 
+                dokumentera varje kursmoment och bearbeta webbplatsen.
+            </p>
+            <br>
+            <a href="https://github.com/dbwebb-se/mvc/tree/main">
+                <p>Här är länken till MVC kursrepot i GitHub</p>
+            </a><br>
+            <a href="https://github.com/AndiDupa/mvc">
+                <p>Här är länken till Mitt kursrepo i GitHub</p>
+            </a>
+        </div>
+
+        <div class="aside-right">
+            <img class="small" src="{{ asset('img/php-oop.png') }}" alt="">
+            <a class="text-small" href="https://brainbell.com/php/object-oriented.html">Bild tagen från brainbell.com</a>
+        </div>
+    </div>
+{% endblock %}

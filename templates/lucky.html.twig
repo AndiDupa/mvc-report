@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Magic number{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <div class="container">
+            <div class="cube">
+                <div class="face left">Här är dagens datum: {{ date }}</div>
+                <div class="face right">Krona eller klave?</div>
+                <div class="face front">Välkommen till den galna sidan!</div>
+                <div class="face back">Här är ett slumpat nummer: {{ number }}</div>
+            </div>
+        </div>
+
+        <div class="{{ side }}">
+            <p>
+                {{ side }}
+            </p>
+        </div>
+    </div>
+{% endblock %}

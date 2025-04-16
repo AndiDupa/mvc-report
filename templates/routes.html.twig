@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}API Routes{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <h1>API Routes</h1><br>
+        <p>
+            Följande är routes till sidans JSON sidor:
+        </p>
+        <br>
+        <label>Denna sida visar 3 slumpade citat</label>
+        <a class="button large link-no-decor" href="{{ path('quote') }}">
+            <p>Quotes</p>
+        </a>
+    </div>
+{% endblock %}

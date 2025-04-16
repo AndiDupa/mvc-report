@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Pig Game{% endblock %}
+
+{% block body %}
+<h1>Roll a dice</h1>
+
+<p>Here is the value of the dice.</p>
+
+{{ include('flash.html.twig') }}
+
+<ul class="deck-parent">
+    <li class="deck">{{ draw }}</li>
+</ul>
+
+{% endblock %}
