@@ -36,22 +36,35 @@ class CardGameController extends AbstractController
     public function showDeck(
         SessionInterface $session
     ): Response {
-        if (count($session) == 0) {
-            $deck = Card::wholeDeck();
+        $deck = $session->get("deck");
+        $userDeck = $session->get("userDeck") ?? [];
+
+        if (count($userDeck) === 52 && $deck === []) {
+            $cardCount = count($deck);
 
             $data = [
-                "deck" => $deck,
+                'deck' => $deck,
+                "cardsLeft" => $cardCount,
+                "userDeck" => $userDeck,
             ];
 
-            // echo ($deck[25]->getAsString());
+        } elseif ($deck == null) {
+            $deck = Card::wholeDeck();
+            $userDeck = [];
+            $cardCount = count($deck);
+
+            $data = [
+                'deck' => $deck,
+                "cardsLeft" => $cardCount,
+                "userDeck" => $userDeck,
+            ];
 
             $session->set("deck", $deck);
-            $session->set("userDeck", []);
-
         } else {
             $data = [
-                "deck" => $session->get("deck"),
-                "userDeck" => $session->get("userDeck"),
+                'deck' => $deck,
+                "cardsLeft" => 0,
+                "userDeck" => $userDeck,
             ];
         }
 
@@ -114,11 +127,64 @@ class CardGameController extends AbstractController
         return $this->render('card/test/draw.html.twig', $data);
     }
 
-    #[Route("/card/deck/draw/:{num<\d+>}", name: "deck_card_draw_num")]
-    public function drawNumFromDeck(
-        int $num,
-        SessionInterface $session
+    #[Route("/card/deck/draw/:{num<\d+>}", name: "deck_card_draw_num_get", methods: ['GET'])]
+    public function drawNumFromDeckGet(
+        SessionInterface $session,
+        int $num
     ): Response {
+        $deck = $session->get("deck");
+        $userDeck = $session->get("userDeck") ?? [];
+        $isDeckArray = false;
+
+        if (empty($deck) || !(is_array($deck))) {
+            $this->addFlash(
+                'warning',
+                'There are no cards left in the deck!'
+            );
+            return $this->redirectToRoute('deck_card');
+        }
+
+        if (count($deck) < $num) {
+            $this->addFlash(
+                'warning',
+                "You can't draw more cards than there are in the deck!"
+            );
+            return $this->redirectToRoute('deck_card');
+        }
+
+        $showCard = [];
+        $isDeckArray = true;
+
+        for ($i = 0; $i < $num; $i++) {
+            if (empty($deck)) {
+                break;
+            }
+
+            $card = array_shift($deck);
+
+            $showCard[] = $card;
+            $userDeck[] = $card;
+        }
+
+        $session->set("deck", $deck);
+        $session->set("userDeck", $userDeck);
+
+        $data = [
+            "draw" => $showCard,
+            "bool" => $isDeckArray,
+            "userDeck" => $userDeck,
+            "num" => $num,
+        ];
+
+        return $this->render('card/test/draw.html.twig', $data);
+    }
+
+    #[Route("/card/deck/draw/page", name: "deck_card_draw_num", methods: ['POST'])]
+    public function drawNumFromDeck(
+        SessionInterface $session,
+        Request $request
+    ): Response {
+        $num = $request->request->get('num');
         $deck = $session->get("deck");
         $userDeck = $session->get("userDeck") ?? [];
         $isDeckArray = false;
@@ -166,11 +232,8 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/game/pig/test/roll/{num<\d+>}", name: "test_roll_num_dices")]
-    public function testRollDices(
-        Request $request
-    ): Response {
-        $num = $request->request->get('num');
-
+    public function testRollDices(int $num): Response
+    {
         if ($num > 99) {
             throw new \Exception("Can not roll more than 99 dices!");
         }

@@ -122,9 +122,10 @@ class HomeRoute extends AbstractController
     ): Response {
         $deck = $session->get("apiDeck");
         $userDeck = $session->get("apiUserDeck") ?? [];
-        $cardCount = count($deck);
 
         if (count($userDeck) === 52 && $deck === []) {
+            $cardCount = count($deck);
+
             $data = [
                 'deck' => $deck,
                 "cardsLeft" => $cardCount,
@@ -134,6 +135,7 @@ class HomeRoute extends AbstractController
         } elseif ($deck == null) {
             $deck = Card::wholeDeck();
             $userDeck = [];
+            $cardCount = count($deck);
 
             $data = [
                 'deck' => $deck,
@@ -145,7 +147,7 @@ class HomeRoute extends AbstractController
         } else {
             $data = [
                 'deck' => $deck,
-                "cardsLeft" => $cardCount,
+                "cardsLeft" => 0,
                 "userDeck" => $userDeck,
             ];
         }

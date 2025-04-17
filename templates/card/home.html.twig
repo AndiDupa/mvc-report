@@ -22,20 +22,21 @@ To draw one card, visit the simple draw route. If you want to draw more at once,
     the deck array, and "getAsString" which returns the string value of the current card.<br>
     The other class "CardGraphic" only holds the "representation" variable, which I already stated, holds the abbreviations to unicode.<br>
     The classes are related in a dependency relationship, since no class owns the other, but Card depends on CardGraphics representation variable.<br><br>
-    The following is an UML diagram showing the two classes' relationship:<br>
+    The following is an UML diagram showing the two classes' relationship:<br><br>
 </p>
 
 <div class="center">
     <img class="small border" src="{{ asset('img/UML.png') }}" alt=""><br><br><br>
 </div>
 
-<h2 class="center">These are the routes for the card game thus far:</h2><br>
+<h2 class="center">These are the routes for the card game thus far:</h2>
+<p class="center">(PS. The :number page for the button below is different and uses draw/page instead of draw/:number,<br> since I could not use a form to display the user imputed number at the end of the link.)</p><br>
 
 <div class="center">
     <a class="nav-btn" href="{{ path('deck_card') }}">View deck</a>
     <a class="nav-btn" href="{{ path('deck_card_shuffle') }}">Shuffle deck</a>
     <a class="nav-btn" href="{{ path('deck_card_draw') }}">Draw 1 card</a>
-    <form class="large" method="POST" action="{{ path('deck_card_draw_num', {'num': 1}) }}">
+    <form class="large" method="POST" action="{{ path('deck_card_draw_num') }}">
         <br><p>Enter a number to draw that number of cards:</p>
         <input type="number" name="num" class="fill-available"><br>
 
