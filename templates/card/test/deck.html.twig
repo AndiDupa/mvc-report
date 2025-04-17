@@ -7,9 +7,19 @@
 
 <p>Here is the value of the dice.</p>
 
+{{ include('flash.html.twig') }}
+
 <ul class="deck-parent">
     {% for card in deck %}
         <li class="deck">{{ card.cardToUnicode }}</li>
+    {% endfor %}
+</ul>
+
+<h2 class="underline">User deck</h2>
+
+<ul class="deck-parent">
+    {% for card in userDeck %}
+        <li class="deck">{{ card.cardToUnicode() }}</li>
     {% endfor %}
 </ul>
 

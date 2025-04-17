@@ -3,7 +3,7 @@
 {% block title %}API Routes{% endblock %}
 
 {% block body %}
-    <div class="center">
+    <div class="center form">
         <h1>API Routes</h1><br>
         <p>
             Följande är routes till sidans JSON sidor:
@@ -13,5 +13,26 @@
         <a class="button large link-no-decor" href="{{ path('quote') }}">
             <p>Quotes</p>
         </a>
+        <a class="button large link-no-decor" href="{{ path('deck') }}">
+            <p>JSON card deck</p>
+        </a>
+        <form class="large" method="POST" action="{{ path('shuffleDeck') }}">
+            <button class="button fill-available link-no-decor">
+                <p>JSON card deck shuffle</p>
+            </button>
+        </form>
+        <form class="large" method="POST" action="{{ path('deckDraw') }}">
+            <button class="button fill-available link-no-decor">
+                <p>JSON deck draw 1 card</p>
+            </button>
+        </form>
+        <form class="large" method="POST" action="{{ path('deckDrawNum', {'num': 1}) }}">
+            <br><p>Enter a number to draw that number of cards:</p>
+            <input type="number" name="num" class="fill-available"><br>
+
+            <button class="button fill-available link-no-decor">
+                <p>Submit</p>
+            </button>
+        </form>
     </div>
 {% endblock %}

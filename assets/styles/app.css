@@ -270,6 +270,11 @@ li {
     text-decoration: underline;
 }
 
+.underline {
+    width: 50%;
+    text-decoration: dotted;
+}
+
 .float-left {
     float: left;
     text-align: left;
@@ -287,6 +292,15 @@ li {
 .deck {
     font-size: 4em;
     display: contents;
+}
+
+.form {
+    display: grid;
+}
+
+.fill-available {
+    width: -webkit-fill-available;
+    margin: 0.5em 0;
 }
 
 .deck-parent {

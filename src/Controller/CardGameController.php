@@ -43,10 +43,15 @@ class CardGameController extends AbstractController
                 "deck" => $deck,
             ];
 
+            // echo ($deck[25]->getAsString());
+
             $session->set("deck", $deck);
+            $session->set("userDeck", []);
+
         } else {
             $data = [
                 "deck" => $session->get("deck"),
+                "userDeck" => $session->get("userDeck"),
             ];
         }
 
@@ -59,11 +64,14 @@ class CardGameController extends AbstractController
     ): Response {
         $deck = Card::shuffleDeck();
 
+        $session->set("deck", $deck);
+        $session->set("userDeck", []);
+
         $data = [
             "deck" => $deck,
+            "bool" => "",
+            "userDeck" => $session->get("userDeck"),
         ];
-
-        $session->set("deck", $deck);
 
         return $this->render('card/test/deck.html.twig', $data);
     }
@@ -73,6 +81,7 @@ class CardGameController extends AbstractController
         SessionInterface $session
     ): Response {
         $deck = $session->get("deck");
+        $userDeck = $session->get("userDeck") ?? [];
 
         if (empty($deck)) {
             $this->addFlash(
@@ -82,29 +91,79 @@ class CardGameController extends AbstractController
 
             $data = [
                 "draw" => "",
+                "bool" => "",
+                "userDeck" => $userDeck,
             ];
         } else {
             $currCard = array_shift($deck);
+
+            array_push($userDeck, $currCard);
 
             $currCardUnicode = $currCard->cardToUnicode();
 
             $data = [
                 "draw" => $currCardUnicode,
+                "bool" => "",
+                "userDeck" => $userDeck,
             ];
 
             $session->set("deck", $deck);
-
-            // print_r(array_shift($deck)->getAsString());
-            foreach ($deck as $card) {
-                print_r($card->getAsString());
-                print_r("<br>");
-            }
-            echo count($deck);
+            $session->set("userDeck", $userDeck);
         }
 
         return $this->render('card/test/draw.html.twig', $data);
     }
 
+    #[Route("/card/deck/draw/:{num<\d+>}", name: "deck_card_draw_num")]
+    public function drawNumFromDeck(
+        int $num,
+        SessionInterface $session
+    ): Response {
+        $deck = $session->get("deck");
+        $userDeck = $session->get("userDeck") ?? [];
+        $isDeckArray = false;
+
+        if (empty($deck) || !(is_array($deck))) {
+            $this->addFlash(
+                'warning',
+                'There are no cards left in the deck!'
+            );
+            return $this->redirectToRoute('deck_card');
+        }
+
+        if (count($deck) < $num) {
+            $this->addFlash(
+                'warning',
+                "You can't draw more cards than there are in the deck!"
+            );
+            return $this->redirectToRoute('deck_card');
+        }
+
+        $showCard = [];
+        $isDeckArray = true;
+
+        for ($i = 0; $i < $num; $i++) {
+            if (empty($deck)) {
+                break;
+            }
+
+            $card = array_shift($deck);
+
+            $showCard[] = $card;
+            $userDeck[] = $card;
+        }
+
+        $session->set("deck", $deck);
+        $session->set("userDeck", $userDeck);
+
+        $data = [
+            "draw" => $showCard,
+            "bool" => $isDeckArray,
+            "userDeck" => $userDeck,
+        ];
+
+        return $this->render('card/test/draw.html.twig', $data);
+    }
 
     #[Route("/game/pig/test/roll/{num<\d+>}", name: "test_roll_num_dices")]
     public function testRollDices(int $num): Response

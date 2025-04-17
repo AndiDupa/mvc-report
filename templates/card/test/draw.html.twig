@@ -10,7 +10,21 @@
 {{ include('flash.html.twig') }}
 
 <ul class="deck-parent">
+    {% if bool %}
+        {% for card in draw %}
+            <li class="deck">{{ card.cardToUnicode() }}</li>
+        {% endfor %}
+    {% else %}
     <li class="deck">{{ draw }}</li>
+    {% endif %}
+</ul>
+
+<h2 class="underline">User deck</h2>
+
+<ul class="deck-parent">
+    {% for card in userDeck %}
+        <li class="deck">{{ card.cardToUnicode() }}</li>
+    {% endfor %}
 </ul>
 
 {% endblock %}

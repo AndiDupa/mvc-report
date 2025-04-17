@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Card\Card;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class HomeRoute extends AbstractController
 {
@@ -106,7 +109,46 @@ class HomeRoute extends AbstractController
             'generated' => $generated,
         ];
 
-        // return new JsonResponse($data);
+        $response = new JsonResponse($data);
+        $response->setEncodingOptions(
+            $response->getEncodingOptions() | JSON_PRETTY_PRINT
+        );
+        return $response;
+    }
+
+    #[Route("/api/deck", name: "deck", methods: ['GET'])]
+    public function jsonDeck(
+        SessionInterface $session
+    ): Response {
+        $deck = $session->get("apiDeck");
+        $userDeck = $session->get("apiUserDeck") ?? [];
+        $cardCount = count($deck);
+
+        if (count($userDeck) === 52 && $deck === []) {
+            $data = [
+                'deck' => $deck,
+                "cardsLeft" => $cardCount,
+                "userDeck" => $userDeck,
+            ];
+
+        } elseif ($deck == null) {
+            $deck = Card::wholeDeck();
+            $userDeck = [];
+
+            $data = [
+                'deck' => $deck,
+                "cardsLeft" => $cardCount,
+                "userDeck" => $userDeck,
+            ];
+
+            $session->set("apiDeck", $deck);
+        } else {
+            $data = [
+                'deck' => $deck,
+                "cardsLeft" => $cardCount,
+                "userDeck" => $userDeck,
+            ];
+        }
 
         $response = new JsonResponse($data);
         $response->setEncodingOptions(
@@ -114,8 +156,85 @@ class HomeRoute extends AbstractController
         );
         return $response;
     }
-}
 
+    #[Route("/api/shuffleDeck", name: "shuffleDeck", methods: ['POST'])]
+    public function jsonShuffleDeck(
+        SessionInterface $session
+    ): Response {
+        $deck = Card::shuffleDeck();
+
+        $session->set("apiDeck", $deck);
+        $session->set("apiUserDeck", []);
+
+        $data = [
+            'deck' => $deck,
+        ];
+
+        return $this->redirectToRoute('deck');
+    }
+
+    #[Route("/api/deck/draw", name: "deckDraw", methods: ['POST'])]
+    public function jsonDeckDraw(
+        SessionInterface $session
+    ): Response {
+        $deck = $session->get("apiDeck");
+        $userDeck = $session->get("apiUserDeck") ?? [];
+        $cardCount = count($deck);
+
+        if (empty($deck)) {
+            return $this->redirectToRoute('deck');
+        } else {
+            $currCard = array_shift($deck);
+
+            $userDeck[] = $currCard->getAsString();
+
+            $session->set("apiDeck", $deck);
+            $session->set("apiUserDeck", $userDeck);
+        }
+
+        return $this->redirectToRoute('deck');
+    }
+
+    #[Route("/api/deck/draw/:{num<\d+>}", name: "deckDrawNum", methods: ['POST'])]
+    public function jsonDeckDrawNum(
+        Request $request,
+        SessionInterface $session
+    ): Response {
+        $num = $request->request->get('num');
+        $deck = $session->get("apiDeck") ?? [];
+        $userDeck = $session->get("apiUserDeck") ?? [];
+
+        if ($deck === [] || count($deck) < $num) {
+            $response = new JsonResponse(
+                ['error' => 'Youve either requested more cards than the amount left in the deck, or the deck is empty'],
+            );
+            $response->setEncodingOptions(
+                $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            );
+            return $response;
+        }
+
+        $cardCount = count($deck);
+
+        $showCard = [];
+
+        for ($i = 0; $i < $num; $i++) {
+            if (empty($deck)) {
+                break;
+            }
+
+            $card = array_shift($deck);
+
+            $showCard[] = $card->getAsString();
+            $userDeck[] = $card->getAsString();
+        }
+
+        $session->set("apiDeck", $deck);
+        $session->set("apiUserDeck", $userDeck);
+
+        return $this->redirectToRoute('deck');
+    }
+}
 
 // <?php
 
