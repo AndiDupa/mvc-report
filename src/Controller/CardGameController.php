@@ -166,8 +166,11 @@ class CardGameController extends AbstractController
     }
 
     #[Route("/game/pig/test/roll/{num<\d+>}", name: "test_roll_num_dices")]
-    public function testRollDices(int $num): Response
-    {
+    public function testRollDices(
+        Request $request
+    ): Response {
+        $num = $request->request->get('num');
+
         if ($num > 99) {
             throw new \Exception("Can not roll more than 99 dices!");
         }

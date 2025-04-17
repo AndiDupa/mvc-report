@@ -26,7 +26,24 @@ To draw one card, visit the simple draw route. If you want to draw more at once,
 </p>
 
 <div class="center">
-    <img class="small border" src="{{ asset('img/UML.png') }}" alt="">
+    <img class="small border" src="{{ asset('img/UML.png') }}" alt=""><br><br><br>
+</div>
+
+<h2 class="center">These are the routes for the card game thus far:</h2><br>
+
+<div class="center">
+    <a class="nav-btn" href="{{ path('deck_card') }}">View deck</a>
+    <a class="nav-btn" href="{{ path('deck_card_shuffle') }}">Shuffle deck</a>
+    <a class="nav-btn" href="{{ path('deck_card_draw') }}">Draw 1 card</a>
+    <form class="large" method="POST" action="{{ path('deck_card_draw_num', {'num': 1}) }}">
+        <br><p>Enter a number to draw that number of cards:</p>
+        <input type="number" name="num" class="fill-available"><br>
+
+        <button class="button small link-no-decor">
+            <p>Submit</p>
+        </button>
+    </form>
+    {# <a class="nav-btn" href="{{ path('deck_card_draw_num') }}">Draw number of cards</a> #}
 </div>
 
 {% endblock %}
