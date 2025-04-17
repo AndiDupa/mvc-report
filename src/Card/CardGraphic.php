@@ -5,7 +5,7 @@ namespace App\Card;
 class CardGraphic
 {
     public static array $representation = [
-        # spader
+        # spades
         "SS" => "🂡",
         "S2" => "🂢",
         "S3" => "🂣",
@@ -19,7 +19,7 @@ class CardGraphic
         "SKn" => "🂫",
         "SDr" => "🂭",
         "SKu" => "🂮",
-        # hjärter
+        # hearts
         "HS" => "🂱",
         "H2" => "🂲",
         "H3" => "🂳",
@@ -33,7 +33,7 @@ class CardGraphic
         "HKn" => "🂻",
         "HDr" => "🂽",
         "HKu" => "🂾",
-        # ruter
+        # diamonds
         "RS" => "🃁",
         "R2" => "🃂",
         "R3" => "🃃",
@@ -47,7 +47,7 @@ class CardGraphic
         "RKn" => "🃋",
         "RDr" => "🃍",
         "RKu" => "🃎",
-        # klöver
+        # clubs
         "KS" => "🃑",
         "K2" => "🃒",
         "K3" => "🃓",

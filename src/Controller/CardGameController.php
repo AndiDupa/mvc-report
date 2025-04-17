@@ -127,6 +127,7 @@ class CardGameController extends AbstractController
         return $this->render('card/test/draw.html.twig', $data);
     }
 
+    # this route is for typing in the link manually
     #[Route("/card/deck/draw/:{num<\d+>}", name: "deck_card_draw_num_get", methods: ['GET'])]
     public function drawNumFromDeckGet(
         SessionInterface $session,
@@ -179,6 +180,7 @@ class CardGameController extends AbstractController
         return $this->render('card/test/draw.html.twig', $data);
     }
 
+    # this route is for the 21 game page
     #[Route("/card/deck/draw/page", name: "deck_card_draw_num", methods: ['POST'])]
     public function drawNumFromDeck(
         SessionInterface $session,
