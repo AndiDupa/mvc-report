@@ -308,6 +308,10 @@ li {
     text-align-last: center;
 }
 
+.border {
+    border: 2px solid black;
+}
+
 .flash-notice {
     padding: 0.5em;
     color: #004085;

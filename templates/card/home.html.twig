@@ -21,9 +21,12 @@ To draw one card, visit the simple draw route. If you want to draw more at once,
     that stores the abbreviations and their respective unicode cards) to create and return an array holding all cards sorted in a deck, "shuffleDeck" which shuffles 
     the deck array, and "getAsString" which returns the string value of the current card.<br>
     The other class "CardGraphic" only holds the "representation" variable, which I already stated, holds the abbreviations to unicode.<br>
-    The classes are related in a composition relationship, since representation is needed for the cards to be displayed correctly, and for the 
-    values to have their correct names and correspondences.<br><br>
+    The classes are related in a dependency relationship, since no class owns the other, but Card depends on CardGraphics representation variable.<br><br>
     The following is an UML diagram showing the two classes' relationship:<br>
 </p>
+
+<div class="center">
+    <img class="small border" src="{{ asset('img/UML.png') }}" alt="">
+</div>
 
 {% endblock %}
