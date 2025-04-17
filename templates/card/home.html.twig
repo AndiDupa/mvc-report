@@ -3,11 +3,27 @@
 {% block title %}21 Game{% endblock %}
 
 {% block body %}
-<h1>21 Game</h1>
+<div class="center">
+    <h1>21 Game</h1>
+</div><br>
 
-<p>The game you're about to play is called "21", which works similarly to the game
+<p>The following links and routes are the groundworks of a game called "21", which works similarly to the game
 "Blackjack", where the player needs to get 21 points and not overshoot or get less than the dealer.
 For a more in depth instructions guide on the game, visit <a href="https://sv.wikipedia.org/wiki/Tjugoett_(kortspel)"> 
 this link</a>.</p>
+
+<p>Right now, you can only draw cards, shuffle and view your current deck. To create a deck, visit the deck route or shuffle route. 
+To draw one card, visit the simple draw route. If you want to draw more at once, visit the draw/:num route.</p>
+
+<p>
+    In this program, i have two main classes. The "Card" class, which holds methods such as "cardToUnicode", which takes the abbreviation 
+    of the card name and links it to a unicode graphic of the card, "wholeDeck", which uses the class "CardGraphic" (which has a variable called representation 
+    that stores the abbreviations and their respective unicode cards) to create and return an array holding all cards sorted in a deck, "shuffleDeck" which shuffles 
+    the deck array, and "getAsString" which returns the string value of the current card.<br>
+    The other class "CardGraphic" only holds the "representation" variable, which I already stated, holds the abbreviations to unicode.<br>
+    The classes are related in a composition relationship, since representation is needed for the cards to be displayed correctly, and for the 
+    values to have their correct names and correspondences.<br><br>
+    The following is an UML diagram showing the two classes' relationship:<br>
+</p>
 
 {% endblock %}
