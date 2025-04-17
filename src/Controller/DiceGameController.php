@@ -88,14 +88,6 @@ class DiceGameController extends AbstractController
         return $this->render('pig/init.html.twig');
     }
 
-    // #[Route("/game/pig/init", name: "pig_init_post", methods: ['POST'])]
-    // public function initCallback(): Response
-    // {
-    //     // Deal with the submitted form
-
-    //     return $this->redirectToRoute('pig_play');
-    // }
-
     #[Route("/game/pig/init", name: "pig_init_post", methods: ['POST'])]
     public function initCallback(
         Request $request,
@@ -116,28 +108,6 @@ class DiceGameController extends AbstractController
 
         return $this->redirectToRoute('pig_play');
     }
-
-    // #[Route("/game/pig/play", name: "pig_play", methods: ['GET'])]
-    // public function play(): Response
-    // {
-    //     // Logic to play the game
-
-    //     return $this->render('pig/play.html.twig');
-    // }
-
-    // #[Route("/game/pig/play", name: "pig_play", methods: ['GET'])]
-    // public function play(
-    //     SessionInterface $session
-    // ): Response
-    // {
-    //     $data = [
-    //         "pigDices" => $session->get("pig_dices"),
-    //         "pigRound" => $session->get("pig_round"),
-    //         "pigTotal" => $session->get("pig_total"),
-    //     ];
-
-    //     return $this->render('pig/play.html.twig', $data);
-    // }
 
     #[Route("/game/pig/play", name: "pig_play", methods: ['GET'])]
     public function play(

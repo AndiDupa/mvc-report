@@ -38,7 +38,7 @@ To draw one card, visit the simple draw route. If you want to draw more at once,
     <a class="nav-btn" href="{{ path('deck_card_draw') }}">Draw 1 card</a>
     <form class="large" method="POST" action="{{ path('deck_card_draw_num') }}">
         <br><p>Enter a number to draw that number of cards:</p>
-        <input type="number" name="num" class="fill-available"><br>
+        <input type="number" min="0" name="num" class="fill-available"><br>
 
         <button class="button small link-no-decor">
             <p>Submit</p>

@@ -28,7 +28,7 @@
         </form>
         <form class="large" method="POST" action="{{ path('deckDrawNum', {'num': 1}) }}">
             <br><p>Enter a number to draw that number of cards:</p>
-            <input type="number" name="num" class="fill-available"><br>
+            <input type="number" min="0" name="num" class="fill-available"><br>
 
             <button class="button fill-available link-no-decor">
                 <p>Submit</p>
