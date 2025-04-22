@@ -62,4 +62,22 @@ class CardGraphic
         "KDr" => "🃝",
         "KKu" => "🃞"
     ];
+
+    public static function cardColor(string $cardValue): string
+    {
+        if ($cardValue[0] === "S") {
+            return "spades";
+        }
+        if ($cardValue[0] === "H") {
+            return "hearts";
+        }
+        if ($cardValue[0] === "R") {
+            return "diamonds";
+        }
+        if ($cardValue[0] === "K") {
+            return "clubs";
+        }
+
+        return "";
+    }
 }

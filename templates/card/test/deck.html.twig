@@ -1,17 +1,17 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Pig Game{% endblock %}
+{% block title %}21 Game{% endblock %}
 
 {% block body %}
-<h1>Roll a dice</h1>
+<h1>House deck</h1>
 
-<p>Here is the value of the dice.</p>
+<p>Here is the deck of the house:</p>
 
 {{ include('flash.html.twig') }}
 
 <ul class="deck-parent">
     {% for card in deck %}
-        <li class="deck">{{ card.cardToUnicode }}</li>
+        <li class="deck {{card.cardColorClass}}">{{ card.cardToUnicode }}</li>
     {% endfor %}
 </ul>
 
@@ -19,7 +19,7 @@
 
 <ul class="deck-parent">
     {% for card in userDeck %}
-        <li class="deck">{{ card.cardToUnicode() }}</li>
+        <li class="deck {{card.cardColorClass}}">{{ card.cardToUnicode() }}</li>
     {% endfor %}
 </ul>
 

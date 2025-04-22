@@ -312,6 +312,22 @@ li {
     border: 2px solid black;
 }
 
+.spades {
+    color: black;
+}
+
+.hearts {
+    color: red;
+}
+
+.diamonds {
+    color: red;
+}
+
+.clubs {
+    color: black;
+}
+
 .flash-notice {
     padding: 0.5em;
     color: #004085;

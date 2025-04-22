@@ -16,28 +16,33 @@ class Card
         return CardGraphic::$representation[$this->value];
     }
 
-    public static function wholeDeck(): array
-    {
-        $deck = [];
+    // public static function wholeDeck(): array
+    // {
+    //     $deck = [];
 
-        foreach (CardGraphic::$representation as $key => $unicode) {
-            $deck[] = new Card($key);
-        }
+    //     foreach (CardGraphic::$representation as $key => $unicode) {
+    //         $deck[] = new Card($key);
+    //     }
 
-        return $deck;
-    }
+    //     return $deck;
+    // }
 
-    public static function shuffleDeck(): array
-    {
-        $deck = Card::wholeDeck();
+    // public static function shuffleDeck(): array
+    // {
+    //     // $deck = Card::wholeDeck();
 
-        shuffle($deck);
+    //     shuffle($deck);
 
-        return $deck;
-    }
+    //     return $deck;
+    // }
 
     public function getAsString(): string
     {
         return "{$this->value}";
+    }
+
+    public function cardColorClass(): string
+    {
+        return CardGraphic::cardColor($this->value);
     }
 }

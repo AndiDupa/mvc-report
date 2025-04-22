@@ -7,7 +7,17 @@
         <h1>Content of session</h1>
         {{ include('flash.html.twig') }}
         {% if session %}
-            <p>{{ dump(session) }}</p>
+            <p>Amount of cards left: {{left}}</p>
+
+            <p>Cards left:</p>
+            <ul class="deck-parent">
+                {% for card in hand %}
+                    <li class="deck {{card.cardColorClass}}">{{card.cardToUnicode}}</li>
+                {% endfor %}
+            </ul><br>
+
+            <p>Raw content of session:</p><br>
+            <p>{{ dump(session.deck.getAsString) }}</p>
         {% endif %}
     </div>
 {% endblock %}
