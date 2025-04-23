@@ -20,8 +20,8 @@ class Session extends AbstractController
         $deck = $session->get("deck") ?? new CardHand();
         $userDeck = $session->get("userDeck") ?? new CardHand();
 
-        $amountLeft= $deck->getNumberCards();
-        $cardsLeft= $deck->cardHand();
+        $amountLeft = $deck->getNumberCards();
+        $cardsLeft = $deck->cardHand();
 
         $amountLeftUser = $userDeck->getNumberCards();
         $cardsLeftUser = $userDeck->cardHand();
