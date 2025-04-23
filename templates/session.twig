@@ -7,11 +7,20 @@
         <h1>Content of session</h1>
         {{ include('flash.html.twig') }}
         {% if session %}
-            <p>Amount of cards left: {{left}}</p>
+            <p>Amount of cards left in house deck: {{left}}</p>
 
-            <p>Cards left:</p>
+            <p>Cards left in house deck:</p>
             <ul class="deck-parent">
                 {% for card in hand %}
+                    <li class="deck {{card.cardColorClass}}">{{card.cardToUnicode}}</li>
+                {% endfor %}
+            </ul><br>
+
+            <p>Amount of cards left in user deck: {{leftUser}}</p>
+
+            <p>Cards left in user deck:</p>
+            <ul class="deck-parent">
+                {% for card in handUser %}
                     <li class="deck {{card.cardColorClass}}">{{card.cardToUnicode}}</li>
                 {% endfor %}
             </ul><br>

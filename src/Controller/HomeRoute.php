@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Card\Card;
+use App\Card\CardGraphic;
+use App\Card\CardHand;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -120,35 +122,37 @@ class HomeRoute extends AbstractController
     public function jsonDeck(
         SessionInterface $session
     ): Response {
-        $deck = $session->get("apiDeck");
-        $userDeck = $session->get("apiUserDeck") ?? [];
+        $deck = $session->get("deck");
+        $userDeck = $session->get("userDeck") ?? new CardHand();
 
-        if (count($userDeck) === 52 && $deck === []) {
-            $cardCount = count($deck);
+        if ($userDeck->getNumberCards() === 52 && $deck->empty()) {
+            $cardCount = $deck->getNumberCards();
 
             $data = [
-                'deck' => $deck,
+                'deck' => $deck->cardHand(),
                 "cardsLeft" => $cardCount,
-                "userDeck" => $userDeck,
+                "userDeck" => $userDeck->cardHand(),
             ];
 
         } elseif ($deck == null) {
-            $deck = Card::wholeDeck();
-            $userDeck = [];
-            $cardCount = count($deck);
+            $deck = new CardHand();
+            $deck->wholeDeck();
+
+            $userDeck = new CardHand();
+            $cardCount = $deck->getNumberCards();
 
             $data = [
-                'deck' => $deck,
+                'deck' => $deck->cardHand(),
                 "cardsLeft" => $cardCount,
-                "userDeck" => $userDeck,
+                "userDeck" => $userDeck->cardHand(),
             ];
 
-            $session->set("apiDeck", $deck);
+            $session->set("deck", $deck);
         } else {
             $data = [
-                'deck' => $deck,
+                'deck' => $deck->cardHand(),
                 "cardsLeft" => 0,
-                "userDeck" => $userDeck,
+                "userDeck" => $userDeck->cardHand(),
             ];
         }
 
@@ -163,13 +167,15 @@ class HomeRoute extends AbstractController
     public function jsonShuffleDeck(
         SessionInterface $session
     ): Response {
-        $deck = Card::shuffleDeck();
+        $deck = new CardHand();
+        $deck->wholeDeck();
+        $deck->shuffle();
 
-        $session->set("apiDeck", $deck);
-        $session->set("apiUserDeck", []);
+        $session->set("deck", $deck);
+        $session->set("userDeck", new CardHand());
 
         $data = [
-            'deck' => $deck,
+            'deck' => $deck->cardHand(),
         ];
 
         return $this->redirectToRoute('deck');
@@ -179,19 +185,19 @@ class HomeRoute extends AbstractController
     public function jsonDeckDraw(
         SessionInterface $session
     ): Response {
-        $deck = $session->get("apiDeck");
-        $userDeck = $session->get("apiUserDeck") ?? [];
-        $cardCount = count($deck);
+        $deck = $session->get("deck");
+        $userDeck = $session->get("userDeck") ?? new CardHand();
+        $cardCount = $deck->getNumberCards();
 
-        if (empty($deck)) {
+        if ($deck->empty()) {
             return $this->redirectToRoute('deck');
         } else {
-            $currCard = array_shift($deck);
+            $currCard = $deck->draw();
 
-            $userDeck[] = $currCard->getAsString();
+            $userDeck->add($currCard);
 
-            $session->set("apiDeck", $deck);
-            $session->set("apiUserDeck", $userDeck);
+            $session->set("deck", $deck);
+            $session->set("userDeck", $userDeck);
         }
 
         return $this->redirectToRoute('deck');
@@ -203,10 +209,10 @@ class HomeRoute extends AbstractController
         SessionInterface $session
     ): Response {
         $num = $request->request->get('num');
-        $deck = $session->get("apiDeck") ?? [];
-        $userDeck = $session->get("apiUserDeck") ?? [];
+        $deck = $session->get("deck") ?? new CardHand();
+        $userDeck = $session->get("userDeck") ?? new CardHand();
 
-        if ($deck === [] || count($deck) < $num) {
+        if ($deck->empty() || $deck->getNumberCards() < $num) {
             $response = new JsonResponse(
                 ['error' => 'Youve either requested more cards than the amount left in the deck, or the deck is empty'],
             );
@@ -216,23 +222,23 @@ class HomeRoute extends AbstractController
             return $response;
         }
 
-        $cardCount = count($deck);
+        $cardCount = $deck->getNumberCards();
 
         $showCard = [];
 
         for ($i = 0; $i < $num; $i++) {
-            if (empty($deck)) {
+            if ($deck->empty()) {
                 break;
             }
 
-            $card = array_shift($deck);
+            $card = $deck->draw();
 
-            $showCard[] = $card->getAsString();
-            $userDeck[] = $card->getAsString();
+            $showCard[] = $card;
+            $userDeck->add($card);
         }
 
-        $session->set("apiDeck", $deck);
-        $session->set("apiUserDeck", $userDeck);
+        $session->set("deck", $deck);
+        $session->set("userDeck", $userDeck);
 
         return $this->redirectToRoute('deck');
     }

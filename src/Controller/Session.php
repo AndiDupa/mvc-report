@@ -17,11 +17,14 @@ class Session extends AbstractController
     public function session(
         SessionInterface $session
     ): Response {
-        $deck = $session->get("deck");
-        $userDeck = $session->get("userDeck");
+        $deck = $session->get("deck") ?? new CardHand();
+        $userDeck = $session->get("userDeck") ?? new CardHand();
 
-        $amountLeft = $deck->getNumberCards();
-        $cardsLeft = $deck->cardHand();
+        $amountLeft= $deck->getNumberCards();
+        $cardsLeft= $deck->cardHand();
+
+        $amountLeftUser = $userDeck->getNumberCards();
+        $cardsLeftUser = $userDeck->cardHand();
 
         $sessionData = $session->all();
 
@@ -29,6 +32,8 @@ class Session extends AbstractController
             "session" => $sessionData,
             "left" => $amountLeft,
             "hand" => $cardsLeft,
+            "leftUser" => $amountLeftUser,
+            "handUser" => $cardsLeftUser,
         ];
 
         return $this->render('session.twig', $data);

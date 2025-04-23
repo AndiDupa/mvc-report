@@ -127,7 +127,7 @@ class CardGameController extends AbstractController
     }
 
     # this route is for typing in the link manually
-    #[Route("/card/deck/draw/:{num<\d+>}", name: "deck_card_draw_num_get", methods: ['GET'])]
+    #[Route("/card/deck/draw/:{num<\d+>}", name: "deck_card_draw_num_get")]
     public function drawNumFromDeckGet(
         SessionInterface $session,
         int $num
