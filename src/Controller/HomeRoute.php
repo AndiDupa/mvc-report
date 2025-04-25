@@ -190,7 +190,13 @@ class HomeRoute extends AbstractController
         $cardCount = $deck->getNumberCards();
 
         if ($deck->empty()) {
-            return $this->redirectToRoute('deck');
+            $response = new JsonResponse(
+                ['error' => 'Youve either requested more cards than the amount left in the deck, or the deck is empty'],
+            );
+            $response->setEncodingOptions(
+                $response->getEncodingOptions() | JSON_PRETTY_PRINT
+            );
+            return $response;
         } else {
             $currCard = $deck->draw();
 

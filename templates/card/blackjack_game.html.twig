@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blackjack{% endblock %}
+
+{% block body %}
+<h1>House deck</h1>
+
+<p>Here is the deck of the house:</p>
+
+{{ include('flash.html.twig') }}
+
+<p>{{housePoints}}</p>
+<ul class="deck-parent">
+    <li class="deck">🂠</li>
+    {% for card in houseDeck[1:] %}
+        <li class="deck {{card.cardColorClass}}">{{ card.cardToUnicode }}</li>
+    {% endfor %}
+</ul>
+
+<h2 class="underline">Player deck</h2>
+
+<p>{{playerPoints}}</p>
+<ul class="deck-parent">
+    {% for card in playerDeck %}
+        <li class="deck {{card.cardColorClass}}">{{ card.cardToUnicode() }}</li>
+    {% endfor %}
+</ul><br><br>
+
+<div class="center space-apart">
+    <a class="nav-btn" href="{{ path('blackjack_call') }}">Call</a>
+    <a class="nav-btn" href="{{ path('blackjack_stay') }}">Stay</a>
+</div>
+
+{% endblock %}

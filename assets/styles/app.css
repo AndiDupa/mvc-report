@@ -328,6 +328,17 @@ li {
     color: black;
 }
 
+.hidden {
+    background-color: black;
+    height: auto;
+    width: auto;
+}
+
+.space-apart {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .flash-notice {
     padding: 0.5em;
     color: #004085;
@@ -346,4 +357,14 @@ li {
 }
 .flash-warning:before {
     content: "⚠";
+}
+
+.flash-success {
+    padding: 0.5em;
+    color: #e3f7dc;
+    background-color: #68be46;
+    border-color: #68be46;
+}
+.flash-success:before {
+    content: "✓";
 }

@@ -63,6 +63,65 @@ class CardGraphic
         "KKu" => "🃞"
     ];
 
+    public static array $point = [
+        # spades
+        "🂡" => 1,
+        "🂢" => 2,
+        "🂣" => 3,
+        "🂤" => 4,
+        "🂥" => 5,
+        "🂦" => 6,
+        "🂧" => 7,
+        "🂨" => 8,
+        "🂩" => 9,
+        "🂪" => 10,
+        "🂫" => 10,
+        "🂭" => 10,
+        "🂮" => 10,
+        # hearts
+        "🂱" => 1,
+        "🂲" => 2,
+        "🂳" => 3,
+        "🂴" => 4,
+        "🂵" => 5,
+        "🂶" => 6,
+        "🂷" => 7,
+        "🂸" => 8,
+        "🂹" => 9,
+        "🂺" => 10,
+        "🂻" => 10,
+        "🂽" => 10,
+        "🂾" => 10,
+        # diamonds
+        "🃁" => 1,
+        "🃂" => 2,
+        "🃃" => 3,
+        "🃄" => 4,
+        "🃅" => 5,
+        "🃆" => 6,
+        "🃇" => 7,
+        "🃈" => 8,
+        "🃉" => 9,
+        "🃊" => 10,
+        "🃋" => 10,
+        "🃍" => 10,
+        "🃎" => 10,
+        # clubs
+        "🃑" => 1,
+        "🃒" => 2,
+        "🃓" => 3,
+        "🃔" => 4,
+        "🃕" => 5,
+        "🃖" => 6,
+        "🃗" => 7,
+        "🃘" => 8,
+        "🃙" => 9,
+        "🃚" => 10,
+        "🃛" => 10,
+        "🃝" => 10,
+        "🃞" => 10
+    ];
+
     public static function cardColor(string $cardValue): string
     {
         if ($cardValue[0] === "S") {
@@ -79,5 +138,20 @@ class CardGraphic
         }
 
         return "";
+    }
+
+    public static function temper(array $deck): int
+    {
+        $temp = [];
+        $sum = 0;
+        // return CardGraphic::$point[$unicode] ?? null;
+        foreach($deck as $element) {
+            $temp[] = CardGraphic::$point[$element->cardToUnicode()];
+        }
+
+        foreach($temp as $individual_card) {
+            $sum += $individual_card;
+        }
+        return $sum;
     }
 }
