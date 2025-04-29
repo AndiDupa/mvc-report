@@ -38,19 +38,26 @@ class BlackjackController extends AbstractController
         $housePoints = $session->get("housePoints") ?? 0;
         $playerPoints = $session->get("playerPoints") ?? 0;
 
-        if ($boardDeck->empty()) {
-            $boardDeck->wholeDeck();
-            $boardDeck->shuffle();
+        $isSet = $session->get("isSet") ?? false;
+        $reveal = $session->get("reveal") ?? false;
 
-            for ($i = 0; $i < 2; $i++) {
-                $houseDeck->add($boardDeck->draw());
-                $playerDeck->add($boardDeck->draw());
-            }
+        $game = new CardGame();
 
-            $session->set("houseDeck", $houseDeck);
-            $session->set("playerDeck", $playerDeck);
-            $session->set("boardDeck", $boardDeck);
-        }
+        // if ($boardDeck->empty()) {
+        //     $boardDeck->wholeDeck();
+        //     $boardDeck->shuffle();
+
+        //     for ($i = 0; $i < 2; $i++) {
+        //         $houseDeck->add($boardDeck->draw());
+        //         $playerDeck->add($boardDeck->draw());
+        //     }
+
+        //     $session->set("houseDeck", $houseDeck);
+        //     $session->set("playerDeck", $playerDeck);
+        //     $session->set("boardDeck", $boardDeck);
+        // }
+
+        $game->createDecks($boardDeck, $houseDeck, $playerDeck, $session);
 
         $playerScoreArr = $playerDeck->cardHand();
         $houseScoreArr = $houseDeck->cardHand();
@@ -61,37 +68,28 @@ class BlackjackController extends AbstractController
         $session->set("housePoints", $houseScore);
         $session->set("playerPoints", $playerScore);
 
-        if ($playerScore > 21) {
-            $this->addFlash(
-                'warning',
-                "Bust! You lose with the hand $playerScore."
-            );
-            return $this->redirectToRoute('blackjack_result');
-        }
-
-        if ($houseScore === 21) {
-            $this->addFlash(
-                'warning',
-                "You lose! The house got $houseScore."
-            );
-            return $this->redirectToRoute('blackjack_result');
-        }
-
-        if ($houseScore > 21) {
-            echo("HELLOOOOOOO");
-            $this->addFlash(
-                'success',
-                "You win! The house bust with $houseScore."
-            );
-            return $this->redirectToRoute('blackjack_result');
-        }
+        $result = $game->winChecker($houseDeck, $playerDeck, $isSet);
 
         $data = [
             "houseDeck" => $houseDeck->cardHand(),
             "playerDeck" => $playerDeck->cardHand(),
             "housePoints" => $houseScore,
             "playerPoints" => $playerScore,
+            "isSet" => $isSet,
+            "result" => $result,
+            "reveal" => $reveal,
         ];
+
+        if ($result) {
+            $this->addFlash(
+                $result[0],
+                $result[1]
+            );
+
+            $session->clear();
+
+            return $this->render('card/blackjack_game.html.twig', $data);
+        }
 
         return $this->render('card/blackjack_game.html.twig', $data);
     }
@@ -119,12 +117,18 @@ class BlackjackController extends AbstractController
         $boardDeck = $session->get("boardDeck");
 
         $housePoints = $session->get("housePoints");
+        $isSet = $session->get("isSet");
 
         if ($housePoints < 21) {
-            $houseDeck->add($boardDeck->draw());
+            if ($isSet === true) {
+                $houseDeck->add($boardDeck->draw());
+            }
             $session->set("boardDeck", $boardDeck);
             $session->set("houseDeck", $houseDeck);
+            $session->set("reveal", true);
         }
+
+        $session->set("isSet", true);
 
         return $this->redirectToRoute('blackjack_start');
     }

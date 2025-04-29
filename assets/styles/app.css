@@ -306,6 +306,7 @@ li {
 .deck-parent {
     margin: 0 5em;
     text-align-last: center;
+    padding-left: 0 !important;
 }
 
 .border {
@@ -367,4 +368,28 @@ li {
 }
 .flash-success:before {
     content: "✓";
+}
+
+@media (width <= 500px) {
+    p {
+        font-size: 0.7rem;
+    }
+
+    .grid {
+        grid-template-columns: auto;
+        padding: 0;
+    }
+
+    .grid-child {
+        border-bottom: 2px dotted #333;
+        margin-top: 1em;
+    }
+
+    .site-title {
+        font-size: 1.5rem;
+    }
+
+    .nav .nav-btn {
+        font-size: 0.5rem;
+    }
 }

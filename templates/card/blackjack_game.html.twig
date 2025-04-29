@@ -7,28 +7,42 @@
 
 <p>Here is the deck of the house:</p>
 
-{{ include('flash.html.twig') }}
+<div class="center">
+    <h1>{{ include('flash.html.twig') }}</h1>
+</div>
 
-<p>{{housePoints}}</p>
+{# <p>{{housePoints}}</p> #}
 <ul class="deck-parent">
-    <li class="deck">🂠</li>
-    {% for card in houseDeck[1:] %}
-        <li class="deck {{card.cardColorClass}}">{{ card.cardToUnicode }}</li>
-    {% endfor %}
+    {% if reveal == false %}
+        <li class="deck">🂠</li>
+        {% for card in houseDeck[1:] %}
+            <li class="deck {{card.cardColorClass}}">{{ card.cardToUnicode }}</li>
+        {% endfor %}
+    {% else %} 
+        {% for card in houseDeck %}
+            <li class="deck {{card.cardColorClass}}">{{ card.cardToUnicode }}</li>
+        {% endfor %}
+    {% endif %}
 </ul>
 
 <h2 class="underline">Player deck</h2>
 
-<p>{{playerPoints}}</p>
+{# <p>{{playerPoints}}</p> #}
 <ul class="deck-parent">
     {% for card in playerDeck %}
         <li class="deck {{card.cardColorClass}}">{{ card.cardToUnicode() }}</li>
     {% endfor %}
 </ul><br><br>
 
-<div class="center space-apart">
-    <a class="nav-btn" href="{{ path('blackjack_call') }}">Call</a>
-    <a class="nav-btn" href="{{ path('blackjack_stay') }}">Stay</a>
-</div>
+{% if result is empty %}
+    <div class="center space-apart">
+        {% if not isSet %}
+            <a class="nav-btn" href="{{ path('blackjack_call') }}">Call</a>
+            <a class="nav-btn" href="{{ path('blackjack_stay') }}">Stay</a>
+        {% else %}
+        <a class="nav-btn" href="{{ path('blackjack_stay') }}">Next turn</a>
+        {% endif %}
+    </div>
+{% endif %}
 
 {% endblock %}

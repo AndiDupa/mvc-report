@@ -4,6 +4,7 @@ namespace App\Card;
 
 use App\Card\Card;
 use App\Card\CardHand;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CardGame
 {
@@ -81,14 +82,10 @@ class CardGame
         }
 
         foreach($temp as $individual_card) {
-            echo($individual_card);
             $sum += $individual_card;
         }
 
-        // echo("HALOO");
-
         if ($sum <= 10 && $temp2 === 1) {
-            echo("RUNNING");
             $sum += 11;
         } elseif ($sum >= 11 && $temp2 === 1) {
             $sum += 1;
@@ -97,12 +94,48 @@ class CardGame
         return $sum;
     }
 
-    // public function unicodeArray(CardHand $hand): array
-    // {
-    //     $res_array = [];
-    //     foreach($hand as $element) {
-    //         $res_array[] = $element->cardToUnicode();
-    //     }
-    //     return $res_array;
-    // }
+    public function winChecker(CardHand $houseDeck, CardHand $playerDeck, bool $isStay): array
+    {
+        $housePoints = CardGame::temper($houseDeck->cardHand());
+        $playerPoints = CardGame::temper($playerDeck->cardHand());
+
+        if ($playerPoints > 21) {
+            return ["warning", "Bust! You lose with the hand $playerPoints."];
+        }
+
+        if ($housePoints === 21) {
+            return ["warning", "You lose! The house got $housePoints."];
+        }
+
+        if ($housePoints > 21) {
+            return ["success", "You win! The house bust with $housePoints."];
+        }
+
+        if ($housePoints > $playerPoints && $housePoints <= 21 && $isStay === true) {
+            return ["warning", "You lose! The house got $housePoints."];
+        }
+
+        if ($housePoints === $playerPoints && $housePoints <= 21 && $isStay === true) {
+            return ["warning", "You lose! The house got $housePoints."];
+        }
+
+        return [];
+    }
+
+    public function createDecks(CardHand $boardDeck, CardHand $houseDeck, CardHand $playerDeck, SessionInterface $session): void
+    {
+        if ($boardDeck->empty()) {
+            $boardDeck->wholeDeck();
+            $boardDeck->shuffle();
+
+            for ($i = 0; $i < 2; $i++) {
+                $houseDeck->add($boardDeck->draw());
+                $playerDeck->add($boardDeck->draw());
+            }
+
+            $session->set("houseDeck", $houseDeck);
+            $session->set("playerDeck", $playerDeck);
+            $session->set("boardDeck", $boardDeck);
+        }
+    }
 }
