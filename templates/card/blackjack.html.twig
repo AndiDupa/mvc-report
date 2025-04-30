@@ -7,15 +7,40 @@
     <h1>Blackjack</h1>
 </div><br>
 
-<h2 class="center">Click below to start the game:</h2>
+<div class="center">
+    <p>
+        Blackjack är en variant av spelet 21, där (i detta fallet) det finns en dealer och spelare. Spelaren startar 
+        med 2 kort, och dealern startar med 2 kort, fast ett upp och nervänt kort som bara visas efter spelaren har valt 
+        att stanna. Målet med spelet är att nå 21, eller att få högre poäng än dealern utan att överstiga 21. För att göra 
+        detta kan spelaren välja "hit" för att dra ett till kort. Får spelaren över 21, är spelet över och dealern har vunnit. 
+        Väljer spelaren att stanna kommer dealern dra kort tills den har nått ett högre poäng än spelaren, utan att överstiga 21, 
+        eller tills dealern har fått samma värde som spelaren, då dealern vinner automatiskt.<br><br>
+
+        Ess: 1 eller 11 poäng baserat på hur mycket dina kort är värda.<br>
+        2: 2 poäng.<br>
+        3: 3 poäng.<br>
+        4: 4 poäng.<br>
+        5: 5 poäng.<br>
+        6: 6 poäng.<br>
+        7: 7 poäng.<br>
+        8: 8 poäng.<br>
+        9: 9 poäng.<br>
+        10: 10 poäng.<br>
+        Knäckt: 10 poäng.<br>
+        Drottning: 10 poäng.<br>
+        Kung: 10 poäng.
+    </p>
+</div><br>
+
+<h2 class="center">Tryck nedan för att starta spelet:</h2>
 
 <div class="center">
-    <a class="nav-btn" href="{{ path('blackjack_start') }}">Start game</a><br><br><br>
+    <a class="nav-btn" href="{{ path('blackjack_start') }}">Starta spelet</a><br><br><br>
     {# <a class="nav-btn" href="{{ path('deck_card_shuffle') }}">Shuffle deck</a>
     <a class="nav-btn" href="{{ path('deck_card_draw') }}">Draw 1 card</a> #}
-    <a class="nav-btn" href="{{ path('session') }}">View session</a>
-    <a class="nav-btn" href="{{ path('session_delete') }}">Delete session</a>
-    <a class="nav-btn" href="{{ path('blackjack_doc') }}">View documentation</a>
+    <a class="nav-btn" href="{{ path('session') }}">Titta på session</a>
+    <a class="nav-btn" href="{{ path('session_delete') }}">Radera session</a>
+    <a class="nav-btn" href="{{ path('blackjack_doc') }}">Se dokumentation</a>
     {# <form class="large" method="POST" action="{{ path('deck_card_draw_num') }}">
         <br><p>Enter a number to draw that number of cards:</p>
         <input type="number" min="0" name="num" class="fill-available"><br>
