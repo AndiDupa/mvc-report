@@ -138,4 +138,15 @@ class CardGame
             $session->set("boardDeck", $boardDeck);
         }
     }
+
+    public function setScore(CardHand $deck, SessionInterface $session, $player): int
+    {
+        $deckArr = $deck->cardHand();
+
+        $deckScore = CardGame::temper($deckArr);
+
+        $session->set($player, $deckScore);
+
+        return $deckScore;
+    }
 }

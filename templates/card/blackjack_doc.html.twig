@@ -1,0 +1,75 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Blackjack{% endblock %}
+
+{% block body %}
+<div class="center">
+    <h1>Blackjack dokumentation</h1>
+</div><br>
+
+<div class="center">
+    <h2 class="center">Flödesschema:</h2>
+
+    <img class="small border" src="{{ asset('img/doc.png') }}" alt=""><br><br>
+
+    <h2 class="center">Pseudokod:</h2><br>
+
+    <h4 class="center">Session variabler:</h4>
+    <p>
+        Session->set("pDeck", new CardHand());<br>
+        Session->set("hDeck", new CardHand());<br>
+        Session->set("bDeck", new CardHand());<br>
+
+        Session->set("pScore", 0);<br>
+        Session->set("hScore", 0);<br>
+    </p><br>
+
+    <h4 class="center">Spel logik:</h4>
+    <p>
+        if ($pScore > 21) {<br>
+            return "Bust!";
+        }<br>
+
+        if ($pScore < $hScore && $stay === true) {<br>
+            return "Dealer has won!";
+        }<br>
+
+        if ($pScore > $hScore && $stay === true && $pScore <= 21) {<br>
+            return "Player has won!";
+        }<br>
+
+        if ($pScore > $hScore && $stay === true && $pScore <= 21) {<br>
+            return "Player has won!";
+        }<br>
+    </p><br>
+
+    <h4 class="center">Hit:</h4>
+    <p>
+        $pDeck->add($bDeck->draw());<br>
+        $session->set("pDeck", $pDeck);<br>
+
+        return redirect("blackjack_game.html.twig);
+    </p><br>
+
+    <h4 class="center">Stay:</h4>
+    <p>
+        $hDeck->add($bDeck->draw());<br>
+        $session->set("hDeck", $hDeck);<br>
+
+        return redirect("blackjack_game.html.twig);
+    </p><br>
+
+    <h2 class="center">Klasser:</h2>
+    <ul>
+        <li>Card.php</li><br>
+        <p>Card klassen står för ett kort. Card klassen kan användas för att få värdet på ett enstaka kort, och visa unicode grafiken.</p>
+        <li>CardGame.php</li><br>
+        <p>CardGame klassen hanterar spelet med metoder som kollar om spelaren eller huset har vunnit.</p>
+        <li>CardGraphic.php</li><br>
+        <p>CardGraphic klassen har en assosiation mellan kort värde och dess unicode variant, samt vilken färg korten har.</p>
+        <li>CardHand.php</li><br>
+        <p>CardHand klassen håller Card objekt för att skapa en kortlek som sedas kan dras ifrån, läggas till kort, shufflas eller återställas.</p>
+    </ul>
+</div>
+
+{% endblock %}

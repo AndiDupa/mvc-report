@@ -144,12 +144,16 @@ body {
 }
 
 .img {
-    margin: -5em 6em -5em;
+    /* margin: -5em 6em -5em; */
     filter: 
         drop-shadow(5px 0 0 black) 
         drop-shadow(0 5px 0 black)
         drop-shadow(-5px 0 0 black) 
         drop-shadow(0 -5px 0 black);
+}
+
+.img img {
+    max-width: 70%;
 }
 
 .krona {
@@ -391,5 +395,16 @@ li {
 
     .nav .nav-btn {
         font-size: 0.5rem;
+    }
+
+    .img, .img img {
+        max-width: 100px;
+        margin: 0 !important;
+    }
+
+    .aside-left, .aside-right {
+        margin: 0 !important;
+        float: none !important;
+        width: 90% !important;
     }
 }

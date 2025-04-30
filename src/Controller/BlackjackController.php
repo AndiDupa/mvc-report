@@ -15,10 +15,16 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class BlackjackController extends AbstractController
 {
-    #[Route("/blackjack", name: "blackjack")]
+    #[Route("/game", name: "blackjack")]
     public function home(): Response
     {
         return $this->render('card/blackjack.html.twig');
+    }
+
+    #[Route("/game/doc", name: "blackjack_doc")]
+    public function doc(): Response
+    {
+        return $this->render('card/blackjack_doc.html.twig');
     }
 
     #[Route("/blackjack/result", name: "blackjack_result")]
@@ -43,30 +49,10 @@ class BlackjackController extends AbstractController
 
         $game = new CardGame();
 
-        // if ($boardDeck->empty()) {
-        //     $boardDeck->wholeDeck();
-        //     $boardDeck->shuffle();
-
-        //     for ($i = 0; $i < 2; $i++) {
-        //         $houseDeck->add($boardDeck->draw());
-        //         $playerDeck->add($boardDeck->draw());
-        //     }
-
-        //     $session->set("houseDeck", $houseDeck);
-        //     $session->set("playerDeck", $playerDeck);
-        //     $session->set("boardDeck", $boardDeck);
-        // }
-
         $game->createDecks($boardDeck, $houseDeck, $playerDeck, $session);
 
-        $playerScoreArr = $playerDeck->cardHand();
-        $houseScoreArr = $houseDeck->cardHand();
-
-        $playerScore = CardGame::temper($playerScoreArr);
-        $houseScore = CardGame::temper($houseScoreArr);
-
-        $session->set("housePoints", $houseScore);
-        $session->set("playerPoints", $playerScore);
+        $playerScore = $game->setScore($playerDeck, $session, "playerPoints");
+        $houseScore = $game->setScore($houseDeck, $session, "housePoints");
 
         $result = $game->winChecker($houseDeck, $playerDeck, $isSet);
 
