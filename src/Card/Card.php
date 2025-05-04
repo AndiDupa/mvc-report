@@ -2,6 +2,8 @@
 
 namespace App\Card;
 
+use App\Card\CardHand;
+
 class Card
 {
     public string $value;
@@ -13,7 +15,8 @@ class Card
 
     public function cardToUnicode(): string
     {
-        return CardGraphic::$representation[$this->value];
+        $graphic = new CardGraphic();
+        return $graphic->cardUnicode($this->value);
     }
 
     public function getAsString(): string
@@ -23,6 +26,7 @@ class Card
 
     public function cardColorClass(): string
     {
-        return CardGraphic::cardColor($this->value);
+        $graphic = new CardGraphic();
+        return $graphic->cardColor($this->value);
     }
 }

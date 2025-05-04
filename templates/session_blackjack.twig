@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Content of session{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <h1>Content of session</h1>
+        {{ include('flash.html.twig') }}
+        <p>Amount of cards left in board deck: {{left}}</p><br>
+
+        <p>Board cards:</p>
+        <ul class="deck-parent">
+            {% for card in board %}
+                <li class="deck {{card.cardColorClass}}">{{card.cardToUnicode}}</li>
+            {% endfor %}
+        </ul><br>
+
+        <p>Dealer cards:</p>
+        <ul class="deck-parent">
+            {% for card in house %}
+                <li class="deck {{card.cardColorClass}}">{{card.cardToUnicode}}</li>
+            {% endfor %}
+        </ul><br>
+
+        <p>Player cards:</p>
+        <ul class="deck-parent">
+            {% for card in player %}
+                <li class="deck {{card.cardColorClass}}">{{card.cardToUnicode}}</li>
+            {% endfor %}
+        </ul><br>
+    </div>
+{% endblock %}

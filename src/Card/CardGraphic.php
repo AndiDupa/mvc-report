@@ -4,6 +4,9 @@ namespace App\Card;
 
 class CardGraphic
 {
+    /**
+     * @var array<string, string> $representation
+    */
     public static array $representation = [
         # spades
         "SS" => "🂡",
@@ -63,6 +66,9 @@ class CardGraphic
         "KKu" => "🃞"
     ];
 
+    /**
+     * @var array<string, int> $point
+    */
     public static array $point = [
         # spades
         "🂡" => 1,
@@ -140,17 +146,30 @@ class CardGraphic
         return "";
     }
 
+    public static function cardUnicode(string $cardValue): string
+    {
+        return self::$representation[$cardValue] ?? "";
+    }
+
+    public static function cardPoint(string $cardValue): int
+    {
+        return self::$point[$cardValue] ?? 0;
+    }
+
+    /**
+     * @param Card[] $deck convert to score
+    */
     public static function temper(array $deck): int
     {
         $temp = [];
         $sum = 0;
-        // return CardGraphic::$point[$unicode] ?? null;
-        foreach($deck as $element) {
-            $temp[] = CardGraphic::$point[$element->cardToUnicode()];
+
+        foreach ($deck as $element) {
+            $temp[] = self::$point[$element->cardToUnicode()];
         }
 
-        foreach($temp as $individual_card) {
-            $sum += $individual_card;
+        foreach ($temp as $individualCard) {
+            $sum += $individualCard;
         }
         return $sum;
     }

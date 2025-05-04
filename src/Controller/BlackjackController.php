@@ -31,13 +31,14 @@ class BlackjackController extends AbstractController
     public function blackjackStart(
         SessionInterface $session
     ): Response {
+        /** @var CardHand $houseDeck */
         $houseDeck = $session->get("houseDeck") ?? new CardHand();
+        /** @var CardHand $playerDeck */
         $playerDeck = $session->get("playerDeck") ?? new CardHand();
+        /** @var CardHand $boardDeck */
         $boardDeck = $session->get("boardDeck") ?? new CardHand();
 
-        $housePoints = $session->get("housePoints") ?? 0;
-        $playerPoints = $session->get("playerPoints") ?? 0;
-
+        /** @var bool $isSet */
         $isSet = $session->get("isSet") ?? false;
         $reveal = $session->get("reveal") ?? false;
 
@@ -78,10 +79,16 @@ class BlackjackController extends AbstractController
     public function blackjackCall(
         SessionInterface $session
     ): Response {
+        /** @var CardHand $playerDeck */
         $playerDeck = $session->get("playerDeck");
+        /** @var CardHand $boardDeck */
         $boardDeck = $session->get("boardDeck");
 
-        $playerDeck->add($boardDeck->draw());
+        $draw = $boardDeck->draw();
+
+        if ($draw !== null) {
+            $playerDeck->add($draw);
+        }
 
         $session->set("boardDeck", $boardDeck);
         $session->set("playerDeck", $playerDeck);
@@ -93,15 +100,22 @@ class BlackjackController extends AbstractController
     public function blackjackStay(
         SessionInterface $session
     ): Response {
+        /** @var CardHand $houseDeck */
         $houseDeck = $session->get("houseDeck");
+        /** @var CardHand $boardDeck */
         $boardDeck = $session->get("boardDeck");
 
         $housePoints = $session->get("housePoints");
+        /** @var bool $isSet */
         $isSet = $session->get("isSet");
 
         if ($housePoints < 21) {
             if ($isSet === true) {
-                $houseDeck->add($boardDeck->draw());
+                $draw = $boardDeck->draw();
+
+                if ($draw !== null) {
+                    $houseDeck->add($draw);
+                }
             }
             $session->set("boardDeck", $boardDeck);
             $session->set("houseDeck", $houseDeck);

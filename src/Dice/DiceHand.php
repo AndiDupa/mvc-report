@@ -2,13 +2,16 @@
 
 namespace App\Dice;
 
-use App\Dice\Dice;
+use App\Dice\Dices;
 
 class DiceHand
 {
-    private $hand = [];
+    /**
+     * @var Dices[] $hand
+     */
+    private array $hand = [];
 
-    public function add(Dice $die): void
+    public function add(Dices $die): void
     {
         $this->hand[] = $die;
     }
@@ -25,6 +28,9 @@ class DiceHand
         return count($this->hand);
     }
 
+    /**
+     * @return int[] $values holding die int values
+     */
     public function getValues(): array
     {
         $values = [];
@@ -34,6 +40,9 @@ class DiceHand
         return $values;
     }
 
+    /**
+     * @return string[] $values holding die string values
+     */
     public function getString(): array
     {
         $values = [];

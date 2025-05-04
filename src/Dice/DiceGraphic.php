@@ -2,9 +2,12 @@
 
 namespace App\Dice;
 
-class DiceGraphic extends Dice
+class DiceGraphic extends Dices
 {
-    private $representation = [
+    /**
+     * @var string[] $representation
+    */
+    private array $representation = [
         '⚀',
         '⚁',
         '⚂',

@@ -8,101 +8,63 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class CardGame
 {
-    public static array $point = [
-        # spades
-        "🂡" => 1,
-        "🂢" => 2,
-        "🂣" => 3,
-        "🂤" => 4,
-        "🂥" => 5,
-        "🂦" => 6,
-        "🂧" => 7,
-        "🂨" => 8,
-        "🂩" => 9,
-        "🂪" => 10,
-        "🂫" => 10,
-        "🂭" => 10,
-        "🂮" => 10,
-        # hearts
-        "🂱" => 1,
-        "🂲" => 2,
-        "🂳" => 3,
-        "🂴" => 4,
-        "🂵" => 5,
-        "🂶" => 6,
-        "🂷" => 7,
-        "🂸" => 8,
-        "🂹" => 9,
-        "🂺" => 10,
-        "🂻" => 10,
-        "🂽" => 10,
-        "🂾" => 10,
-        # diamonds
-        "🃁" => 1,
-        "🃂" => 2,
-        "🃃" => 3,
-        "🃄" => 4,
-        "🃅" => 5,
-        "🃆" => 6,
-        "🃇" => 7,
-        "🃈" => 8,
-        "🃉" => 9,
-        "🃊" => 10,
-        "🃋" => 10,
-        "🃍" => 10,
-        "🃎" => 10,
-        # clubs
-        "🃑" => 1,
-        "🃒" => 2,
-        "🃓" => 3,
-        "🃔" => 4,
-        "🃕" => 5,
-        "🃖" => 6,
-        "🃗" => 7,
-        "🃘" => 8,
-        "🃙" => 9,
-        "🃚" => 10,
-        "🃛" => 10,
-        "🃝" => 10,
-        "🃞" => 10
-    ];
-
+    /**
+     * @param Card[] $deck
+     */
     public static function temper(array $deck): int
     {
         $temp = [];
         $temp2 = 0;
         $sum = 0;
 
-        foreach($deck as $element) {
-            if(CardGame::$point[$element->cardToUnicode()] == 1) {
-                $temp2 = CardGame::$point[$element->cardToUnicode()];
-            } else {
-                $temp[] = CardGame::$point[$element->cardToUnicode()];
+        $graphic = new CardGraphic();
+
+        foreach ($deck as $element) {
+            if ($graphic->cardPoint($element->cardToUnicode()) == 1) {
+                $temp2 = $graphic->cardPoint($element->cardToUnicode());
             }
+
+            $temp[] = $graphic->cardPoint($element->cardToUnicode());
         }
 
-        foreach($temp as $individual_card) {
-            $sum += $individual_card;
+        foreach ($temp as $individualCard) {
+            $sum += $individualCard;
         }
 
         if ($sum <= 10 && $temp2 === 1) {
             $sum += 11;
-        } elseif ($sum >= 11 && $temp2 === 1) {
+        }
+
+        if ($sum >= 11 && $temp2 === 1) {
             $sum += 1;
         }
 
         return $sum;
     }
 
+    /**
+     * @return string[] $result flash message
+     */
     public function winChecker(CardHand $houseDeck, CardHand $playerDeck, bool $isStay): array
     {
-        $housePoints = CardGame::temper($houseDeck->cardHand());
-        $playerPoints = CardGame::temper($playerDeck->cardHand());
+        $housePoints = self::temper($houseDeck->cardHand());
+        $playerPoints = self::temper($playerDeck->cardHand());
 
-        if ($playerPoints > 21) {
-            return ["warning", "Bust! You lose with the hand $playerPoints."];
+        $result = $this->winCheckerPlayer($playerPoints);
+        if (!empty($result)) {
+            return $result;
         }
 
+        $result = $this->winCheckerHouse($housePoints, $playerPoints, $isStay);
+
+        return $result;
+    }
+
+    /**
+     * @return string[] $result flash message
+     */
+    public function winCheckerHouse(int $housePoints, int $playerPoints, bool $isStay): array
+    {
         if ($housePoints === 21) {
             return ["warning", "You lose! The house got $housePoints."];
         }
@@ -111,12 +73,24 @@ class CardGame
             return ["success", "You win! The house bust with $housePoints."];
         }
 
-        if ($housePoints > $playerPoints && $housePoints <= 21 && $isStay === true) {
+        if ($housePoints > $playerPoints && $isStay === true) {
             return ["warning", "You lose! The house got $housePoints."];
         }
 
-        if ($housePoints === $playerPoints && $housePoints <= 21 && $isStay === true) {
+        if ($housePoints === $playerPoints && $isStay === true) {
             return ["warning", "You lose! The house got $housePoints."];
+        }
+
+        return [];
+    }
+
+    /**
+     * @return string[] $result flash message
+     */
+    public function winCheckerPlayer(int $playerPoints): array
+    {
+        if ($playerPoints > 21) {
+            return ["warning", "Bust! You lose with the hand $playerPoints."];
         }
 
         return [];
@@ -129,8 +103,15 @@ class CardGame
             $boardDeck->shuffle();
 
             for ($i = 0; $i < 2; $i++) {
-                $houseDeck->add($boardDeck->draw());
-                $playerDeck->add($boardDeck->draw());
+                $draw = $boardDeck->draw();
+                if ($draw !== null) {
+                    $houseDeck->add($draw);
+                }
+
+                $draw = $boardDeck->draw();
+                if ($draw !== null) {
+                    $playerDeck->add($draw);
+                }
             }
 
             $session->set("houseDeck", $houseDeck);
@@ -139,11 +120,13 @@ class CardGame
         }
     }
 
-    public function setScore(CardHand $deck, SessionInterface $session, $player): int
+    public function setScore(CardHand $deck, SessionInterface $session, string $player): int
     {
+        $game = new CardGame();
+
         $deckArr = $deck->cardHand();
 
-        $deckScore = CardGame::temper($deckArr);
+        $deckScore = $game->temper($deckArr);
 
         $session->set($player, $deckScore);
 

@@ -27,7 +27,7 @@
 
 <h2 class="underline">Player deck</h2>
 
-{# <p>{{playerPoints}}</p> #}
+<p>{{playerPoints}}</p>
 <ul class="deck-parent">
     {% for card in playerDeck %}
         <li class="deck {{card.cardColorClass}}">{{ card.cardToUnicode() }}</li>

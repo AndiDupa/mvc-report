@@ -24,7 +24,9 @@ class CardGameController extends AbstractController
     public function showDeck(
         SessionInterface $session
     ): Response {
+        /** @var CardHand $deck */
         $deck = $session->get("deck");
+        /** @var CardHand $userDeck */
         $userDeck = $session->get("userDeck") ?? new CardHand();
 
         if ($userDeck->getNumberCards() === 52 && $deck->empty()) {
@@ -51,13 +53,13 @@ class CardGameController extends AbstractController
             ];
 
             $session->set("deck", $deck);
-        } else {
-            $data = [
-                'deck' => $deck->cardHand(),
-                "cardsLeft" => 0,
-                "userDeck" => $userDeck->cardHand(),
-            ];
         }
+
+        $data = [
+            'deck' => $deck->cardHand(),
+            "cardsLeft" => 0,
+            "userDeck" => $userDeck->cardHand(),
+        ];
 
         return $this->render('card/test/deck.html.twig', $data);
     }
@@ -88,7 +90,9 @@ class CardGameController extends AbstractController
     public function drawFromDeck(
         SessionInterface $session
     ): Response {
+        /** @var CardHand $deck */
         $deck = $session->get("deck");
+        /** @var CardHand $userDeck */
         $userDeck = $session->get("userDeck") ?? new CardHand();
 
         if ($deck->empty()) {
@@ -103,11 +107,11 @@ class CardGameController extends AbstractController
                 "bool" => "",
                 "userDeck" => $userDeck->cardHand(),
             ];
-        } else {
-            $currCard = $deck->draw();
+        }
 
-            // array_push($userDeck, $currCard);
+        $currCard = $deck->draw();
 
+        if ($currCard !== null) {
             $userDeck->add($currCard);
 
             $currCardUnicode = $currCard->cardToUnicode();
@@ -121,9 +125,14 @@ class CardGameController extends AbstractController
 
             $session->set("deck", $deck);
             $session->set("userDeck", $userDeck);
+            return $this->render('card/test/draw.html.twig', $data);
         }
+        $this->addFlash(
+            'warning',
+            'There are no cards left in the deck!'
+        );
 
-        return $this->render('card/test/draw.html.twig', $data);
+        return $this->redirectToRoute('deck_card');
     }
 
     # this route is for typing in the link manually
@@ -132,7 +141,9 @@ class CardGameController extends AbstractController
         SessionInterface $session,
         int $num
     ): Response {
+        /** @var CardHand $deck */
         $deck = $session->get("deck");
+        /** @var CardHand $userDeck */
         $userDeck = $session->get("userDeck") ?? new CardHand();
         $isDeckArray = false;
 
@@ -156,14 +167,16 @@ class CardGameController extends AbstractController
         $isDeckArray = true;
 
         for ($i = 0; $i < $num; $i++) {
-            if ($deck->empty()) {
-                break;
-            }
+            // if ($deck->empty()) {
+            //     break;
+            // }
 
             $card = $deck->draw();
 
             $showCard[] = $card;
-            $userDeck->add($card);
+            if ($card !== null) {
+                $userDeck->add($card);
+            }
         }
 
         $session->set("deck", $deck);
@@ -185,8 +198,11 @@ class CardGameController extends AbstractController
         SessionInterface $session,
         Request $request
     ): Response {
+        /** @var int $num */
         $num = $request->request->get('num');
+        /** @var CardHand $deck */
         $deck = $session->get("deck");
+        /** @var CardHand $userDeck */
         $userDeck = $session->get("userDeck") ?? new CardHand();
         $isDeckArray = false;
 
@@ -210,14 +226,16 @@ class CardGameController extends AbstractController
         $isDeckArray = true;
 
         for ($i = 0; $i < $num; $i++) {
-            if (empty($deck)) {
-                break;
-            }
+            // if (empty($deck)) {
+            //     break;
+            // }
 
             $card = $deck->draw();
 
             $showCard[] = $card;
-            $userDeck->add($card);
+            if ($card !== null) {
+                $userDeck->add($card);
+            }
         }
 
         $session->set("deck", $deck);

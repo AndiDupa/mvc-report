@@ -6,7 +6,10 @@ use App\Card\Card;
 
 class CardHand
 {
-    private $hand = [];
+    /**
+     * @var Card[] $hand holds Card
+     */
+    private array $hand = [];
 
     public function add(Card $card): void
     {
@@ -23,6 +26,9 @@ class CardHand
         return count($this->hand);
     }
 
+    /**
+     * @return string[] $values cards as unicode
+     */
     public function cardToUnicode(): array
     {
         $values = [];
@@ -32,6 +38,9 @@ class CardHand
         return $values;
     }
 
+    /**
+     * @return string[] $values cards as strings
+     */
     public function getAsString(): array
     {
         $values = [];
@@ -43,17 +52,23 @@ class CardHand
 
     public function wholeDeck(): void
     {
-        foreach (CardGraphic::$representation as $key => $unicode) {
+        foreach (array_keys(CardGraphic::$representation) as $key) {
             $this->hand[] = new Card($key);
         }
     }
 
+    /**
+     * @return Card[] $this->hand returns whole hand
+     */
     public function cardHand(): array
     {
         return $this->hand;
     }
 
-    public function draw(): Card
+    /**
+     * @return Card|null Card or null if deck empty
+     */
+    public function draw(): ?Card
     {
         return array_shift($this->hand);
     }
