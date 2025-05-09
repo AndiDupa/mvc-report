@@ -28,18 +28,6 @@ class CardGame
             $sum += $temp;
         }
 
-        // foreach ($temp as $individualCard) {
-        //     $sum += $individualCard;
-        // }
-
-        // if ($sum <= 10 && $temp2 === 1) {
-        //     $sum += 11;
-        // }
-
-        // if ($sum >= 11 && $temp2 === 1) {
-        //     $sum += 1;
-        // }
-
         while ($ace > 0 && $sum + 10 <= 21) {
             $sum += 10;
             $ace--;
@@ -102,6 +90,12 @@ class CardGame
         return [];
     }
 
+    /**
+     * @param CardHand $boardDeck holds the board deck
+     * @param CardHand $houseDeck holds the dealers deck
+     * @param CardHand $playerDeck holds the players deck
+     * @param SessionInterface $session holds the session
+     */
     public function createDecks(CardHand $boardDeck, CardHand $houseDeck, CardHand $playerDeck, SessionInterface $session): void
     {
         if ($boardDeck->empty()) {
@@ -126,6 +120,9 @@ class CardGame
         }
     }
 
+    /**
+     * @return int set score in session and return the score it set
+     */
     public function setScore(CardHand $deck, SessionInterface $session, string $player): int
     {
         $game = new CardGame();

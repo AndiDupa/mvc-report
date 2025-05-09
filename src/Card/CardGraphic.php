@@ -128,6 +128,10 @@ class CardGraphic
         "🃞" => 10
     ];
 
+    /**
+     * @param string $cardValue Holds string value of card
+     * @return string Returns a string of the card type based on the prefix
+     */
     public static function cardColor(string $cardValue): string
     {
         if ($cardValue[0] === "S") {
@@ -146,11 +150,19 @@ class CardGraphic
         return "";
     }
 
+    /**
+     * @param string $cardValue holds string value of card
+     * @return string Returns a string of the unicode equivalent of the card abbreviation
+     */
     public static function cardUnicode(string $cardValue): string
     {
         return self::$representation[$cardValue] ?? "";
     }
 
+    /**
+     * @param string $cardValue holds string value of card
+     * @return int Returns an int point equivalent of the card
+     */
     public static function cardPoint(string $cardValue): int
     {
         return self::$point[$cardValue] ?? 0;
