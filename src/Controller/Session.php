@@ -54,8 +54,6 @@ class Session extends AbstractController
 
         $amountLeft = $boardDeck->getNumberCards();
 
-        $sessionData = $session->all();
-
         $data = [
             "left" => $amountLeft,
             "player" => $playerDeck->cardHand(),

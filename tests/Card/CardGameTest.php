@@ -25,11 +25,12 @@ class CardGameTest extends TestCase
     public function testCardGameTemper()
     {
         $cardHand = new CardHand();
+        $cardGame = new CardGame();
 
         $cardHand->add(new Card("SS"));
         $cardHand->add(new Card("SKu"));
 
-        $res = CardGame::temper($cardHand->cardHand());
+        $res = $cardGame->temper($cardHand->cardHand());
 
         $this->assertEquals(21, $res);
     }

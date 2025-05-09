@@ -401,6 +401,36 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Dice-Dices.html#property_value"
         },                {
+            "fqsen": "\\App\\Dice\\Dice",
+            "name": "Dice",
+            "summary": "",
+            "url": "classes/App-Dice-Dice.html"
+        },                {
+            "fqsen": "\\App\\Dice\\Dice\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Dice-Dice.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Dice\\Dice\u003A\u003Aroll\u0028\u0029",
+            "name": "roll",
+            "summary": "",
+            "url": "classes/App-Dice-Dice.html#method_roll"
+        },                {
+            "fqsen": "\\App\\Dice\\Dice\u003A\u003AgetAsString\u0028\u0029",
+            "name": "getAsString",
+            "summary": "",
+            "url": "classes/App-Dice-Dice.html#method_getAsString"
+        },                {
+            "fqsen": "\\App\\Dice\\Dice\u003A\u003AgetValue\u0028\u0029",
+            "name": "getValue",
+            "summary": "",
+            "url": "classes/App-Dice-Dice.html#method_getValue"
+        },                {
+            "fqsen": "\\App\\Dice\\Dice\u003A\u003A\u0024value",
+            "name": "value",
+            "summary": "",
+            "url": "classes/App-Dice-Dice.html#property_value"
+        },                {
             "fqsen": "\\App\\Dice\\DiceGraphic",
             "name": "DiceGraphic",
             "summary": "",

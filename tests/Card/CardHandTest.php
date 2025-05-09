@@ -29,7 +29,7 @@ class CardHandTest extends TestCase
     {
         $cardHand = new CardHand();
 
-        $wholeDeck = $cardHand->wholeDeck();
+        $cardHand->wholeDeck();
         $res = $cardHand->getNumberCards();
         $exp = 52;
         $this->assertEquals($exp, $res);
