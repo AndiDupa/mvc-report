@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class CardGame
 {
     /**
-     * @param Card[] $deck
+     * @param Card[] $deck Holds an array of Card objects
      */
     public static function temper(array $deck): int
     {
@@ -37,7 +37,7 @@ class CardGame
     }
 
     /**
-     * @return string[] $result flash message
+     * @return string[] $result Return a flash message
      */
     public function winChecker(CardHand $houseDeck, CardHand $playerDeck, bool $isStay): array
     {
@@ -55,7 +55,7 @@ class CardGame
     }
 
     /**
-     * @return string[] $result flash message
+     * @return string[] $result Return a flash message
      */
     public function winCheckerHouse(int $housePoints, int $playerPoints, bool $isStay): array
     {
@@ -79,7 +79,7 @@ class CardGame
     }
 
     /**
-     * @return string[] $result flash message
+     * @return string[] $result Return a flash message
      */
     public function winCheckerPlayer(int $playerPoints): array
     {

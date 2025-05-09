@@ -11,16 +11,25 @@ class CardHand
      */
     private array $hand = [];
 
+    /**
+     * @param Card $card Holds a card object
+     */
     public function add(Card $card): void
     {
         $this->hand[] = $card;
     }
 
+    /**
+     * Shuffles the hand array
+     */
     public function shuffle(): void
     {
         shuffle($this->hand);
     }
 
+    /**
+     * @return int Count of the hand array
+     */
     public function getNumberCards(): int
     {
         return count($this->hand);
@@ -50,6 +59,9 @@ class CardHand
         return $values;
     }
 
+    /**
+     * Adds all 52 card objects to hand array
+     */
     public function wholeDeck(): void
     {
         foreach (array_keys(CardGraphic::$representation) as $key) {
@@ -73,6 +85,9 @@ class CardHand
         return array_shift($this->hand);
     }
 
+    /**
+     * @return bool Return true if hand array is empty
+     */
     public function empty(): bool
     {
         return empty($this->hand);

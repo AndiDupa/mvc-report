@@ -5,7 +5,7 @@ namespace App\Card;
 class CardGraphic
 {
     /**
-     * @var array<string, string> $representation
+     * @var array<string, string> $representation Holds abbreviations to unicode card equivalents
     */
     public static array $representation = [
         # spades
@@ -67,7 +67,7 @@ class CardGraphic
     ];
 
     /**
-     * @var array<string, int> $point
+     * @var array<string, int> $point Holds unicode to point equivalents of cards
     */
     public static array $point = [
         # spades
