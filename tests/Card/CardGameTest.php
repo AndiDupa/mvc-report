@@ -2,6 +2,7 @@
 
 namespace App\Card;
 
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use PHPUnit\Framework\TestCase;
 
 /**

@@ -13,7 +13,6 @@ class CardGame
      */
     public static function temper(array $deck): int
     {
-        // $temp2 = 0;
         $sum = 0;
         $ace = 0;
 
