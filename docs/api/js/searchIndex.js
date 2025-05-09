@@ -113,7 +113,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003Ashuffle\u0028\u0029",
             "name": "shuffle",
-            "summary": "",
+            "summary": "Shuffles\u0020the\u0020hand\u0020array",
             "url": "classes/App-Card-CardHand.html#method_shuffle"
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003AgetNumberCards\u0028\u0029",
@@ -133,7 +133,7 @@ Search.appendIndex(
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003AwholeDeck\u0028\u0029",
             "name": "wholeDeck",
-            "summary": "",
+            "summary": "Adds\u0020all\u002052\u0020card\u0020objects\u0020to\u0020hand\u0020array",
             "url": "classes/App-Card-CardHand.html#method_wholeDeck"
         },                {
             "fqsen": "\\App\\Card\\CardHand\u003A\u003AcardHand\u0028\u0029",

@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This is the Card Class
+ * The Card class holds methods for creating Card objects
+ */
+
 namespace App\Card;
 
 use App\Card\CardHand;

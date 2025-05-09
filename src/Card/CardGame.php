@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This is the CardGame Class
+ * The CardGame class holds methods for handling the blackjack game
+ */
+
 namespace App\Card;
 
 use App\Card\Card;

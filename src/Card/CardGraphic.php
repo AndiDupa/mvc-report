@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * This is the CardGraphic Class
+ * The CardGraphic class holds variables and methods for giving cards their respective value and color class
+ */
+
 namespace App\Card;
 
 class CardGraphic
