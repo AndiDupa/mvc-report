@@ -118,13 +118,42 @@
                     </p>
                 </ul>
 
-
             <h2 id="kmom04" class="center">kmom04</h2>
 
-                {# <ul>
-                    <li></li>
-                    <p></p>
-                </ul> #}
+                <ul>
+                    <li>Berätta hur du upplevde att skriva kod som testar annan kod med PHPUnit och hur du upplever phpunit rent allmänt.</li>
+                    <p>
+                        Jag upplever det som helt okej. Det gick lite bättre när man väl fick till labbmiljön (Men det var lite strul i början, då jag råkade ladda ner det fel och fick ladda om repot.) Jag fick skriva om 
+                        metoden temper, eftersom jag med hjälp av testerna insåg att jag hade en konstig logik med min hantering av ess i blackjack. Där var testerna hjälpsamma.
+                    </p>
+                    <li>Hur väl lyckades du med kodtäckningen av din kod, lyckades du nå mer än 90% kodtäckning?</li>
+                    <p>
+                        Nej, det gjorde jag inte. Mitt problem var att jag har två metoder i CardGame klassen kvar att testa, men det går inte (Till min uppfattning) att testa session med en phpUnit test. Så jag lämnade en kommentar under mitt 
+                        sista test, som informerar att det inte går på grund av att de har att göra med session. Annars har jag lyckats testa alla klasser som har med kortspelet att göra.
+                    </p>
+                    <li>Upplever du din egen kod som “testbar kod” eller finns det delar i koden som är mer eller mindre testbar och finns det saker som kan göras för att förbättra kodens testbarhet?</li>
+                    <p>
+                        Som sagt ovan, är sessiondelarna, till min uppfattning, otestbara, eftersom de kräver att en session initieras, och det går inte att göra med att helt enkelt kalla på SessionInterface som sin egen klass. Men utöver det, 
+                        hade jag möjligheten att testa min kod utan några större bekymmer. Eftersom vi i tidigare kursmomentet hade använt oss av composer lint, så var många utav de potentiella felen redan borta, så jag uppfattade det inte som 
+                        att min kod var så otestbar.
+                    </p>
+                    <li>Valde du att skriva om delar av din kod för att förbättra den eller göra den mer testbar, om så berätta lite hur du tänkte.</li>
+                    <p>
+                        Ja, som sagt i mitt första stycke, fick jag skriva om metoden temper i CardGame klassen, eftersom min hantering av ess var fel. Det fungerade väl på webbsidan, men i testerna, fick jag för många poäng av ett ess, vilket ledde 
+                        till att jag skrev om metoden med en while loop som räknar av varje ess du har i din lek så att det inte blir struligt. Jag fick också ändra om någon return statement, eftersom jag inte fick det resultatet jag förväntade mig, 
+                        men det dick snabbt att fixa. Utöver allt detta var koden testbar.
+                    </p>
+                    <li>Fundera över om du anser att testbar kod är något som kan identifiera “snygg och ren kod”.</li>
+                    <p>
+                        Det är det säkerligen, eftersom testerna kan peka ut potentiella fel i dina metoder, vilket leder till att du skriver om dem, eller lägger till mer logik för att hantera det bättre. Det uppmanar kodaren att koda väl, och 
+                        om man använder tester ofta, kan det nog hjälpa med att göra en mer genomgående bra kod.
+                    </p>
+                    <li>Vilken är din TIL för detta kmom?</li>
+                    <p>
+                        Min TIL för detta kmom är hur jag kommer igång med och använder phpDoc och phpUnit. I detta kmom har jag fått skriva tester i php med verktyget phpUnit, jag har lärt mig installera det, hur jag förbättrar mina metoder, samt hur 
+                        jag kan skriva bättre kod i framtiden. Jag har även lärt mig hur jag kan ladda om mitt repo från github.
+                    </p>
+                </ul>
 
 
             <h2 id="kmom05" class="center">kmom05</h2>
