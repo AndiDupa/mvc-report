@@ -2,7 +2,7 @@
 
 namespace App\Dice;
 
-class DiceGraphic extends Dices
+class DiceGraphic extends Dice
 {
     /**
      * @var string[] $representation

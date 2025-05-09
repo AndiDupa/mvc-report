@@ -2,16 +2,16 @@
 
 namespace App\Dice;
 
-use App\Dice\Dices;
+use App\Dice\Dice;
 
 class DiceHand
 {
     /**
-     * @var Dices[] $hand
+     * @var Dice[] $hand
      */
     private array $hand = [];
 
-    public function add(Dices $die): void
+    public function add(Dice $die): void
     {
         $this->hand[] = $die;
     }

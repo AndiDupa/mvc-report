@@ -13,30 +13,37 @@ class CardGame
      */
     public static function temper(array $deck): int
     {
-        $temp = [];
         $temp2 = 0;
         $sum = 0;
+        $ace = 0;
 
         $graphic = new CardGraphic();
 
         foreach ($deck as $element) {
-            if ($graphic->cardPoint($element->cardToUnicode()) == 1) {
-                $temp2 = $graphic->cardPoint($element->cardToUnicode());
+            $temp = $graphic->cardPoint($element->cardToUnicode());
+
+            if ($temp === 1) {
+                $ace++;
             }
 
-            $temp[] = $graphic->cardPoint($element->cardToUnicode());
+            $sum += $temp;
         }
 
-        foreach ($temp as $individualCard) {
-            $sum += $individualCard;
-        }
+        // foreach ($temp as $individualCard) {
+        //     $sum += $individualCard;
+        // }
 
-        if ($sum <= 10 && $temp2 === 1) {
-            $sum += 11;
-        }
+        // if ($sum <= 10 && $temp2 === 1) {
+        //     $sum += 11;
+        // }
 
-        if ($sum >= 11 && $temp2 === 1) {
-            $sum += 1;
+        // if ($sum >= 11 && $temp2 === 1) {
+        //     $sum += 1;
+        // }
+
+        while ($ace > 0 && $sum + 10 <= 21) {
+            $sum += 10;
+            $ace--;
         }
 
         return $sum;

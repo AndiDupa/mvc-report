@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Dice\Dices;
+use App\Dice\Dice;
 use App\Dice\DiceGraphic;
 use App\Dice\DiceHand;
 use Exception;
@@ -23,7 +23,7 @@ class DiceGameController extends AbstractController
     #[Route("/game/pig/test/roll", name: "test_roll_dice")]
     public function testRollDice(): Response
     {
-        $die = new Dices();
+        $die = new Dice();
 
         $data = [
             "dice" => $die->roll(),
@@ -69,7 +69,7 @@ class DiceGameController extends AbstractController
                 $hand->add(new DiceGraphic());
             }
 
-            $hand->add(new Dices());
+            $hand->add(new Dice());
         }
 
         $hand->roll();
