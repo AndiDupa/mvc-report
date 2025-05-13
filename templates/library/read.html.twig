@@ -16,6 +16,16 @@
                     <h4>{{book.getTitle()}}</h4>
                     <p>{{book.getAuthor()}}</p>
                     <p>{{book.getISBN()}}</p>
+
+                    <form method="POST" action="{{ path('library_update_landing') }}">
+                        <input hidden="true" name="book_id" value="{{book.getId()}}">
+                        <input class="button" type="submit" name="do_it" value="Update book">
+                    </form>
+
+                    <form method="POST" action="{{ path('library_delete_by_id') }}">
+                        <input hidden="true" name="book_id" value="{{book.getId()}}">
+                        <input class="button red" type="submit" name="do_it" value="Delete book">
+                    </form>
                 </div>
             </li>
         {% endfor %}

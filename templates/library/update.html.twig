@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Read many!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <div class="center">
+        <h1>All books</h1>
+    </div>
+
+    {% for book in books %}
+        <form class="form" method="POST" action="{{ path('library_update') }}">
+            <input class="max" type="hidden" name="book_id" value="{{book.getId()}}">
+            <input class="max" type="text" name="title" value="{{book.getTitle()}}">
+            <input class="max" type="text" name="author" value="{{book.getAuthor()}}">
+            <input class="max" type="text" name="isbn" value="{{book.getISBN()}}">
+            <input class="max" type="text" name="image" value="{{book.getImage()}}">
+            <input class="button btn-center" type="submit" name="do_it" value="Update book">
+        </form>
+    {% endfor %}
+</form>
+</div>
+{% endblock %}

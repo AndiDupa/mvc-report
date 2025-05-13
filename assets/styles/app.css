@@ -79,6 +79,14 @@ code {
     text-align: center;
 }
 
+.btn-center {
+    justify-self: center;
+}
+
+.red {
+    background-color: tomato;
+}
+
 .center h1{
     margin: 1em 0 1em;
     width: 50%;
@@ -109,8 +117,7 @@ code {
 
 .book {
     max-width: 10em;
-    height: 19em;
-    max-height: 19em;
+    height: 22em;
     box-shadow: 0 0 1em grey;
     justify-items: anchor-center;
     /* transform: scale(0.7); */
@@ -125,6 +132,9 @@ code {
 
 .book h4 {
     text-align: center;
+    font-size: 0.9rem;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
 }
 
 .book-ul {
@@ -464,9 +474,5 @@ li {
     .book-ul {
         grid-template-columns: auto;
         justify-items: center;
-    }
-
-    .book {
-        height: 17em;
     }
 }
