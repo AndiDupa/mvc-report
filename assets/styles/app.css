@@ -17,6 +17,10 @@ body {
     background-color: whitesmoke;
 }
 
+code {
+    word-break: break-all;
+}
+
 .main {
     flex: 1;
     margin: 0.5em;
@@ -52,7 +56,7 @@ body {
     border-radius: 0.5em;
     background-color: #232423;
     color: white;
-    width: 12%;
+    width: 10%;
     text-align: center;
 }
 
@@ -94,15 +98,60 @@ body {
     grid-template-columns: auto auto auto;
     text-align: center;
     padding: 2em 0 2em;
-    color: white;
     margin-top: 1em;
+    color: black;
 }
 
 .grid-child {
     place-content: center;
+    color: white;
 }
 
-.button, input[type=number] {
+.book {
+    max-width: 10em;
+    height: 19em;
+    max-height: 19em;
+    box-shadow: 0 0 1em grey;
+    justify-items: anchor-center;
+    /* transform: scale(0.7); */
+    padding: 0.5em;
+    margin: 1em;
+}
+
+.book p {
+    margin: 0 !important;
+    font-size: 0.9rem;
+}
+
+.book h4 {
+    text-align: center;
+}
+
+.book-ul {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding-left: 0 !important;
+}
+
+.book-ul .book-li {
+    text-decoration: none !important;
+    list-style-type: none !important;
+    padding-left: 0 !important;
+    margin-bottom: 0 !important;
+    justify-self: center;
+}
+
+.book-img {
+    max-width: 80%;
+    height: auto;
+    display: block;
+}
+
+label {
+    font-size: small;
+}
+
+.button, input[type=number], input[type=text] {
     display: inline-block;
     color: #333;
     border: 2px solid black;
@@ -128,15 +177,19 @@ body {
 }
 
 .small {
-    width: 50%;
+    width: 50% !important;
 }
 
 .medium {
-    width: 70%;
+    width: 70% !important;
 }
 
 .large {
-    width: 90%;
+    width: 90% !important;
+}
+
+.max {
+    width: -webkit-fill-available !important;
 }
 
 .text-small {
@@ -406,5 +459,14 @@ li {
         margin: 0 !important;
         float: none !important;
         width: 90% !important;
+    }
+
+    .book-ul {
+        grid-template-columns: auto;
+        justify-items: center;
+    }
+
+    .book {
+        height: 17em;
     }
 }

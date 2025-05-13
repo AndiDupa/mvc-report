@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Read many!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <div class="center">
+        <h1>All books</h1>
+    </div>
+    <ul class="book-ul">
+        {% for book in books %}
+            <li class="book-li">
+                <div class="book">
+                    <img class="book-img" src="{{book.getImage()}}" alt="Book cover"></img>
+                    <h4>{{book.getTitle()}}</h4>
+                    <p>{{book.getAuthor()}}</p>
+                    <p>{{book.getISBN()}}</p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</form>
+</div>
+{% endblock %}
