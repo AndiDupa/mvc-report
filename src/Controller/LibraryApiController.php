@@ -93,7 +93,9 @@ final class LibraryApiController extends AbstractController
             $response = new JsonResponse(
                 ['error' => 'Youve entered an ISBN which is not in the database!'],
             );
-        } else {
+        }
+
+        if (!empty($data)) {
             $response = new JsonResponse($data);
             $response->setEncodingOptions(
                 $response->getEncodingOptions() | JSON_PRETTY_PRINT

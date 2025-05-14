@@ -43,7 +43,6 @@ final class LibraryController extends AbstractController
 
         $entityManager->flush();
 
-        // return new Response('Saved new product with id '.$book->getId());
         return $this->redirectToRoute('library_read_many');
     }
 
@@ -57,10 +56,6 @@ final class LibraryController extends AbstractController
         $data = [
             "books" => $books,
         ];
-
-        // foreach($books as $book) {
-        //     echo($book->getTitle());
-        // }
 
         return $this->render('library/read.html.twig', $data);
     }
