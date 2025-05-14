@@ -20,6 +20,8 @@ final class LibraryApiController extends AbstractController
         $books = $bookRepository
             ->findAll();
 
+        $data = [];
+
         foreach($books as $book) {
             $data[] = [
                 "title" => $book->getTitle(),
@@ -43,6 +45,8 @@ final class LibraryApiController extends AbstractController
     ): Response {
         $books = $bookRepository
             ->findAll();
+
+        $data = [];
 
         foreach($books as $book) {
             if ($book->getISBN() == $isbn) {
