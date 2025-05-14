@@ -66,6 +66,7 @@ final class LibraryApiController extends AbstractController
         return $response;
     }
 
+    // Route for twig file
     #[Route('api/library/search_isbn', name: 'api_library_read_one_twig', methods: ["POST"])]
     public function apiOneBookTwig(
         BookRepository $bookRepository,
