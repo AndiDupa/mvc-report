@@ -47,7 +47,7 @@ final class ProductController extends AbstractController
             ->findAll();
 
         $temp = [];
-        foreach($products as $product) {
+        foreach ($products as $product) {
             $temp[] = [
                 "id" => $product->getId(),
                 "name" => $product->getName(),
@@ -65,6 +65,12 @@ final class ProductController extends AbstractController
     ): Response {
         $product = $productRepository
             ->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
 
         $temp = [];
 
@@ -151,7 +157,7 @@ final class ProductController extends AbstractController
         int $value
     ): Response {
         $products = $productRepository->findByMinimumValue2($value);
-    
+
         return $this->json($products);
     }
 }

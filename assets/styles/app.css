@@ -437,6 +437,13 @@ li {
     content: "✓";
 }
 
+@media (width <= 800px) {
+    .book-ul {
+        grid-template-columns: auto auto;
+        justify-items: center;
+    }
+}
+
 @media (width <= 500px) {
     p {
         font-size: 0.7rem;

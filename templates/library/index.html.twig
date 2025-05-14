@@ -19,13 +19,13 @@
     <div>
         <form class="form" method="post" action="{{ path('library_create_post') }}">
             <label>Title:</label>
-            <input class="max" type="text" name="title">
+            <input class="max" type="text" name="title" required>
             <label>Author:</label>
-            <input class="max" type="text" name="author">
+            <input class="max" type="text" name="author" required>
             <label>ISBN:</label>
-            <input class="max" type="number" name="ISBN">
+            <input class="max" type="number" name="ISBN" required>
             <label>Image-URL:</label>
-            <input class="max" type="text" name="image">
+            <input class="max" type="text" name="image" required>
             <input class="button btn-center" type="submit" name="do_it" value="Create book">
         </form>
     </div>

@@ -12,10 +12,10 @@
     {% for book in books %}
         <form class="form" method="POST" action="{{ path('library_update') }}">
             <input class="max" type="hidden" name="book_id" value="{{book.getId()}}">
-            <input class="max" type="text" name="title" value="{{book.getTitle()}}">
-            <input class="max" type="text" name="author" value="{{book.getAuthor()}}">
-            <input class="max" type="text" name="isbn" value="{{book.getISBN()}}">
-            <input class="max" type="text" name="image" value="{{book.getImage()}}">
+            <input class="max" type="text" name="title" value="{{book.getTitle()}}" required>
+            <input class="max" type="text" name="author" value="{{book.getAuthor()}}" required>
+            <input class="max" type="text" name="isbn" value="{{book.getISBN()}}" required>
+            <input class="max" type="text" name="image" value="{{book.getImage()}}" required>
             <input class="button btn-center" type="submit" name="do_it" value="Update book">
         </form>
     {% endfor %}

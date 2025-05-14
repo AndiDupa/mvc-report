@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\BooksRepository;
+use App\Repository\BookRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: BooksRepository::class)]
-class Books
+#[ORM\Entity(repositoryClass: BookRepository::class)]
+class Book
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,8 +16,8 @@ class Books
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column]
-    private ?int $ISBN = null;
+    #[ORM\Column(length: 255)]
+    private ?string $isbn = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
@@ -42,14 +42,14 @@ class Books
         return $this;
     }
 
-    public function getISBN(): ?int
+    public function getISBN(): ?string
     {
-        return $this->ISBN;
+        return $this->isbn;
     }
 
-    public function setISBN(int $ISBN): static
+    public function setISBN(string $isbn): static
     {
-        $this->ISBN = $ISBN;
+        $this->isbn = $isbn;
 
         return $this;
     }

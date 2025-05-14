@@ -37,5 +37,19 @@
         <a class="button large link-no-decor" href="{{ path('game') }}">
             <p>JSON blackjack status</p>
         </a>
+
+        <h1>Library API</h1>
+        <a class="button large link-no-decor" href="{{ path('library_api_books') }}">
+            <p>JSON All library books</p>
+        </a><br>
+        <form class="large" method="POST" action="{{ path('api_library_read_one_twig') }}">
+            <br><p>Enter an ISBN for one of the books in the library:</p>
+            <input type="number" min="0" name="isbn" class="fill-available"><br>
+
+            <label>The Fellowship of the Ring: 9780261102354</label>
+            <button class="button fill-available link-no-decor">
+                <p>Submit</p>
+            </button>
+        </form>
     </div>
 {% endblock %}

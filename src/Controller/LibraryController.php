@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Books;
-use App\Repository\BooksRepository;
+use App\Entity\Book;
+use App\Repository\BookRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,12 +25,12 @@ final class LibraryController extends AbstractController
         Request $request,
         ManagerRegistry $doctrine
     ): Response {
-        $title = $request->request->get('title');
-        $author = $request->request->get('author');
-        $isbn = $request->request->get('ISBN');
-        $image = $request->request->get('image');
+        $title = (string) $request->request->get('title');
+        $author = (string) $request->request->get('author');
+        $isbn = (string) $request->request->get('ISBN');
+        $image = (string) $request->request->get('image');
 
-        $book = new Books();
+        $book = new Book();
 
         $entityManager = $doctrine->getManager();
 
@@ -49,9 +49,9 @@ final class LibraryController extends AbstractController
 
     #[Route('/library/read_many', name: 'library_read_many')]
     public function readManyBooks(
-        BooksRepository $booksRepository
+        BookRepository $bookRepository
     ): Response {
-        $books = $booksRepository
+        $books = $bookRepository
             ->findAll();
 
         $data = [
@@ -67,10 +67,10 @@ final class LibraryController extends AbstractController
 
     #[Route('/library/read_one/{id}', name: 'library_read_one')]
     public function readOneBook(
-        BooksRepository $booksRepository,
+        BookRepository $bookRepository,
         int $id
     ): Response {
-        $books = $booksRepository
+        $books = $bookRepository
             ->find($id);
 
         $book = [
@@ -86,13 +86,12 @@ final class LibraryController extends AbstractController
 
     #[Route('/library/update_edit', name: 'library_update_landing', methods: ['POST'])]
     public function updateBookLanding(
-        ManagerRegistry $doctrine,
-        BooksRepository $booksRepository,
+        BookRepository $bookRepository,
         Request $request
     ): Response {
-        $id = $request->request->get("book_id");
+        $id = (int) $request->request->get("book_id");
 
-        $books = $booksRepository
+        $books = $bookRepository
         ->find($id);
 
         $book = [
@@ -111,10 +110,10 @@ final class LibraryController extends AbstractController
         ManagerRegistry $doctrine,
         Request $request
     ): Response {
-        $id = $request->request->get("book_id");
+        $id = (int) $request->request->get("book_id");
 
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Books::class)->find($id);
+        $book = $entityManager->getRepository(Book::class)->find($id);
 
         if (!$book) {
             throw $this->createNotFoundException(
@@ -122,10 +121,10 @@ final class LibraryController extends AbstractController
             );
         }
 
-        $title = $request->request->get('title');
-        $author = $request->request->get('author');
-        $isbn = $request->request->get('isbn');
-        $image = $request->request->get('image');
+        $title = (string) $request->request->get('title');
+        $author = (string) $request->request->get('author');
+        $isbn = (string) $request->request->get('isbn');
+        $image = (string) $request->request->get('image');
 
         $book->setTitle($title);
         $book->setAuthor($author);
@@ -142,10 +141,10 @@ final class LibraryController extends AbstractController
         ManagerRegistry $doctrine,
         Request $request
     ): Response {
-        $id = $request->request->get("book_id");
+        $id = (int) $request->request->get("book_id");
 
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Books::class)->find($id);
+        $book = $entityManager->getRepository(Book::class)->find($id);
 
         if (!$book) {
             throw $this->createNotFoundException(
