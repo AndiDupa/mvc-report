@@ -1,0 +1,121 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Metrics{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <h1>Metrics</h1><br>
+    </div>
+
+    <div class="center">
+        <h2>Introduktion</h2>
+    </div>
+
+    <article class="article">
+        <p>
+            Denna analysen handlar om att undersöka och analysera kodkvalitet enligt de "6 C:na". Följande är dessa 6 mätvärden:<br><br>
+            Codestyle<br>
+            Coverage<br>
+            Complexity<br>
+            Cohesion<br>
+            Coupling<br>
+            CRAP<br>
+        </p>
+
+        <h3 class="center">CodeStyle</h3><br>
+
+        <p>
+            CodeStyle beskriver till vilken stil en kodbas följer. Det finns många olika standards som går att följa för, till exempel, PHP, som har i mål att skapa en standardiserad 
+            och genomtänkt plan till hur man kodar i just det språket. I denna kodbas, används <a href="https://www.php-fig.org/psr/" alt="php-fig">PHP-fig's regler</a> som grund, samt den generella kodstrukturen som har 
+            visats under genomgångarna i kursen MVC. Dessa stilerna följs till en godtycklig standard, då de inte har varit i centralt fokus under kursens gång. En välutvecklad och genomtänkt kodstil, gör det 
+            möjligt att ha en mer lättläst och lättanvänd kodbas, som flera individer kan förstå och bidra till. Därav hjälper det till att skapa en enhetlig stil på sättet koden ser ut, och gör den mer standardiserad.
+        </p><br>
+
+        <h3 class="center">Coverage</h3><br>
+
+        <p>
+            Med coverage menas hur stor andel av din kodbas som täcks av tester. En kodbas utan tester, eller med få tester, har större chans att vara instabil, och därav kan fler oväntade buggar 
+            framkomma. Coverage är bra att ha till egenskapade klasser, ty det gör det lättare att se hur koden fungerar, och att upptäcka eventuella fix. Coverage är svårare att nå för importerade delar av projectet, 
+            eftersom de är menade som verktyg för din kodbas, och inte att gå igenom tester. I denna kursen, har verktyget <a href="https://phpunit.de/index.html" alt="phpunit">PHPunit</a> använts för att skapa tester. 
+            I denna kodbas, används PHPunit för att testa egenskapade klasserna för "Card" och "Dice", som innehåller kod för att initiera småspel. Ju mer tester du har för att analysera din kod, desto högre coverage har du.
+        </p><br>
+
+        <h3 class="center">Complexity</h3><br>
+
+        <p>
+            Complexity handlar om hur komplex din kod är. Används för många if-satser eller for-loopar, kommer komplexiteten att gå upp. Detta gör koden mer klottrad och svårläst, samt svårare för programmet att initiera. 
+            När man når en alldeles för hög complexity bör man skriva om sin kod, dela upp den i mindre bitar eller fler klasser, och minska komplexiteten. I detta project, finns bättre komplexitet på de egenskapade klasserna 
+            eftersom möjligheten fanns att senare gå tillbaka, dela upp, samt fixa koden. För att see komplexitet, användes <a href="https://scrutinizer-ci.com/" alt="scrutinizer">Scrutinizer</a> och 
+            <a href="https://phpmetrics.github.io/website/" alt="PHPmetrics">PHPmetrics</a> för att analysera kodbasen och identifiera komplexitet. Exempel på klassernas complexity finns nedanför:<br><br>
+        </p>
+
+        <li>Card        - Total complexity: 4</li><br>
+        <li>CardHand    - Total complexity: 12</li><br>
+        <li>CardGraphic - Total complexity: 10</li><br>
+        <li>CardGame    - Total complexity: 22</li><br>
+
+        <h3 class="center">Cohesion</h3><br>
+
+        <p>
+            Coheasion innebär hur mycket klasserna har att göra för sig själva. En klass med låg coheasion, litar på andra klasser för att inte göra för mycket själv. Genom att dela upp koden i mindre, mer stabila klasser, 
+            bidrar det till en lägre coheasion och en bättre strukturerad kod. I detta projectet har några klasser lite för hög coheasion. Exempelvis: 
+        </p>
+
+        <li>CardGraphic  - LCOM: 4</li><br>
+        <li>ApiRoute     - LCOM: 5</li><br>
+
+        <p>
+            Detta visar att dessa klasserna gör alldeles för mycket själva, och hade gynnats om koden delades upp bättre. I ApiRoute, hade ett API directory med mindre API routes innuti fungerat, och i CardGraphic, 
+            så hade det gynnats om vissa metoder var i andra klasser istället.
+        </p>
+
+        <h3 class="center">Coupling</h3><br>
+
+        <p>
+            Coupling är uppdelad i två huvudsakliga delar:<br><br>
+            Afferent coupling (AC), är antalet klasser som påverkas av den givna klassen.<br>
+            Efferent coupling (EC), är antalet klassen som den givna klassen påverkas av.<br><br>
+            Coupling handlar därav att skapa en balans av dependencies för dina klasser. Enstaka klasser bör inte påverka en alldeles för stor mängd andra, och tvärtom. Om en sådan relation skapas, kan det vara 
+            svårt att fixa eventuella fel, eftersom den enstaka förälderklassen som är ansvarig för grunddatan kan ha fel. Nedanför är några av kodbasens klassers coupling:
+        </p>
+
+        <li>CardHand            - AC: 5 | EC: 1</li><br>
+        <li>CardGame            - AC: 4 | EC: 5</li><br>
+        <li>LibraryController   - AC: 0 | EC: 6</li><br>
+
+        <h3 class="center">CRAP</h3><br>
+
+        <p>
+            CRAP (Change Risk Analyzer and Predictor) visar ett mättal på risken om att ändra en metod som används av något annat. Ett högt index av CRAP, visar att om din metod ändras, kommer förmodligen ditt program 
+            inte att fungera som det är menat längre. CRAP är därav nära till med hög-komplexa klasser och metoder, eftersom en komplex metod, som är mycket linjär i sättet den är kodad, kan inte ändras lätt utan att bygga 
+            om en större del av metoden/klassen. CRAP mäts med mängden komplexitet i metoder jämfört med antal testfall för metoden. Om en högkomplex metod inte går att testa i många fall, visar den en högre risk att inte fungera.
+            I tidigare kmom, hade den egenskapade metoden "temper" i klassen "CardGame", en dålig komplexitet, vilket ledde till att den var svår att testa. Det fanns fler if-satser, som skulle se om det fanns ess i spelaren eller husets 
+            kort, men det hanterades på ett struligt sätt, och därav gick inte att ändra eller testa väl. Då skrevs metoden om igen, för att skapa en mer testbar och mindre komplex metod.
+        </p>
+    </article>
+
+    <div class="center">
+        <h2>Phpmetrics</h2>
+    </div>
+
+    <article class="article">
+        <p>
+            1. PHPmetrics visar att denna kodbas inte har tillräckligt stor andel tester för andra klasser. Detta är förståeligt, ty många av klasserna är från genomgångar, och så vidare, men det visar att 
+            webbsidan i helhet inte är testad väl, och slarvig på många ställen, vilket kan öka complexity och CRAP-skalan. Exempel på klasser med specifikt dålig komplexitet är "CardGameController" (18 cycl), "ApiRoute" (21 cycl), och "CardGame" (17 cycl).
+            Problemet här, är att koden inte är uppdelad väl. Den kan vara bra kodad och väl genomtänkt, men eftersom de är stora i volym, betyder det att de blir svårare att testa i helhet, slarvigare, och mer komplexa. En förbättring hade varit att 
+            splittra upp dem mer, och till exempel skapa enstaka ApiRoute filer för varje kmom.<br><br>
+
+            2. PHPmetrics visar att coheasion är dålig för vissa klasser i kodbasen. Ett par klasser innehåller onödiga funktioner som hade bättre passats någon annan stans. Exempel på dessa är "CardGame" (4 LCOM), och "CardGraphic" (4 LCOM). Anledningen till 
+            varför dessa är så pass höga i skalan, är för att CardGame hanterar mycket av datan som sker i spelet. Den var tänkt som en klass för att minska koden i själva controllern, och därav, innehåller den metoder såsom setScore och createDecks, som 
+            hade kunnat fungera i controllern istället. Utöver detta finns klassen CardGraphic, som innehåller grafikdata kring korten, dess värde, och dess UNICODE värde. CardGraphic innehåller metoder såsom cardUnicode, cardPoint och temper, vilket är 
+            metoder som redan finns och används i andra klasser, vilket gör dem onödiga i cardGraphic.<br><br>
+
+            3. PHPmetrics visar att volymen på många av klasserna är onödigt stora, och hade gynnats med att vara mindre och mer uppdelat. Volym indexet på "ApiRoute" (2041,05), "CardGraphic" (1892,35), "CardGameController" (1768,8), och "DiceGameController" (1402,14) 
+            visar att volymen för specifikt kontrollerna hade kunnat vara mycket mindre. Kontrollerna har i uppgift att fungera som pilar eller skyltar, som säger till vad varje route ska till och vad de skall exekvera för någon kod. Problemet ligger när controllers 
+            håller för mycket kod, som istället hade kunnat göras innuti en klass. Om en kontroller med många olika routes, behöver exekvera en del kod i varje route, blir volymen genast väldigt stor. Om man har en route som inte går att dela upp väl, skall man försöka 
+            bilda klasser som kan hantera koden som är till för routen.
+        </p>
+
+        <img class="image-small" src="{{ asset('img/screencapture1.png') }}" alt="Bild på PHPmetrics">
+    </article>
+{% endblock %}

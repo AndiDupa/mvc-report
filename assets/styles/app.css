@@ -56,8 +56,17 @@ code {
     border-radius: 0.5em;
     background-color: #232423;
     color: white;
-    width: 10%;
+    width: 9.5%;
     text-align: center;
+}
+
+.article {
+    width: 80vw;
+    place-self: center;
+}
+
+.image-small {
+    width: 80vw;
 }
 
 .small-btn {

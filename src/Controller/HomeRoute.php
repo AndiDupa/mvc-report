@@ -24,16 +24,6 @@ class HomeRoute extends AbstractController
             "number" => $number
         ];
 
-        // return new Response(
-        //     '
-        //         <html>
-        //             <body>
-        //                 Mitt namn är Andi Dupa. <br> Lucky number: '.$number.'
-        //             </body>
-        //         </html>
-        //     '
-        // );
-
         return $this->render('lucky_number.html.twig', $data);
     }
 
@@ -53,6 +43,12 @@ class HomeRoute extends AbstractController
     public function report(): Response
     {
         return $this->render('report.html.twig');
+    }
+
+    #[Route("/metrics", name: "metrics")]
+    public function metrics(): Response
+    {
+        return $this->render('metrics/metrics.html.twig');
     }
 
     #[Route("/lucky", name: "lucky")]
