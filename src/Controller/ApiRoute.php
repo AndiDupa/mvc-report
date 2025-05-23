@@ -67,9 +67,7 @@ class ApiRoute extends AbstractController
         /** @var CardHand $userDeck */
         $userDeck = $session->get("userDeck") ?? new CardHand();
 
-        if ($userDeck->getNumberCards() === 52 && $deck->empty()) {
-            $cardCount = $deck->getNumberCards();
-        } elseif ($deck == null) {
+        if ($deck == null) {
             $deck = new CardHand();
             $deck->wholeDeck();
 
