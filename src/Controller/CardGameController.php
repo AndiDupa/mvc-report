@@ -31,13 +31,6 @@ class CardGameController extends AbstractController
 
         if ($userDeck->getNumberCards() === 52 && $deck->empty()) {
             $cardCount = $deck->getNumberCards();
-
-            $data = [
-                'deck' => $deck->cardHand(),
-                "cardsLeft" => $cardCount,
-                "userDeck" => $userDeck->cardHand(),
-            ];
-
         } elseif ($deck == null) {
             $deck = new CardHand();
             $userDeck = new CardHand();
@@ -100,13 +93,6 @@ class CardGameController extends AbstractController
                 'warning',
                 'There are no cards left in the deck!'
             );
-
-            $data = [
-                "color" => "",
-                "draw" => "",
-                "bool" => "",
-                "userDeck" => $userDeck->cardHand(),
-            ];
         }
 
         $currCard = $deck->draw();
@@ -145,7 +131,6 @@ class CardGameController extends AbstractController
         $deck = $session->get("deck");
         /** @var CardHand $userDeck */
         $userDeck = $session->get("userDeck") ?? new CardHand();
-        $isDeckArray = false;
 
         if ($deck->empty()) {
             $this->addFlash(
@@ -154,7 +139,6 @@ class CardGameController extends AbstractController
             );
             return $this->redirectToRoute('deck_card');
         }
-
         if ($deck->getNumberCards() < $num) {
             $this->addFlash(
                 'warning',
@@ -164,13 +148,8 @@ class CardGameController extends AbstractController
         }
 
         $showCard = [];
-        $isDeckArray = true;
 
         for ($i = 0; $i < $num; $i++) {
-            // if ($deck->empty()) {
-            //     break;
-            // }
-
             $card = $deck->draw();
 
             $showCard[] = $card;
@@ -184,7 +163,6 @@ class CardGameController extends AbstractController
 
         $data = [
             "draw" => $showCard,
-            "bool" => $isDeckArray,
             "userDeck" => $userDeck->cardHand(),
             "num" => $num,
         ];
@@ -204,7 +182,6 @@ class CardGameController extends AbstractController
         $deck = $session->get("deck");
         /** @var CardHand $userDeck */
         $userDeck = $session->get("userDeck") ?? new CardHand();
-        $isDeckArray = false;
 
         if ($deck->empty()) {
             $this->addFlash(
@@ -213,7 +190,6 @@ class CardGameController extends AbstractController
             );
             return $this->redirectToRoute('deck_card');
         }
-
         if ($deck->getNumberCards() < $num) {
             $this->addFlash(
                 'warning',
@@ -223,13 +199,8 @@ class CardGameController extends AbstractController
         }
 
         $showCard = [];
-        $isDeckArray = true;
 
         for ($i = 0; $i < $num; $i++) {
-            // if (empty($deck)) {
-            //     break;
-            // }
-
             $card = $deck->draw();
 
             $showCard[] = $card;
@@ -243,7 +214,6 @@ class CardGameController extends AbstractController
 
         $data = [
             "draw" => $showCard,
-            "bool" => $isDeckArray,
             "userDeck" => $userDeck->cardHand(),
         ];
 

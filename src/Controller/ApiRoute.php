@@ -41,9 +41,9 @@ class ApiRoute extends AbstractController
             $chosen = $quotes[0];
         } elseif ($number === 1) {
             $chosen = $quotes[1];
+        } else {
+            $chosen = $quotes[2];
         }
-
-        $chosen = $quotes[2];
 
         $data = [
             'quote' => $chosen,
@@ -69,13 +69,6 @@ class ApiRoute extends AbstractController
 
         if ($userDeck->getNumberCards() === 52 && $deck->empty()) {
             $cardCount = $deck->getNumberCards();
-
-            $data = [
-                'deck' => $deck->cardHand(),
-                "cardsLeft" => $cardCount,
-                "userDeck" => $userDeck->cardHand(),
-            ];
-
         } elseif ($deck == null) {
             $deck = new CardHand();
             $deck->wholeDeck();

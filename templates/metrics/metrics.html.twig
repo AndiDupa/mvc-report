@@ -116,6 +116,61 @@
             bilda klasser som kan hantera koden som är till för routen.
         </p>
 
-        <img class="image-small" src="{{ asset('img/screencapture1.png') }}" alt="Bild på PHPmetrics">
+        <img class="image-article" src="{{ asset('img/screencapture1.png') }}" alt="Bild på PHPmetrics">
+    </article>
+
+    <div class="center">
+        <h2>Scrutinizer</h2>
+    </div>
+
+    <article class="article">
+        <p>
+            1. Scrutinizers coverage bygger på samma data som undersöktes i PHPmetrics. Anledningen till varför coverage är så låg i procent när det kommer till Scrutinizer, är att den analyzerar hela repository:t. Det vill säga att alla egenskapade filer samt dependencies 
+            räknas med. Detta bidrar till att coverage är låg, eftersom det inte finns något sätt att skapa tester för alla dependencies (107 enligt PHPmetrics). När det kommer till dem egenskapade klasserna såsom Card, CardHand, CardGame och CardGraphics, är datan annorlunda. 
+            Card klassen har 100% i test coverage. Detsamma med CardHand- och CardGraphic-klasserna. CardGame har 63,64% i test coverage, men det går att förklara med faktumet att det krävs förmågan att testa skapelser av session för varje test, vilket inte gick att få till. 
+            Coverage i Scrutinizer hänger därav ihop med datan från till exempel phpdoc.<br><br>
+
+            2. Scrutinizer har också möjligheten att peka ut och informera användaren om onödiga rader av kod i repo:t. I denna kodbasens analys av Scrutinizer, hittades många rader av kod som har gått oanvända i repot. Några exempel av detta är filen ApiRoute, som tidigare 
+            undersöktes hur dess volym och komplexitet var för stor, innehåller "$chosen" och "$data", som enligt Scrutinizer är "dead and can be removed". Detta går att hitta i större grad i filer såsom CardGameController, vilket också hade väldigt stor volym. Denna filen 
+            innehåller ett flertal "$data"-variabler (som för sig själva, sträcker sig några rader av kod), som är döda och kan plockas bort. Genom att göra detta hade man sparat volym och komplexitet, vilket hade gett testerna ett bättre resultat.<br><br>
+
+            3. Scrutinizer kan även visa CRAP index för filer i repot. Under "Code", och sedan "Hot Spots", finns längst ner en lista med "Least tested PHP operations". Här går det att observera samma slutsats som PHPmetric kom fram till när det gäller klassen "CardGame". 
+            Denna klassen har metoder som kräver en att skapa ett session, som inte gick att skapa under testernas gång. Därav är inte alla metoder testade i den klassen, Coverage går ner, och eftersom CRAP-indexet använder sig av complexity i jämförelse med coverage, och CardGame 
+            är sämre på båda, blir CRAP-värdet sämre.
+        </p>
+
+        <div class="center">
+            <a href="https://scrutinizer-ci.com/g/AndiDupa/mvc-report/?branch=main" alt="Scrutinizer link">
+                <img src="https://scrutinizer-ci.com/g/AndiDupa/mvc-report/badges/quality-score.png?b=main" alt="Scrutinizer">
+            </a><br>
+
+            <a href="https://scrutinizer-ci.com/g/AndiDupa/mvc-report/?branch=main" alt="Coverage link">
+                <img src="https://scrutinizer-ci.com/g/AndiDupa/mvc-report/badges/coverage.png?b=main" alt="coverage">
+            </a><br>
+
+            <a href="https://scrutinizer-ci.com/g/AndiDupa/mvc-report/?branch=main" alt="Build link">
+                <img src="https://scrutinizer-ci.com/g/AndiDupa/mvc-report/badges/build.png?b=main" alt="build">
+            </a><br>
+
+            <a href="https://scrutinizer-ci.com/g/AndiDupa/mvc-report/?branch=main" alt="Intelligence link">
+                <img src="https://scrutinizer-ci.com/g/AndiDupa/mvc-report/badges/code-intelligence.svg?b=main" alt="intelligence">
+            </a>
+        </div><br>
+    </article>
+
+        <div class="center">
+        <h2>Förbättringar</h2>
+    </div>
+
+    <article class="article">
+        <p>
+            1. Ett fel som har varit mycket uppenbart i denna analysen är hur pass komplex, och dåligt upplagt klasser och routes är. Genom att fixa till routes såsom ApiRoutes, och splittra upp koden, 
+            blir volymen samt komplexiteten mindre.<br>
+
+            2. Scrutinizer har uppmanat om att kolla igenom koden och radera eventuella döda variabler som inte används. Genom att göra detta kommer komplexiteten att minskas, och då har CRAP-värdet också chans 
+            att bli bättre.<br>
+
+            3. Genom att öka testfallen till metoder som inte testats, kommer coverage även att bli bättre, vilket kommer att bidra till ett bättre coverage-värde, samt ett bättre CRAP-värde.
+        </p>
     </article>
 {% endblock %}
