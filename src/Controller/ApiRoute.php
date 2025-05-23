@@ -72,22 +72,21 @@ class ApiRoute extends AbstractController
             $deck->wholeDeck();
 
             $userDeck = new CardHand();
-            $cardCount = $deck->getNumberCards();
 
             $data = [
                 'deck' => $deck->cardHand(),
-                "cardsLeft" => $cardCount,
+                "cardsLeft" => $deck->getNumberCards(),
                 "userDeck" => $userDeck->cardHand(),
             ];
 
             $session->set("deck", $deck);
+        } else {
+            $data = [
+                'deck' => $deck->cardHand(),
+                "cardsLeft" => $deck->getNumberCards(),
+                "userDeck" => $userDeck->cardHand(),
+            ];
         }
-
-        $data = [
-            'deck' => $deck->cardHand(),
-            "cardsLeft" => 0,
-            "userDeck" => $userDeck->cardHand(),
-        ];
 
         $response = new JsonResponse($data);
         $response->setEncodingOptions(

@@ -35,22 +35,20 @@ class CardGameController extends AbstractController
 
             $deck->wholeDeck();
 
-            $cardCount = $deck->getNumberCards();
-
             $data = [
                 'deck' => $deck->cardHand(),
-                "cardsLeft" => $cardCount,
+                "cardsLeft" => $deck->getNumberCards(),
                 "userDeck" => $userDeck->cardHand(),
             ];
 
             $session->set("deck", $deck);
+        } else {
+            $data = [
+                'deck' => $deck->cardHand(),
+                "cardsLeft" => $deck->getNumberCards(),
+                "userDeck" => $userDeck->cardHand(),
+            ];
         }
-
-        $data = [
-            'deck' => $deck->cardHand(),
-            "cardsLeft" => 0,
-            "userDeck" => $userDeck->cardHand(),
-        ];
 
         return $this->render('card/test/deck.html.twig', $data);
     }
