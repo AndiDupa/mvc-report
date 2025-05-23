@@ -22,7 +22,7 @@ final class LibraryApiController extends AbstractController
 
         $data = [];
 
-        foreach($books as $book) {
+        foreach ($books as $book) {
             $data[] = [
                 "title" => $book->getTitle(),
                 "author" => $book->getAuthor(),
@@ -48,7 +48,7 @@ final class LibraryApiController extends AbstractController
 
         $data = [];
 
-        foreach($books as $book) {
+        foreach ($books as $book) {
             if ($book->getISBN() == $isbn) {
                 $data[] = [
                     "title" => $book->getTitle(),
@@ -79,7 +79,7 @@ final class LibraryApiController extends AbstractController
 
         $data = [];
 
-        foreach($books as $book) {
+        foreach ($books as $book) {
             if ($book->getISBN() == $isbn) {
                 $data[] = [
                     "title" => $book->getTitle(),

@@ -171,30 +171,40 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-ApiRoute.html#method_jsonQuote"
         },                {
-            "fqsen": "\\App\\Controller\\ApiRoute\u003A\u003AjsonDeck\u0028\u0029",
+            "fqsen": "\\App\\Controller\\ApiRouteCard",
+            "name": "ApiRouteCard",
+            "summary": "",
+            "url": "classes/App-Controller-ApiRouteCard.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiRouteCard\u003A\u003AjsonDeck\u0028\u0029",
             "name": "jsonDeck",
             "summary": "",
-            "url": "classes/App-Controller-ApiRoute.html#method_jsonDeck"
+            "url": "classes/App-Controller-ApiRouteCard.html#method_jsonDeck"
         },                {
-            "fqsen": "\\App\\Controller\\ApiRoute\u003A\u003AjsonShuffleDeck\u0028\u0029",
+            "fqsen": "\\App\\Controller\\ApiRouteCard\u003A\u003AjsonShuffleDeck\u0028\u0029",
             "name": "jsonShuffleDeck",
             "summary": "",
-            "url": "classes/App-Controller-ApiRoute.html#method_jsonShuffleDeck"
+            "url": "classes/App-Controller-ApiRouteCard.html#method_jsonShuffleDeck"
         },                {
-            "fqsen": "\\App\\Controller\\ApiRoute\u003A\u003AjsonDeckDraw\u0028\u0029",
+            "fqsen": "\\App\\Controller\\ApiRouteCard\u003A\u003AjsonDeckDraw\u0028\u0029",
             "name": "jsonDeckDraw",
             "summary": "",
-            "url": "classes/App-Controller-ApiRoute.html#method_jsonDeckDraw"
+            "url": "classes/App-Controller-ApiRouteCard.html#method_jsonDeckDraw"
         },                {
-            "fqsen": "\\App\\Controller\\ApiRoute\u003A\u003AjsonDeckDrawNum\u0028\u0029",
+            "fqsen": "\\App\\Controller\\ApiRouteCard\u003A\u003AjsonDeckDrawNum\u0028\u0029",
             "name": "jsonDeckDrawNum",
             "summary": "",
-            "url": "classes/App-Controller-ApiRoute.html#method_jsonDeckDrawNum"
+            "url": "classes/App-Controller-ApiRouteCard.html#method_jsonDeckDrawNum"
         },                {
-            "fqsen": "\\App\\Controller\\ApiRoute\u003A\u003Agame\u0028\u0029",
+            "fqsen": "\\App\\Controller\\ApiRouteGame",
+            "name": "ApiRouteGame",
+            "summary": "",
+            "url": "classes/App-Controller-ApiRouteGame.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ApiRouteGame\u003A\u003Agame\u0028\u0029",
             "name": "game",
             "summary": "",
-            "url": "classes/App-Controller-ApiRoute.html#method_game"
+            "url": "classes/App-Controller-ApiRouteGame.html#method_game"
         },                {
             "fqsen": "\\App\\Controller\\BlackjackController",
             "name": "BlackjackController",
@@ -335,6 +345,11 @@ Search.appendIndex(
             "name": "report",
             "summary": "",
             "url": "classes/App-Controller-HomeRoute.html#method_report"
+        },                {
+            "fqsen": "\\App\\Controller\\HomeRoute\u003A\u003Ametrics\u0028\u0029",
+            "name": "metrics",
+            "summary": "",
+            "url": "classes/App-Controller-HomeRoute.html#method_metrics"
         },                {
             "fqsen": "\\App\\Controller\\HomeRoute\u003A\u003Alucky\u0028\u0029",
             "name": "lucky",

@@ -45,7 +45,11 @@ class DiceHandTest extends TestCase
     {
         $dieHand = new DiceHand();
 
-        $dieHandVal1 = $dieHand->add(new Dice(), new Dice(), new Dice());
+        $dieList = [new Dice(), new Dice(), new Dice()];
+
+        foreach($dieList as $die) {
+            $dieHand->add($die);
+        }
 
         $valsInt = $dieHand->getValues();
 
@@ -59,7 +63,11 @@ class DiceHandTest extends TestCase
     {
         $dieHand = new DiceHand();
 
-        $dieHandVal1 = $dieHand->add(new Dice(), new Dice(), new Dice());
+        $dieList = [new Dice(), new Dice(), new Dice()];
+
+        foreach($dieList as $die) {
+            $dieHand->add($die);
+        }
 
         $valsStr = $dieHand->getString();
 

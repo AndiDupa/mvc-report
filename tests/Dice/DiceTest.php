@@ -45,11 +45,7 @@ class DiceTest extends TestCase
     {
         $die = new Dice();
 
-        $dieVal1 = "[";
-        $dieVal2 = strval($die->getValue());
-        $dieVal3 = "]";
-
-        $dieValRes = $dieVal1 .= $dieVal2 .= $dieVal3;
+        $dieValRes = "[" . strval($die->getValue()) . "]";
 
         $res = $die->getAsString();
 
