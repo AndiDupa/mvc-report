@@ -79,7 +79,7 @@
             svårt att fixa eventuella fel, eftersom den enstaka förälderklassen som är ansvarig för grunddatan kan ha fel. Nedanför är några av kodbasens klassers coupling:
         </p>
 
-        <li>CardHand            - AC: 5 | EC: 1</li><br>
+        <li>CardHand            - AC: 6 | EC: 1</li><br>
         <li>CardGame            - AC: 4 | EC: 5</li><br>
         <li>LibraryController   - AC: 0 | EC: 6</li><br>
 
@@ -158,7 +158,7 @@
         </div><br>
     </article>
 
-        <div class="center">
+    <div class="center">
         <h2>Förbättringar</h2>
     </div>
 
@@ -171,6 +171,38 @@
             att bli bättre.<br>
 
             3. Genom att öka testfallen till metoder som inte testats, kommer coverage även att bli bättre, vilket kommer att bidra till ett bättre coverage-värde, samt ett bättre CRAP-värde.
+        </p><br><br>
+
+        <p>
+            Efter att förbättringarna noterades, användes dem för att ändra koden. Inledningsvis, så fixades scrutinizer, eftersom de räknade med vendor vilen, vilket gav errors baserade på dependencies (som inte 
+            skall räknas med). Efteråt, kunde scrutinizer visa de egenskapade filerna med errors. Dessa felen inkluderade många "döda" variabler och linjer av kod. Sådana fel betyder att koden inte behövs. Feles 
+            fixades (förutom src/Kernel.php som fortfarande räknas med), och scrutinizers poäng gick från 6.65, till 9.97. Därefter påbörjades fixen på routsen som till exempel ApiRoute, som var alldeles för stor. 
+            Den kortades ner till "ApiRoute", "ApiRouteCard", och "ApiRouteGame". Efter att dessa fixes gjordes, uppdaterades PHPmetrics, till att visa ny statistik. Nedanför är några exempel på förändringar:<br><br>
         </p>
+            <li>Average LCOM: 1.78 --> 1.64 (~8.1% förändring)</li>
+            <li>Average cyclomatic complexity: by class 5.62 --> 4.96 (~12.5% förändring)</li>
+            <li>Average relative System complexity: 75.9 --> 67.7 (~11.4% förändring)</li>
+            <li>ApiRoute Volume: 2041.05 --> 326.9</li>
+            <li>CardGameController Volume: 1768,8 --> 1496.89</li><br><br>
+        <p>
+            Resultaten är annorlunda, ja, men det var trott att det skulle bli lite bättre. SLutsatsen var att för att få bättre CRAP score, till exempel, behövs det tester för CardGame:s metoder, vilket bör anropa session, 
+            som inte gick. Därav är inte CRAP dramatiskt annorlunda, eftersom coverage inte är dramatiskt annorlunda. Att minska volymen på andra controllers var diskuterat, men blev eventuellt inte av, eftersom koden innuti 
+            dem har att göra med själva kursmomentet de tillhör, och för många controllers i en map gör det mindre organiserat.
+        </p>
+    </article>
+
+    <div class="center">
+        <h2>Diskussion</h2>
+    </div>
+
+    <article class="article">
+        <p>
+            Ja, det går att jobba med kodkvalitet, "clean code", och med de 6 c:en i åtanke medans man arbetar med ett project, men, det är mycket man måste tänka på innan man börjar. Ett project som introducerar dessa vilkoren 
+            alldeles för sent, riskerar att ändra för mycket, och haka sig på gammal kod, vilket försenar projektets framgång. Alternativt, om man istället börjar tidigt, så kommer man igång snabbare, men arbetet går långsammare. 
+            Det gäller att ha en balans mellan hur mycket tid man lägger på clean code, jämfört med självaste ideen man har om hur koden skall fungera. Att använda clean code hjälper en att göra det till vana, men, för mycket fokus 
+            på clean code över funktionalitet, leder till att projektet inte når den grad som originellt var planerad.<br>
+            Avslutningsvis, går det att säga att clean code är viktigt för ens kodbas samt sättet man kodar. Det kan ställa till det i ens kod, men att lära sig det tidigt hjälper en bygga en mer konkret struktur för framtida projekt 
+            och arbeten.
+        </p><br><br>
     </article>
 {% endblock %}

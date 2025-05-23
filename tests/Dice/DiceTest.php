@@ -21,4 +21,38 @@ class DiceTest extends TestCase
         $res = $die->getAsString();
         $this->assertNotEmpty($res);
     }
+
+    /**
+     * Test if roll method randomizes die.
+     */
+    public function testDiceRoll()
+    {
+        $die = new Dice();
+
+        $dieVal = $die->getValue();
+
+        $die->roll();
+
+        $res = $die;
+
+        $this->assertNotEquals($dieVal, $res);
+    }
+
+    /**
+     * Test if getAsString returns correct value.
+     */
+    public function testDiceGetAsString()
+    {
+        $die = new Dice();
+
+        $dieVal1 = "[";
+        $dieVal2 = strval($die->getValue());
+        $dieVal3 = "]";
+
+        $dieValRes = $dieVal1 .= $dieVal2 .= $dieVal3;
+
+        $res = $die->getAsString();
+
+        $this->assertEquals($dieValRes, $res);
+    }
 }
