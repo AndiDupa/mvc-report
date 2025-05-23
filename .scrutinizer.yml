@@ -4,6 +4,10 @@ imports:
 filter:
     excluded_paths: [vendor/*, test/*, tools/*]
 
+checks:
+    php:
+        missing_property: false
+
 build:
     image: default-bionic
 
