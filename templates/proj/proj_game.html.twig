@@ -1,0 +1,46 @@
+{% extends "proj/base_proj.html.twig" %}
+
+{% block title %}About{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <h1>Kmom10: Aväntyrsspel</h1><br>
+        {# <div>
+            <nav class="nav vertical">
+                <a class="nav-btn-vertical" href="{{ path('home') }}">Home</a>
+                <a class="nav-btn-vertical" href="{{ path('about') }}">About</a>
+                <a class="nav-btn-vertical" href="{{ path('lucky') }}">Lucky</a>
+                <a class="nav-btn-vertical" href="{{ path('report') }}">Report</a>
+                <a class="nav-btn-vertical" href="{{ path('pig_init_get') }}">Game</a>
+                <a class="nav-btn-vertical" href="{{ path('api') }}">API</a>
+                <a class="nav-btn-vertical" href="{{ path('card_home') }}">21 game</a>
+                <a class="nav-btn-vertical" href="{{ path('blackjack') }}">Blackjack</a>
+                <a class="nav-btn-vertical" href="{{ path('app_library') }}">Library</a>
+                <a class="nav-btn-vertical" href="{{ path('metrics') }}">Metrics</a>
+                <a class="nav-btn-vertical" href="{{ path('project') }}">Project</a>
+            </nav>
+        </div> #}
+
+        <div class="game-box">
+            <h2>{{data.room}}</h2>
+
+            <p>{{data.desc}}</p>
+
+            {% if (data.image != "img/proj_rooms/image_died.png") and (data.image != "img/proj_rooms/image_chest.png") %}
+            <img class="room" src="{{ asset(data.image) }}" alt="Room image">
+        </div>
+
+        <div class="fill">
+            <div class="game-bar">
+                <form method="POST" action="{{ path('project_handle_room_change') }}">
+                    <input class="max" type="text" name="action" placeholder="Vad vill du göra?"></input>
+                </form>
+            </div>
+        </div>
+            {% else %}
+            <img class="room" src="{{ asset(data.image) }}" alt="Room image">
+            <a class="submit white-background link-no-decor" href="{{ path('project_init') }}">Start over?</a>
+        </div>
+            {% endif %}
+    </div>
+{% endblock %}

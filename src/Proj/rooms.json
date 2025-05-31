@@ -1,0 +1,166 @@
+{
+    "bedroom": {
+        "room": "Bedroom",
+        "desc": "This is a familiar area. It just so happens to be your bedroom! But something isn't right... You should explore the area and see if you can figure out what's off about this place...",
+        "image": "img/proj_rooms/image_1.png",
+        "items": ["key"],
+        "directions": {
+            "north": "hallway"
+        },
+        "actions": {
+            "look around": "Around you is your room. 'It's messy because I've been busy with school projects', you think to yourself... sure... Also, there seems to be something shimmering on the floor.",
+            "look at floor": "You see a small key.",
+            "pick up key": {
+                "add": "key",
+                "remove": "key",
+                "msg": "You pick up the key."
+            },
+            "open door": {
+                "req": "key",
+                "next": "hallway",
+                "msg": "You use the key to unlock the door and enter the hallway..."
+            }
+        }
+    },
+    "hallway": {
+        "room": "Hallway",
+        "desc": "The hallway is dark and spooky... Wait... How did it get so dark in here? Well, you better pick your next move carefully!",
+        "image": "img/proj_rooms/image_2.png",
+        "items": ["plushie"],
+        "directions": {
+            "south": "bedroom",
+            "east": "bathroom"
+        },
+        "actions": {
+            "look around": "The hallway is very dark... Very mysterious... Very... Spooky...",
+            "look up": "Theres nothing here... Wait... there's what seems to be a plushie dangling from a string on the ceiling!?",
+            "go south": {
+                "req": "",
+                "next": "bedroom",
+                "msg": "You enter your bedroom again."
+            },
+            "go back": {
+                "req": "",
+                "next": "bedroom",
+                "msg": "You enter your bedroom again."
+            },
+            "look at door": "The ominous door stands before you... you hear a scary noise coming from the inside...",
+            "open door": {
+                "req": "plushie",
+                "next": "bathroom",
+                "dead": "img/proj_rooms/image_died.png",
+                "deadMsg": "You DIE!!! You enter the door, walking straight into the open mouth of a spooky beast...",
+                "msg": "With the protection of your little plushie, you manage to enter the door and the beast within crumbles to dust..."
+            },
+            "pick up plushie": {
+                "add": "plushie",
+                "remove": "plushie",
+                "msg": "You reach up and grab the plushie of a duck."
+            }
+        }
+    },
+    "bathroom": {
+        "room": "Bathroom",
+        "desc": "Low and behold, the chambers appear dark and mysterious as well.",
+        "image": "img/proj_rooms/image_dark.png",
+        "items": [],
+        "directions": {
+            "south": "bedroom",
+            "east": "bathroom"
+        },
+        "actions": {
+            "look around": "The bathroom is dark and spooky... what the actual heck... Oh! There's a light switch beside you.",
+            "look at light switch": {
+                "msg": "Just a normal light switch.",
+                "msgImage": "img/proj_rooms/image_light.png",
+                "add": "light",
+                "remove": "light"
+            },
+            "flip switch": {
+                "req": "light",
+                "next": "lightbathroom",
+                "msg": "You flip the light switch, revealing that the HAS A PORTAL IN IT!!!!!!"
+            },
+            "go south": {
+                "req": "",
+                "next": "hallway",
+                "msg": "You enter your hallway again."
+            },
+            "go back": {
+                "req": "",
+                "next": "hallway",
+                "msg": "You enter your hallway again."
+            }
+        }
+    },
+    "lightbathroom": {
+        "room": "Bathroom",
+        "desc": "Wow! The chambers are so bright.. IS THAT A WIZARD'S PORTAL???",
+        "image": "img/proj_rooms/image_portal.png",
+        "items": [],
+        "directions": {
+            "south": "bedroom",
+            "east": "bathroom"
+        },
+        "actions": {
+            "look around": "The bathroom is dark and spooky... what the actual floppy sloppy...",
+            "look at portal": "IT'S A WIZARDS PORTAL??? Will you enter it?...",
+            "enter portal": {
+                "req": "light",
+                "next": "enemydungeon",
+                "msg": "You enter the portal and your body reconstructs itself... YOU'RE IN A DANGEROUS DUNGEON!!! AND IN FRONT OF YOU IS A SPOOOOKY GHOST!!!"
+            },
+            "go south": {
+                "dead": "img/proj_rooms/image_died.png",
+                "deadMsg": "Okay that's just lame man, enter the portal next time maybe. Oh? How did you die? Uhhh... you hit your toe and exploded?"
+            },
+            "go back": {
+                "dead": "img/proj_rooms/image_died.png",
+                "deadMsg": "Okay that's just lame man, enter the portal next time maybe. Oh? How did you die? Uhhh... you hit your toe and exploded?"
+            }
+        }
+    },
+    "enemydungeon": {
+        "room": "Dungeon",
+        "desc": "HOLY CARP THAT'S A GHOST!!! Whatever shall you do...",
+        "image": "img/proj_rooms/image_dungeon_enemy.png",
+        "items": [],
+        "directions": {
+            "south": "bedroom",
+            "east": "bathroom"
+        },
+        "actions": {
+            "look around": "You are not even in the same dimension as your house now... You're in a scary looking dungeon with a literal GHOST in front of you.",
+            "talk to ghost": {
+                "msg": "You ask the ghost 'What's up?', the ghost responds with 'Oh uhm, nothing much, just trying to solve this rubix cube...'",
+                "add": "askrubix",
+                "remove": "askrubix"
+            },
+            "ask to solve rubix cube": {
+                "req": "askrubix",
+                "deadMsg": "'HOLY CARP YOU JUST SOLVED THE CUBE I'VE BEEN TRYING TO SOLVE FOR THE LAST 2000 YEARS THANK YOU'\nYOU'RE A WINNER!!!",
+                "dead": "img/proj_rooms/image_chest.png"
+            },
+            "solve rubix cube": {
+                "req": "askrubix",
+                "msg": "'HOLY CARP YOU JUST SOLVED THE CUBE I'VE BEEN TRYING TO SOLVE FOR THE LAST 2000 YEARS THANK YOU'\nYOU'RE A WINNER!!!",
+                "image": "img/proj_rooms/image_chest.png",
+                "next": "windungeon"
+            },
+            "attack ghost": {
+                "deadMsg": "I don't know what you thought would happen, trying to attack a GHOST. Long story short, you are so, SO dead.",
+                "dead": "img/proj_rooms/image_died.png"
+            }
+        }
+    },
+    "windungeon": {
+        "room": "Dungeon",
+        "desc": "YOU'RE A WINNER! You might not be able to do anything with the money, since you're locked in a dungeon and all, but at least you have a sick plushie and fat stacks!",
+        "image": "img/proj_rooms/image_chest.png",
+        "items": [],
+        "directions": {
+            "south": "bedroom",
+            "east": "bathroom"
+        }
+    }
+}
