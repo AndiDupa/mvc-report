@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Room;
 use App\Proj\Projer;
+use App\Proj\RoomHandler;
 use App\Repository\RoomRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,13 +29,13 @@ class ProjectController extends AbstractController
         $room = $session->set("room", "bedroom");
         $inventory = $session->set("inventory", []);
 
-        $handler = new Projer();
+        $handler = new RoomHandler();
         $test = $handler->roomName("Bedroom");
 
         $data = [
-            "room" => $test["room"],
-            "desc" => $test["desc"],
-            "image" => $test["image"]
+            "room" => $test->name,
+            "desc" => $test->desc,
+            "image" => $test->image
         ];
 
         return $this->render('proj/proj_game.html.twig', [
@@ -55,12 +56,6 @@ class ProjectController extends AbstractController
         $roomHandler = new Projer();
 
         $res = $roomHandler->action($room, $action, $inventory);
-
-        $test = $roomHandler->roomName($room);
-
-        // foreach($res as $cow) {
-        //     echo($cow);
-        // }
 
         if (isset($res["add"]) && !in_array($res["add"], $inventory)) {
             $inventory[] = $res["add"];

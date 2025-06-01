@@ -1,0 +1,20 @@
+{% extends "proj/base_proj.html.twig" %}
+
+{% block title %}Project about{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <h1>Kmom10: Aväntyrsspel</h1><br>
+
+        <div>
+            <p>
+                Detta projekt (kmom10), handlar om att bygga ett program enligt de givna projektiderna, eller en egen ide, i objektorienterad PHP med hjälp av Symfony. I detta projektet, har det valts att skapa ett 
+                äventyrsspel, eftersom det är något som var bekant under skapandet. Äventyrsspelet är ett kort skämtspel, gjort med spel såsom Sierra's "Space Quest" i åtanke, fast på en mycket mer grundläggande nivå. 
+                Spelaren börjar i ett rum, där hen har möjligheten att se sig omkring, och interagera med en nyckel på golvet. Spelet är byggt och hanteras med Session samt en JSON-fil, som håller data om alla spelets rum. 
+                JSON filen är strukturerad på så sätt att den lätt kan utökas med nya rum, som sedan kan kopplas samman beroende på namn, visa vinst- eller dödsmeddelanden, samt skapa nya "items".
+            </p><br><br>
+
+            <a class="nav-btn-vertical" href="{{ path('project_init') }}">Game</a>
+        </div>
+    </div>
+{% endblock %}

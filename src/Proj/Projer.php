@@ -6,163 +6,101 @@
  */
 
 namespace App\Proj;
+use App\Proj\RoomHandler;
 
 class Projer
 {
-    /**
-     * @var string $value Is string value of the RoomHandler object
-    */
-    public string $value;
-
-    /**
-     * @var array $value Is array value of the RoomHandler object
-    */
-    public array $generalActions = [
-        "look around",
-        "look at door",
-        "pick up key",
-        "check door",
-        "open door",
-        "go north",
-        "go west",
-        "go south",
-        "go east",
-        "go up",
-        "go left",
-        "go down",
-        "go right",
-        "check chest",
-        "open chest"
-    ];
-
-    public array $allRooms = [
-        "Bedroom",
-        "Hallway",
-        "Bathroom",
-        "Lower floor",
-        "Outside"
-    ];
-
-    // public function __construct(string $value = "")
-    // {
-    //     $this->value = $value;
-    // }
-
-    public function __construct(string $value = "")
+    public function __construct()
     {
-        $roomsJson = file_get_contents(__DIR__ . "/rooms.json");
-
-        $this->rooms = json_decode($roomsJson, true);
+        $this->roomHandler =  new RoomHandler();
+        $this->rooms = $this->roomHandler->getRooms();
     }
-
-    public function roomName(string $value) {
-        $newVal = strtolower($value);
-
-        return $this->rooms[$newVal];
-    }
-
-
-    // /**
-    //  * @return string $value holds room image based on inputted value
-    //  */
-    // public function getImage($value): string
-    // {
-    //     $newVal = strtolower($value);
-
-    //     $possibleImg = [
-    //         "bedroom" => "img/proj_rooms/image_1.png",
-    //         "hallway" => "img/",
-    //         "bathroom" => "img/",
-    //         "lower floor" => "img/",
-    //         "outside" => "img/",
-    //     ];
-
-    //     return $possibleImg[$newVal];
-    // }
 
     /**
-     * @return array $value holds room image based on inputted value
+     * @return array $resReturn holds processed game data
      */
     public function action(string $room, string $action, array $inventory): array
     {
         $newVal = strtolower($action);
-        $currRoom = $room;
+        $currRoom = $this->rooms[$room];
 
-        if (!isset($this->rooms[$currRoom]["actions"])) {
+        if (!$currRoom->anyActionExists()) {
             return [
                 "room" => $room,
-                "msg" => $this->rooms[$currRoom]["desc"],
+                "msg" => $currRoom->desc,
                 "add" => null,
                 "remove" => null,
-                "image" => $this->rooms[$currRoom]["image"]
+                "image" => $currRoom->image
             ];
         }
 
-        $res = $this->rooms[$currRoom]["actions"];
+        $allActions = $currRoom->actions;
 
-        if (!isset($res[$action])) {
+        if (!$currRoom->actionExists($action)) {
             return [
                 "room" => $room,
                 "msg" => "Sorry, this program is too dumb to understand your genius.",
                 "add" => null,
                 "remove" => null,
-                "image" => $this->rooms[$currRoom]["image"]
+                "image" => $currRoom->image
             ];
         }
 
-        $res2 = $res[$action];
-        $req = $res2["req"] ?? "";
+        $singleAction = $allActions[$action];
+        $req = $singleAction["req"] ?? "";
         $resReturn = [
             "room" => $room,
-            "msg" => $res2["msg"] ?? null,
-            "add" => $res2["add"] ?? null,
-            "remove" => $res2["remove"] ?? null,
-            "image" => $this->rooms[$currRoom]["image"] ?? "img/proj_rooms/image_1.png"
+            "msg" => $singleAction["msg"] ?? null,
+            "add" => $singleAction["add"] ?? null,
+            "remove" => $singleAction["remove"] ?? null,
+            "image" => $currRoom->image ?? "img/proj_rooms/image_1.png"
         ];
 
-        if (isset($res2["dead"]) && !in_array($req, $inventory)) {
+        if (isset($singleAction["dead"]) && !in_array($req, $inventory)) {
             return [
                 "room" => $room,
-                "msg" => $res2["deadMsg"],
+                "msg" => $singleAction["deadMsg"],
                 "add" => null,
                 "remove" => null,
-                "image" => $res2["dead"]
+                "image" => $singleAction["dead"]
             ];
         }
 
-        if (is_string($res2)) {
-            $resReturn["msg"] = $res2;
+        if (is_string($singleAction)) {
+            $resReturn["msg"] = $singleAction;
             return $resReturn;
         }
 
-        if (isset($res2["msgImage"])) {
-            $resReturn["image"] = $res2["msgImage"];
-            $resReturn["msg"] = $res2["msg"];
+        if (isset($singleAction["msgImage"])) {
+            $resReturn["image"] = $singleAction["msgImage"];
+            $resReturn["msg"] = $singleAction["msg"];
             return $resReturn;
         }
 
+        $resReturn = $this->hasItem($singleAction, $req, $inventory, $resReturn);
+
+        return $resReturn;
+    }
+
+    /**
+     * @return array $resReturn holds room game data after item has been added
+     */
+    public function hasItem(array $singleAction, string $req, array $inventory, array $resReturn): array
+    {
         if ($req !== "" && !in_array($req, $inventory)) {
             $resReturn["msg"] = "You dont have the thing required to do that yet.";
-            $resReturn["add"] = $res2["add"] ?? null;
-            $resReturn["remove"] = $res2["remove"] ?? null;
+            $resReturn["add"] = $singleAction["add"] ?? null;
+            $resReturn["remove"] = $singleAction["remove"] ?? null;
             return $resReturn;
         }
 
-        if (isset($res2["next"]) && ($req === "" || in_array($req, $inventory))) {
-            $resReturn["room"] = $res2["next"];
-            $resReturn["msg"] = $res2["msg"];
-            $resReturn["image"] = $this->rooms[$res2["next"]]["image"];
+        if (isset($singleAction["next"]) && ($req === "" || in_array($req, $inventory))) {
+            $resReturn["room"] = $singleAction["next"];
+            $resReturn["msg"] = $singleAction["msg"];
+            $resReturn["image"] = $this->rooms[$singleAction["next"]]->image;
             return $resReturn;
         }
 
         return $resReturn;
-
-        // return [
-        //     "room" => $res2["room"] ?? $room,
-        //     "msg" => $res2["msg"] ?? "You certainly did something, but it wasnt described in the code.",
-        //     "add" => $res2["add"] ?? null,
-        //     "remove" => $res2["remove"] ?? null,
-        //     "next" => $res2["next"] ?? null
-        // ];
     }
 }

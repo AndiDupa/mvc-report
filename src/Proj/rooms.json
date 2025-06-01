@@ -27,10 +27,6 @@
         "desc": "The hallway is dark and spooky... Wait... How did it get so dark in here? Well, you better pick your next move carefully!",
         "image": "img/proj_rooms/image_2.png",
         "items": ["plushie"],
-        "directions": {
-            "south": "bedroom",
-            "east": "bathroom"
-        },
         "actions": {
             "look around": "The hallway is very dark... Very mysterious... Very... Spooky...",
             "look up": "Theres nothing here... Wait... there's what seems to be a plushie dangling from a string on the ceiling!?",
@@ -64,10 +60,6 @@
         "desc": "Low and behold, the chambers appear dark and mysterious as well.",
         "image": "img/proj_rooms/image_dark.png",
         "items": [],
-        "directions": {
-            "south": "bedroom",
-            "east": "bathroom"
-        },
         "actions": {
             "look around": "The bathroom is dark and spooky... what the actual heck... Oh! There's a light switch beside you.",
             "look at light switch": {
@@ -98,10 +90,6 @@
         "desc": "Wow! The chambers are so bright.. IS THAT A WIZARD'S PORTAL???",
         "image": "img/proj_rooms/image_portal.png",
         "items": [],
-        "directions": {
-            "south": "bedroom",
-            "east": "bathroom"
-        },
         "actions": {
             "look around": "The bathroom is dark and spooky... what the actual floppy sloppy...",
             "look at portal": "IT'S A WIZARDS PORTAL??? Will you enter it?...",
@@ -125,10 +113,6 @@
         "desc": "HOLY CARP THAT'S A GHOST!!! Whatever shall you do...",
         "image": "img/proj_rooms/image_dungeon_enemy.png",
         "items": [],
-        "directions": {
-            "south": "bedroom",
-            "east": "bathroom"
-        },
         "actions": {
             "look around": "You are not even in the same dimension as your house now... You're in a scary looking dungeon with a literal GHOST in front of you.",
             "talk to ghost": {

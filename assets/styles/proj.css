@@ -85,11 +85,11 @@ code {
 }
 
 .vertical {
-    align-items: center;
+    /* align-items: center; */
     background-image: none !important;
-    flex-direction: column;
+    /* flex-direction: column;
     width: 10em !important;
-    padding: 0 0 1em !important;
+    padding: 0 0 1em !important; */
 }
 
 .article {
