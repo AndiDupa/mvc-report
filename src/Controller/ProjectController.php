@@ -26,8 +26,8 @@ class ProjectController extends AbstractController
         SessionInterface $session
     ): Response
     {
-        $room = $session->set("room", "bedroom");
-        $inventory = $session->set("inventory", []);
+        $session->set("room", "bedroom");
+        $session->set("inventory", []);
 
         $handler = new RoomHandler();
         $test = $handler->roomName("Bedroom");
@@ -48,10 +48,13 @@ class ProjectController extends AbstractController
         SessionInterface $session,
         Request $request
     ): Response {
-        $room = $session->get("room") ?? "bedroom";
-        $inventory = $session->get("inventory") ?? [];
+        $roomValue = $session->get("room");
+        $room = is_string($roomValue) ? $roomValue : "bedroom";
 
-        $action = (string) $request->request->get('action');
+        /** @var array<string> $inventory contains player inventory */
+        $inventory = (array) ($session->get("inventory") ?? []);
+
+        $action = (string) ($request->request->get('action'));
 
         $roomHandler = new Projer();
 

@@ -12,6 +12,8 @@ class Room
     public string $name;
     public string $desc;
     public string $image;
+
+    /** @var array<string, array<string, mixed>> $actions contains actions for given room */
     public array $actions;
 
     public function __construct(string $name, array $roomData)

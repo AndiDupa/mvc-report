@@ -6,18 +6,26 @@
  */
 
 namespace App\Proj;
+
 use App\Proj\RoomHandler;
 
 class Projer
 {
+    /** @var array<string, Room> */
+    private array $rooms;
+    private RoomHandler $roomHandler;
+
     public function __construct()
     {
-        $this->roomHandler =  new RoomHandler();
+        $this->roomHandler = new RoomHandler();
         $this->rooms = $this->roomHandler->getRooms();
     }
 
     /**
-     * @return array $resReturn holds processed game data
+     * @param string $room contains the room name
+     * @param string $action contains the action name
+     * @param array<string> $inventory contains items in the player's inventory
+     * @return array<string, mixed> contains formatted game data
      */
     public function action(string $room, string $action, array $inventory): array
     {
@@ -83,7 +91,11 @@ class Projer
     }
 
     /**
-     * @return array $resReturn holds room game data after item has been added
+     * @param array<string> $singleAction contains the chosen actions variables
+     * @param string $req contains the requirement to do the action
+     * @param array<string> $inventory contains items in the players inventory
+     * @param array<string, mixed> $resReturn contains formatted game data
+     * @return array<string, mixed> $resReturn contains formatted game data
      */
     public function hasItem(array $singleAction, string $req, array $inventory, array $resReturn): array
     {
