@@ -29,7 +29,6 @@ class GameHandler
      */
     public function action(string $room, string $action, array $inventory): array
     {
-        $newVal = strtolower($action);
         $currRoom = $this->rooms[$room];
 
         if (!$currRoom->anyActionExists()) {
