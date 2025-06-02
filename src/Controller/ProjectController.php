@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Entity\Room;
-use App\Proj\Projer;
+use App\Proj\GameHandler;
 use App\Proj\RoomHandler;
-use App\Repository\RoomRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,7 +54,7 @@ class ProjectController extends AbstractController
 
         $action = (string) ($request->request->get('action'));
 
-        $roomHandler = new Projer();
+        $roomHandler = new GameHandler();
 
         $res = $roomHandler->action($room, $action, $inventory);
 

@@ -1,15 +1,15 @@
 <?php
 
 /**
- * This is the RoomHandler Class
- * The RoomHandler class holds methods for creating RoomHandler objects
+ * This is the GameHandler Class
+ * The GameHandler class holds methods for initiating an adventure game
  */
 
 namespace App\Proj;
 
 use App\Proj\RoomHandler;
 
-class Projer
+class GameHandler
 {
     /** @var array<string, Room> */
     private array $rooms;
@@ -55,6 +55,8 @@ class Projer
         }
 
         $singleAction = $allActions[$action];
+
+        /** @var string $req contains required item for committing action */
         $req = $singleAction["req"] ?? "";
         $resReturn = [
             "room" => $room,
@@ -91,7 +93,7 @@ class Projer
     }
 
     /**
-     * @param array<string> $singleAction contains the chosen actions variables
+     * @param array<string, mixed> $singleAction contains the chosen actions variables
      * @param string $req contains the requirement to do the action
      * @param array<string> $inventory contains items in the players inventory
      * @param array<string, mixed> $resReturn contains formatted game data
