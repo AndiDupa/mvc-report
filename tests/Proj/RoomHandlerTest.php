@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class RoomHandlerTest extends TestCase
 {
     /**
-     * 
+     * Tests if RoomHandler->getRooms() returns an array of all the rooms in the JSON file.
      */
     public function testRoomHandlerRooms()
     {
@@ -21,7 +21,7 @@ class RoomHandlerTest extends TestCase
     }
 
     /**
-     * 
+     * Tests if RoomHandler->getRooms contains an array of Room objects.
      */
     public function testRoomHandlerContainsRooms()
     {
@@ -33,6 +33,9 @@ class RoomHandlerTest extends TestCase
         }
     }
 
+    /**
+     * Tests if "bedroom" exists within the rooms in roomHandler (which it should).
+     */
     public function testRoomHandlerRoomName()
     {
         $roomHandler = new RoomHandler();
@@ -42,33 +45,61 @@ class RoomHandlerTest extends TestCase
         $this->assertEquals($res->image, "img/proj_rooms/image_1.png");
     }
 
-    // /**
-    //  * Test if roll method randomizes die.
-    //  */
-    // public function testDiceRoll()
-    // {
-    //     $die = new Dice();
+    /**
+     * Tests if its possible to create a new Room object, and that the "look" action exists.
+     */
+    public function testRoomCreate()
+    {
+        $roomData = [
+            "desc" => "A grand castle.",
+            "image" => "img/proj_rooms/image_1.png",
+            "actions" => [
+                "look" => "You see a large king's chair in front of you."
+            ]
+        ];
 
-    //     $dieVal = $die->getValue();
+        $room = new Room("castle", $roomData);
 
-    //     $die->roll();
+        $this->assertEquals($room->name, "castle");
+        $this->assertEquals($room->desc, "A grand castle.");
+        $this->assertTrue($room->actionExists("look"));
+    }
 
-    //     $res = $die;
+    /**
+     * Test if actions exists within the Room object.
+     */
+    public function testRoomActions()
+    {
+        $roomData = [
+            "desc" => "A grand castle.",
+            "image" => "img/proj_rooms/image_1.png",
+            "actions" => [
+                "look" => "You see a large king's chair in front of you."
+            ]
+        ];
 
-    //     $this->assertNotEquals($dieVal, $res);
-    // }
+        $room = new Room("castle", $roomData);
 
-    // /**
-    //  * Test if getAsString returns correct value.
-    //  */
-    // public function testDiceGetAsString()
-    // {
-    //     $die = new Dice();
+        $this->assertTrue($room->anyActionExists());
+    }
 
-    //     $dieValRes = "[" . strval($die->getValue()) . "]";
+    /**
+     * Tests that the "jump" action exists and contains the correct message.
+     */
+    public function testRoomGetAction()
+    {
+        $roomData = [
+            "desc" => "A grand castle.",
+            "image" => "img/proj_rooms/image_1.png",
+            "actions" => [
+                "look" => "You see a large king's chair in front of you.",
+                "jump" => "You jump through the ceiling and into the stars."
+            ]
+        ];
 
-    //     $res = $die->getAsString();
+        $room = new Room("castle", $roomData);
 
-    //     $this->assertEquals($dieValRes, $res);
-    // }
+        $this->assertIsArray($room->getAction("jump"));
+        $this->assertEquals($room->getAction("jump")["msg"], "You jump through the ceiling and into the stars.");
+    }
 }
