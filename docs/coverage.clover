@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1748889880">
-  <project timestamp="1748889880">
+<coverage generated="1748896582">
+  <project timestamp="1748896582">
     <file name="/home/andobambino/dbwebb-kurser/mvc/me/report/src/Card/Card.php">
       <class name="App\Card\Card" namespace="global">
         <metrics complexity="4" methods="4" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="10" coveredelements="10"/>
@@ -1000,14 +1000,14 @@
     </file>
     <file name="/home/andobambino/dbwebb-kurser/mvc/me/report/src/Proj/GameHandler.php">
       <class name="App\Proj\GameHandler" namespace="global">
-        <metrics complexity="14" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="57" coveredstatements="30" elements="60" coveredelements="31"/>
+        <metrics complexity="14" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="57" coveredstatements="37" elements="60" coveredelements="38"/>
       </class>
-      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="2"/>
-      <line num="20" type="stmt" count="2"/>
-      <line num="21" type="stmt" count="2"/>
-      <line num="30" type="method" name="action" visibility="public" complexity="7" crap="17.11" count="2"/>
-      <line num="32" type="stmt" count="2"/>
-      <line num="34" type="stmt" count="2"/>
+      <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="20" type="stmt" count="3"/>
+      <line num="21" type="stmt" count="3"/>
+      <line num="30" type="method" name="action" visibility="public" complexity="7" crap="10.95" count="3"/>
+      <line num="32" type="stmt" count="3"/>
+      <line num="34" type="stmt" count="3"/>
       <line num="35" type="stmt" count="0"/>
       <line num="36" type="stmt" count="0"/>
       <line num="37" type="stmt" count="0"/>
@@ -1015,15 +1015,15 @@
       <line num="39" type="stmt" count="0"/>
       <line num="40" type="stmt" count="0"/>
       <line num="41" type="stmt" count="0"/>
-      <line num="44" type="stmt" count="2"/>
-      <line num="46" type="stmt" count="2"/>
-      <line num="47" type="stmt" count="0"/>
-      <line num="48" type="stmt" count="0"/>
-      <line num="49" type="stmt" count="0"/>
-      <line num="50" type="stmt" count="0"/>
-      <line num="51" type="stmt" count="0"/>
-      <line num="52" type="stmt" count="0"/>
-      <line num="53" type="stmt" count="0"/>
+      <line num="44" type="stmt" count="3"/>
+      <line num="46" type="stmt" count="3"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="53" type="stmt" count="1"/>
       <line num="56" type="stmt" count="2"/>
       <line num="59" type="stmt" count="2"/>
       <line num="60" type="stmt" count="2"/>
@@ -1062,21 +1062,21 @@
       <line num="113" type="stmt" count="1"/>
       <line num="114" type="stmt" count="1"/>
       <line num="117" type="stmt" count="0"/>
-      <metrics loc="119" ncloc="100" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="57" coveredstatements="30" elements="60" coveredelements="31"/>
+      <metrics loc="119" ncloc="100" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="57" coveredstatements="37" elements="60" coveredelements="38"/>
     </file>
     <file name="/home/andobambino/dbwebb-kurser/mvc/me/report/src/Proj/Room.php">
       <class name="App\Proj\Room" namespace="global">
         <metrics complexity="10" methods="6" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="15" elements="24" coveredelements="19"/>
       </class>
-      <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="8"/>
-      <line num="25" type="stmt" count="8"/>
-      <line num="26" type="stmt" count="8"/>
-      <line num="27" type="stmt" count="8"/>
-      <line num="28" type="stmt" count="8"/>
-      <line num="31" type="method" name="actionExists" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="33" type="stmt" count="3"/>
-      <line num="36" type="method" name="anyActionExists" visibility="public" complexity="1" crap="1" count="3"/>
-      <line num="38" type="stmt" count="3"/>
+      <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="9"/>
+      <line num="25" type="stmt" count="9"/>
+      <line num="26" type="stmt" count="9"/>
+      <line num="27" type="stmt" count="9"/>
+      <line num="28" type="stmt" count="9"/>
+      <line num="31" type="method" name="actionExists" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="33" type="stmt" count="4"/>
+      <line num="36" type="method" name="anyActionExists" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="38" type="stmt" count="4"/>
       <line num="45" type="method" name="getAction" visibility="public" complexity="3" crap="3.33" count="1"/>
       <line num="47" type="stmt" count="1"/>
       <line num="49" type="stmt" count="1"/>
@@ -1084,31 +1084,31 @@
       <line num="53" type="stmt" count="1"/>
       <line num="54" type="stmt" count="1"/>
       <line num="57" type="stmt" count="0"/>
-      <line num="64" type="method" name="getString" visibility="private" complexity="2" crap="2.15" count="8"/>
-      <line num="66" type="stmt" count="8"/>
-      <line num="67" type="stmt" count="8"/>
+      <line num="64" type="method" name="getString" visibility="private" complexity="2" crap="2.15" count="9"/>
+      <line num="66" type="stmt" count="9"/>
+      <line num="67" type="stmt" count="9"/>
       <line num="70" type="stmt" count="0"/>
-      <line num="77" type="method" name="getActions" visibility="private" complexity="2" crap="2" count="8"/>
-      <line num="79" type="stmt" count="8"/>
-      <line num="80" type="stmt" count="5"/>
-      <line num="84" type="stmt" count="8"/>
+      <line num="77" type="method" name="getActions" visibility="private" complexity="2" crap="2" count="9"/>
+      <line num="79" type="stmt" count="9"/>
+      <line num="80" type="stmt" count="6"/>
+      <line num="84" type="stmt" count="9"/>
       <metrics loc="87" ncloc="65" classes="1" methods="6" coveredmethods="4" conditionals="0" coveredconditionals="0" statements="18" coveredstatements="15" elements="24" coveredelements="19"/>
     </file>
     <file name="/home/andobambino/dbwebb-kurser/mvc/me/report/src/Proj/RoomHandler.php">
       <class name="App\Proj\RoomHandler" namespace="global">
         <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
       </class>
-      <line num="16" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="5"/>
-      <line num="18" type="stmt" count="5"/>
-      <line num="19" type="stmt" count="5"/>
-      <line num="20" type="stmt" count="5"/>
-      <line num="23" type="stmt" count="5"/>
-      <line num="24" type="stmt" count="5"/>
+      <line num="16" type="method" name="__construct" visibility="public" complexity="2" crap="2" count="6"/>
+      <line num="18" type="stmt" count="6"/>
+      <line num="19" type="stmt" count="6"/>
+      <line num="20" type="stmt" count="6"/>
+      <line num="23" type="stmt" count="6"/>
+      <line num="24" type="stmt" count="6"/>
       <line num="28" type="method" name="roomName" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="30" type="stmt" count="1"/>
       <line num="32" type="stmt" count="1"/>
-      <line num="38" type="method" name="getRooms" visibility="public" complexity="1" crap="1" count="4"/>
-      <line num="40" type="stmt" count="4"/>
+      <line num="38" type="method" name="getRooms" visibility="public" complexity="1" crap="1" count="5"/>
+      <line num="40" type="stmt" count="5"/>
       <metrics loc="43" ncloc="34" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="8" coveredstatements="8" elements="11" coveredelements="11"/>
     </file>
     <file name="/home/andobambino/dbwebb-kurser/mvc/me/report/src/Repository/BookRepository.php">
@@ -1157,6 +1157,6 @@
       <line num="27" type="stmt" count="0"/>
       <metrics loc="30" ncloc="30" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="9" coveredelements="0"/>
     </file>
-    <metrics files="29" loc="2628" ncloc="2349" classes="28" methods="127" coveredmethods="39" conditionals="0" coveredconditionals="0" statements="855" coveredstatements="141" elements="982" coveredelements="180"/>
+    <metrics files="29" loc="2628" ncloc="2349" classes="28" methods="127" coveredmethods="39" conditionals="0" coveredconditionals="0" statements="855" coveredstatements="148" elements="982" coveredelements="187"/>
   </project>
 </coverage>

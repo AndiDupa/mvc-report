@@ -40,6 +40,20 @@ class GameHandlerTest extends TestCase
         $this->assertEquals($res["msg"], "You use the key to unlock the door and enter the hallway...");
     }
 
+    public function testGameHandlerActionNotExist()
+    {
+        $gameHandler = new GameHandler();
+
+        $inventory = [];
+        $room = "bedroom";
+        $action = "";
+
+        $res = $gameHandler->action($room, $action, $inventory);
+
+        $this->assertIsArray($res);
+        $this->assertEquals($res["msg"], "Sorry, this program is too dumb to understand your genius.");
+    }
+
     // /**
     //  * @param string $room contains the room name
     //  * @param string $action contains the action name
