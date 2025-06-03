@@ -117,6 +117,7 @@
             "look around": "You are not even in the same dimension as your house now... You're in a scary looking dungeon with a literal GHOST in front of you.",
             "talk to ghost": {
                 "msg": "You ask the ghost 'What's up?', the ghost responds with 'Oh uhm, nothing much, just trying to solve this rubix cube...'",
+                "msgImage": "img/proj_rooms/image_rubix.png",
                 "add": "askrubix",
                 "remove": "askrubix"
             },
@@ -145,6 +146,14 @@
         "directions": {
             "south": "bedroom",
             "east": "bathroom"
+        }
+    },
+    "test": {
+        "room": "Test",
+        "desc": "TestDescription",
+        "image": "img/proj_rooms/image_dark.png",
+        "items": [],
+        "actions": {
         }
     }
 }

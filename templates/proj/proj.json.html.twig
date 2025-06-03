@@ -1,0 +1,62 @@
+{% extends "proj/base_proj.html.twig" %}
+
+{% block title %}Project about{% endblock %}
+
+{% block body %}
+    <div class="center">
+        <h1>Kmom10: Aväntyrsspel</h1><br>
+
+        <div class="center form">
+            <h1>API Routes</h1><br>
+            <p>
+                Följande är routes till projektets JSON sidor:
+            </p>
+            <br>
+
+            <label>Denna sida visar all rum-data i spelets rooms.json fil</label>
+            <a class="submit large white-background link-no-decor" href="{{ path('project_json_all_rooms') }}">
+                <p>Alla rum</p>
+            </a>
+
+            <br>
+
+            <label>Här kan du söka bland rum-namnen</label>
+
+            <form class="fill-available" method="POST" action="{{ path('project_json_search') }}">
+                <input type="text" name="room" class="large"><br>
+
+                <button class="submit large white-background link-no-decor">
+                    <p>Submit</p>
+                </button>
+            </form>
+
+            <br>
+
+            <label>Här kan du se vad som finns i session för spelet.</label>
+            <a class="submit large white-background link-no-decor" href="{{ path('project_json_session') }}">
+                <p>Session data</p>
+            </a>
+
+            <br>
+
+            <label>Här kan du nollställa session-variablerna för spelet.</label>
+            <a class="submit large white-background link-no-decor" href="{{ path('project_json_reset') }}">
+                <p>Nollställ</p>
+            </a>
+
+            <br>
+
+            <form class="fill-available" method="POST" action="{{ path('project_json_set') }}">
+                <label>Här kan du skriva in vilket rum du vill vara i spelet.</label>
+                <input type="text" name="room" class="large"><br>
+
+                <label>Här kan du skriva in vad du vill ha i användarens inventory (separera items likt såhär: key, plushie).</label>
+                <input type="text" name="inventory" class="large"><br>
+
+                <button class="submit large white-background link-no-decor">
+                    <p>Submit</p>
+                </button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

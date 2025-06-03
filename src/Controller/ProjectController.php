@@ -19,16 +19,22 @@ class ProjectController extends AbstractController
         return $this->render('proj/proj.html.twig');
     }
 
+    #[Route("/proj/about", name: "project_about")]
+    public function projAbout(): Response
+    {
+        return $this->render('proj/proj.about.html.twig');
+    }
+
     #[Route("/proj/game", name: "project_init")]
     public function game(
         SessionInterface $session
     ): Response
     {
-        $session->set("room", "bedroom");
-        $session->set("inventory", []);
+        $roomName = $session->get("room");
+        $room = is_string($roomName) ? $roomName : "bedroom";
 
         $handler = new RoomHandler();
-        $test = $handler->roomName("Bedroom");
+        $test = $handler->roomName($room);
 
         $data = [
             "room" => $test->name,

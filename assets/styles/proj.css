@@ -4,6 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Pixelify Sans", sans-serif;
 }
 
 html {
@@ -15,7 +16,6 @@ body {
     max-width: 100%;
     height: 100%;
     line-height: 1.4;
-    font-family: "Pixelify Sans", sans-serif;
     background-color: white;
 }
 

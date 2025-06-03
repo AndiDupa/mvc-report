@@ -102,4 +102,40 @@ class RoomHandlerTest extends TestCase
         $this->assertIsArray($room->getAction("jump"));
         $this->assertEquals($room->getAction("jump")["msg"], "You jump through the ceiling and into the stars.");
     }
+
+    /**
+     * Tests that the "look" action exists and contains the correct message.
+     */
+    public function testRoomGetActionTwo()
+    {
+        $roomData = [
+            "desc" => "A grand castle.",
+            "image" => "img/proj_rooms/image_1.png",
+            "actions" => [
+                "look" => [
+                    "msg" => "You see a large king's chair in front of you."
+                ]
+            ]
+        ];
+
+        $room = new Room("castle", $roomData);
+
+        $this->assertIsArray($room->getAction("look"));
+        $this->assertEquals($room->getAction("look")["msg"], "You see a large king's chair in front of you.");
+    }
+
+    /**
+     * Tests if no action exists.
+     */
+    public function testRoomGetActionThree()
+    {
+        $roomData = [
+            "desc" => "A grand castle.",
+            "image" => "img/proj_rooms/image_1.png"
+        ];
+
+        $room = new Room("castle", $roomData);
+
+        $this->assertEquals($room->getAction("look"), null);
+    }
 }

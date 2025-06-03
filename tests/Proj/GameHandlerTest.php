@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class GameHandlerTest extends TestCase
 {
     /**
-     * Tests if RoomHandler->getRooms() returns an array of all the rooms in the JSON file.
+     * Tests if item requirements work.
      */
     public function testGameHandlerActionWithoutItem()
     {
@@ -26,6 +26,9 @@ class GameHandlerTest extends TestCase
         $this->assertEquals($res["msg"], "You dont have the thing required to do that yet.");
     }
 
+    /**
+     * Tests if item requirements work when player has the item.
+     */
     public function testGameHandlerActionWithItem()
     {
         $gameHandler = new GameHandler();
@@ -40,6 +43,9 @@ class GameHandlerTest extends TestCase
         $this->assertEquals($res["msg"], "You use the key to unlock the door and enter the hallway...");
     }
 
+    /**
+     * Tests if user inputted action doesn't exist.
+     */
     public function testGameHandlerActionNotExist()
     {
         $gameHandler = new GameHandler();
@@ -54,163 +60,71 @@ class GameHandlerTest extends TestCase
         $this->assertEquals($res["msg"], "Sorry, this program is too dumb to understand your genius.");
     }
 
-    // /**
-    //  * @param string $room contains the room name
-    //  * @param string $action contains the action name
-    //  * @param array<string> $inventory contains items in the player's inventory
-    //  * @return array<string, mixed> contains formatted game data
-    //  */
-    // public function action(string $room, string $action, array $inventory): array
-    // {
-    //     $currRoom = $this->rooms[$room];
+    /**
+     * Tests if room with no actions returns the room description.
+     */
+    public function testGameHandlerNoActions()
+    {
+        $gameHandler = new GameHandler();
 
-    //     if (!$currRoom->anyActionExists()) {
-    //         return [
-    //             "room" => $room,
-    //             "msg" => $currRoom->desc,
-    //             "add" => null,
-    //             "remove" => null,
-    //             "image" => $currRoom->image
-    //         ];
-    //     }
+        $inventory = [];
+        $room = "windungeon";
+        $action = "";
 
-    //     $allActions = $currRoom->actions;
+        $res = $gameHandler->action($room, $action, $inventory);
 
-    //     if (!$currRoom->actionExists($action)) {
-    //         return [
-    //             "room" => $room,
-    //             "msg" => "Sorry, this program is too dumb to understand your genius.",
-    //             "add" => null,
-    //             "remove" => null,
-    //             "image" => $currRoom->image
-    //         ];
-    //     }
+        $this->assertIsArray($res);
+        $this->assertEquals($res["msg"], "YOU'RE A WINNER! You might not be able to do anything with the money, since you're locked in a dungeon and all, but at least you have a sick plushie and fat stacks!");
+    }
 
-    //     $singleAction = $allActions[$action];
+    /**
+     * Tests if room action results in death and the correct message is displayed.
+     */
+    public function testGameHandlerDead()
+    {
+        $gameHandler = new GameHandler();
 
-    //     /** @var string $req contains required item for committing action */
-    //     $req = $singleAction["req"] ?? "";
-    //     $resReturn = [
-    //         "room" => $room,
-    //         "msg" => $singleAction["msg"] ?? null,
-    //         "add" => $singleAction["add"] ?? null,
-    //         "remove" => $singleAction["remove"] ?? null,
-    //         "image" => $currRoom->image ?? "img/proj_rooms/image_1.png"
-    //     ];
+        $inventory = [];
+        $room = "hallway";
+        $action = "open door";
 
-    //     if (isset($singleAction["dead"]) && !in_array($req, $inventory)) {
-    //         return [
-    //             "room" => $room,
-    //             "msg" => $singleAction["deadMsg"],
-    //             "add" => null,
-    //             "remove" => null,
-    //             "image" => $singleAction["dead"]
-    //         ];
-    //     }
+        $res = $gameHandler->action($room, $action, $inventory);
 
-    //     if (is_string($singleAction)) {
-    //         $resReturn["msg"] = $singleAction;
-    //         return $resReturn;
-    //     }
+        $this->assertIsArray($res);
+        $this->assertEquals($res["msg"], "You DIE!!! You enter the door, walking straight into the open mouth of a spooky beast...");
+    }
 
-    //     if (isset($singleAction["msgImage"])) {
-    //         $resReturn["image"] = $singleAction["msgImage"];
-    //         $resReturn["msg"] = $singleAction["msg"];
-    //         return $resReturn;
-    //     }
+    /**
+     * Tests if msgImage works and the correct message is displayed.
+     */
+    public function testGameHandlerMsgImage()
+    {
+        $gameHandler = new GameHandler();
 
-    //     $resReturn = $this->hasItem($singleAction, $req, $inventory, $resReturn);
+        $inventory = [];
+        $room = "bathroom";
+        $action = "look at light switch";
 
-    //     return $resReturn;
-    // }
+        $res = $gameHandler->action($room, $action, $inventory);
 
-    // public function __construct()
-    // {
-    //     $this->roomHandler = new RoomHandler();
-    //     $this->rooms = $this->roomHandler->getRooms();
-    // }
+        $this->assertIsArray($res);
+        $this->assertEquals($res["msg"], "Just a normal light switch.");
+    }
 
+    /**
+     * Tests if an action with just a message returns correctly.
+     */
+    public function testGameHandlerSingleMsg()
+    {
+        $gameHandler = new GameHandler();
 
-    // /**
-    //  * Tests if RoomHandler->getRooms contains an array of Room objects.
-    //  */
-    // public function testRoomHandlerContainsRooms()
-    // {
-    //     $roomHandler = new RoomHandler();
-    //     $res = $roomHandler->getRooms();
+        $inventory = [];
+        $room = "bathroom";
+        $action = "look around";
 
-    //     foreach($res as $room) {
-    //         $this->assertInstanceOf("\App\Proj\Room", $room);
-    //     }
-    // }
+        $res = $gameHandler->action($room, $action, $inventory);
 
-    // /**
-    //  * Tests if "bedroom" exists within the rooms in roomHandler (which it should).
-    //  */
-    // public function testRoomHandlerRoomName()
-    // {
-    //     $roomHandler = new RoomHandler();
-    //     $res = $roomHandler->roomName("bedroom");
-
-    //     $this->assertInstanceOf("\App\Proj\Room", $res);
-    //     $this->assertEquals($res->image, "img/proj_rooms/image_1.png");
-    // }
-
-    // /**
-    //  * Tests if its possible to create a new Room object, and that the "look" action exists.
-    //  */
-    // public function testRoomCreate()
-    // {
-    //     $roomData = [
-    //         "desc" => "A grand castle.",
-    //         "image" => "img/proj_rooms/image_1.png",
-    //         "actions" => [
-    //             "look" => "You see a large king's chair in front of you."
-    //         ]
-    //     ];
-
-    //     $room = new Room("castle", $roomData);
-
-    //     $this->assertEquals($room->name, "castle");
-    //     $this->assertEquals($room->desc, "A grand castle.");
-    //     $this->assertTrue($room->actionExists("look"));
-    // }
-
-    // /**
-    //  * Test if actions exists within the Room object.
-    //  */
-    // public function testRoomActions()
-    // {
-    //     $roomData = [
-    //         "desc" => "A grand castle.",
-    //         "image" => "img/proj_rooms/image_1.png",
-    //         "actions" => [
-    //             "look" => "You see a large king's chair in front of you."
-    //         ]
-    //     ];
-
-    //     $room = new Room("castle", $roomData);
-
-    //     $this->assertTrue($room->anyActionExists());
-    // }
-
-    // /**
-    //  * Tests that the "jump" action exists and contains the correct message.
-    //  */
-    // public function testRoomGetAction()
-    // {
-    //     $roomData = [
-    //         "desc" => "A grand castle.",
-    //         "image" => "img/proj_rooms/image_1.png",
-    //         "actions" => [
-    //             "look" => "You see a large king's chair in front of you.",
-    //             "jump" => "You jump through the ceiling and into the stars."
-    //         ]
-    //     ];
-
-    //     $room = new Room("castle", $roomData);
-
-    //     $this->assertIsArray($room->getAction("jump"));
-    //     $this->assertEquals($room->getAction("jump")["msg"], "You jump through the ceiling and into the stars.");
-    // }
+        $this->assertIsArray($res);
+        $this->assertEquals($res["msg"], "The bathroom is dark and spooky... what the actual heck... Oh! There's a light switch beside you.");
+    }
 }
