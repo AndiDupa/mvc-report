@@ -10,7 +10,7 @@
 
 ## Image of site
 
-![Image of homepage](.\public\img\homepage.png)
+![Image of homepage](public/img/homepage.png)
 
 This project is my project repository for the MVC (DV1608) course, used for working with object oriented programming in PHP, among other things such as developing a website and working on and implementing assignments. The website also includes an adventure game, made as the final project for the MVC course.
 
