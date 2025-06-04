@@ -40,7 +40,7 @@ class ProjectApiController extends AbstractController
         $handler = new RoomHandler();
         $data = [];
 
-        foreach($handler->getRooms() as $key => $value) {
+        foreach ($handler->getRooms() as $key => $value) {
             if ($search === $key) {
                 $data[] = $value;
             }
@@ -60,8 +60,7 @@ class ProjectApiController extends AbstractController
     #[Route("/proj/api/session", name: "project_json_session")]
     public function projJsonSession(
         SessionInterface $session
-    ): Response 
-    {
+    ): Response {
         /** @var string $room contains room name */
         $room = $session->get("room");
 

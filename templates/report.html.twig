@@ -218,13 +218,96 @@
                     </p>
                 </ul>
 
-
             <h2 id="kmom10" class="center">kmom10</h2>
+                <h3>1.</h3><br>
+                <ul>
+                    <li>Krav 1-3: Webbplats.</li>
+                    <p>Innehåll och utseende.</p><br>
+                    <p>
+                        Projektets skapande inleddes med att skapa laddningssidan “/proj”, som skulle agera som en bas för projektet, och alla dess andra sidor. Sedan undersöktes de olika fokus för projektet för att hitta 
+                        något som upplevdes som en godtagbar utmaning hittades, och sedan valdes fokuset “Äventyrsspel”. Kraven beskriver hur webbplatsen för projektsidorna skall ha en enhetlig design, och därmed togs gamla PC-spel 
+                        som inspiration för stilen, med starkt mättade färger, och ett 8-bitars typsnitt “Pixelify Sans” från Google Fonts. Denna design är till för att efterlikna de starka färgerna som ofta användes förut för dessa spel, 
+                        eftersom datorer bara hade möjligheten att visa några få färger. Sidan bygger på samma stylesheet som tidigare, fast kopierat, och ändrat till en ny fil “proj.css”, som används för projektsidornas stil, för att 
+                        skapa en distinkt design som skiljer sig från tidigare kursmoment. Webbplatsen har även en separat navbar, som bara dyker upp i projekt sidorna, som inkluderar länkar till att starta spelet, om-sidan, samt 
+                        JSON API-sidan. Om-sidan innehåller en kort introduktion till projektet, vad äventyrsspel är, och hur man kan börja med spelet.
+                    </p><br>
+                    <p>Repo och dokumentation.</p><br>
+                    <p>
+                        Projektets repo innehåller en “README.md” fil. Denna filen innehåller en kort introduktion till repot använt för att skapa projektet, samt en lista av funktioner och intressanta delar av sidan som är 
+                        tillgänglig för användaren. Det är beskrivet om hur äventyrsspelet är inkluderat, och finns i “Project”-länken i navbaren. Nedåt i filen finns även instruktioner till hur användaren går till väga för 
+                        att klona repot och komma igång med Symfony. Det finns även Scrutinizer badges, som länkar till repots Scrutinizer sida, där det finns information kring kodkvaliteten i repot. Projektet har även 
+                        nygenererat dokumentation med phpdoc samt phpmetrics, för att visa mer information kring kodbasen. Informationen innehåller projektets kodtäckning, som är över 90% för filerna relaterade till 
+                        äventyrsspelet (Just nu 97.59% för Proj-mappen i \src.). “Proj” mappen inkluderar filerna “GameHandler.php”, som hanterar generell data för spelet genom att läsa användarens action-input, och 
+                        läser igenom “rooms.json” för att hitta rätt svar. “Room.php” innehåller Room-klassen, som formaterar ett rum till ett Room-objekt, som sedan används i “RoomHandler.php”, som innehåller alla 
+                        spelets rum, samt funktioner för att få ut datan.
+                    </p><br>
 
-                {# <ul>
-                    <li></li>
-                    <p></p>
-                </ul> #}
+                    <li>Krav 4: JSON API</li>
+                    <p>
+                        Ett JSON API har implementerats i projektet. Meningen med API:t, är att visa information om spelets filer, samt att kunna ändra data relaterat till den nuvarande spelsessionen. Första routen, 
+                        handlar om att visa innehållet i “rooms.json” filen, som håller informationen om spelets alla olika rum samt items, så att användaren kan se alla kommandon och olika sätt att ta sig fram. 
+                        Den andra routen: “Sök bland rum”, har ett formulär med en “POST”-route, där användaren kan söka efter ett rum-namn, och se information om det rummet. Detta är bra om spelet till exempel 
+                        utökas, och “rooms.json”-filen blir alldeles för stor. Den tredje routen visar sessionsdata för den nuvarande spelsessionen, som inkluderar vilket rum spelaren är i, samt vad användaren 
+                        har i sitt inventory, och den frärde routen är till för att nollställa den datan till dess originella värde, det vill säga att rummet är “bedroom”, och inventory är “[]”. Den femte routen 
+                        handlar om att ändra spelsessionens data, och i den kan användaren skriva in vilket rum hen vill vara i när de hoppar in i spelet igen, samt vilka items hen vill ha i sitt inventory, med 
+                        hjälp av ett “POST”-formulär. Programmet kollar sedan om användaren inte fyllt i båda fälten, och ber dem göra det, men annars så tas inventory strängen och görs om till en array, och inventory 
+                        samt rummet sätts till sessionvariablerna, och visas i routen i “$data”-variabeln:<br><br>
+
+                        $room = strtolower((string) $request->request->get("room"));<br>
+                        $inventory = strtolower((string) $request->request->get("inventory"));<br><br>
+
+                        $arrInventory = [];<br>
+                        $data = [];<br><br>
+
+                        if ($inventory === "" || $room === "") {<br>
+                            $response = new JsonResponse("Vänligen fyll i båda fälten");<br>
+                            $response->setEncodingOptions(<br>
+                                $response->getEncodingOptions() | JSON_PRETTY_PRINT<br>
+                            );<br>
+                            return $response;<br>
+                        } else {<br>
+                            $arrInventory = explode(", ", $inventory);<br><br>
+
+                            $session->set("room", $room);<br>
+                            $session->set("inventory", $arrInventory);<br>
+                        }<br><br>
+
+                        $data[] = [<br>
+                            $room,<br>
+                            $inventory<br>
+                        ];<br><br>
+
+                        $response = new JsonResponse($data);<br>
+                        $response->setEncodingOptions(<br>
+                            $response->getEncodingOptions() | JSON_PRETTY_PRINT<br>
+                        );<br>
+                        return $response;<br><br>
+                    </p><br>
+                    <li>Krav 5: Pass</li><br>
+                    <li>Krav 6: Pass</li>
+                </ul><br>
+
+                <h3>2.</h3><br>
+                <ul>
+                    <p>
+                        Projektets genomförande gick väl, även om det fanns en tidspress att få klart projektet snabbt innan slutdagen, efter att Webapp-kursens projekt hade tagit upp så mycket tid. Äventyrsspelet valdes, 
+                        eftersom det var något som kändes bekant, och inte alldeles för komplicerat att fixa inom några dagar, men om det hade funnits mer tid, hade även fler krav avklarats. Problemet till att börja med 
+                        var att krav 5 prioriterades kvickt, och med tidspressen, blev inte implementationen av en databas som förväntat. Då ändrades istället projektet till att prioritera en lättare struktur, med en json-fil 
+                        som lätt går att implementera nya rum med, istället för en databas, som hade kunnat ta för lång tid att implementera fullt. Ett annat problem som förekom under projektets gång var att phpstan ofta klagade 
+                        på kodens struktur, vilket ledde till att “Room” samt “RoomHandler” klasserna fick ändras och kommenteras på olika sätt, för att få bort meddelanderna. Annars upplevdes inte en alldeles för stor svårighetsgrad, 
+                        och det gick att skapa ett objektorienterat spel till slut, även om det inte uppfyller alla kraven. Projektet var rimligt för denna kursen.
+                    </p>
+                </ul><br>
+
+                <h3>3.</h3><br>
+                <ul>
+                    <p>
+                        Kursens material och handledning har varit bra, även om det ofta strulat med abstrakta fel från symfony eller phpstan. Det har aldrig känts omöjligt, och information om fixes och annat har alltid kunnat hittas 
+                        i Discord-chatten samt online på olika forum. Det har varit mycket intressant och lärorikt att utforska vad PHP-språket kan användas till i en större grad än vad som använts i tidigare kurser. Även om det under 
+                        några tillfällen varit rätt stressigt att få kodbasen att fungera väl, samt att få verktyg såsom Scrutinizer att fungera, har kursen ändå flutit på väl, och det finns inte mycket negativt att kommentera om lärandet 
+                        och innehållet. Att kunna välja ett eget fokus i projektet var väldigt välkommet. Jag är nöjd med kursen, och ger den en 8/10.
+                    </p>
+                </ul>
         </article>
     </div>
 {% endblock %}

@@ -47,7 +47,7 @@ class DiceHandTest extends TestCase
 
         $dieList = [new Dice(), new Dice(), new Dice()];
 
-        foreach($dieList as $die) {
+        foreach ($dieList as $die) {
             $dieHand->add($die);
         }
 
@@ -65,7 +65,7 @@ class DiceHandTest extends TestCase
 
         $dieList = [new Dice(), new Dice(), new Dice()];
 
-        foreach($dieList as $die) {
+        foreach ($dieList as $die) {
             $dieHand->add($die);
         }
 

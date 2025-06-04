@@ -144,23 +144,21 @@ code {
 }
 
 .footer {
-    background-image: linear-gradient(50deg, #232423, #16150c);
+    background-image: none;
+    background-color: #3d0c28 !important;
     border-top: 0;
-    /* position: absolute; */
+    position: static;
+    padding: 0;
     margin-top: 1em;
-    width: 100vw;
-    /* bottom: 0; */
 }
 
 .game-bar {
     width: 500px;
-    /* position: absolute; */
     justify-self: anchor-center;
     background-color: aquamarine;
     height: 8em;
     margin-top: 1em;
     padding: 2em;
-    /* bottom: 0; */
     z-index: 1;
 }
 

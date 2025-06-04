@@ -28,18 +28,17 @@ class ProjectController extends AbstractController
     #[Route("/proj/game", name: "project_init")]
     public function game(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $roomName = $session->get("room");
         $room = is_string($roomName) ? $roomName : "bedroom";
 
         $handler = new RoomHandler();
-        $test = $handler->roomName($room);
+        $currRoom = $handler->roomName($room);
 
         $data = [
-            "room" => $test->name,
-            "desc" => $test->desc,
-            "image" => $test->image
+            "room" => $currRoom->name,
+            "desc" => $currRoom->desc,
+            "image" => $currRoom->image
         ];
 
         return $this->render('proj/proj_game.html.twig', [
@@ -47,7 +46,28 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route("/proj/game/room", name: "project_handle_room_change")]
+    #[Route("/proj/game/reset", name: "project_init_reset")]
+    public function gameReset(
+        SessionInterface $session
+    ): Response {
+        $session->set("room", "bedroom");
+        $session->set("inventory", []);
+
+        $handler = new RoomHandler();
+        $currRoom = $handler->roomName("bedroom");
+
+        $data = [
+            "room" => $currRoom->name,
+            "desc" => $currRoom->desc,
+            "image" => $currRoom->image
+        ];
+
+        return $this->render('proj/proj_game.html.twig', [
+            'data' => $data
+        ]);
+    }
+
+    #[Route("/proj/game/room", name: "project_handle_room_change", methods: ["POST"])]
     public function change(
         SessionInterface $session,
         Request $request

@@ -28,7 +28,7 @@ class RoomHandlerTest extends TestCase
         $roomHandler = new RoomHandler();
         $res = $roomHandler->getRooms();
 
-        foreach($res as $room) {
+        foreach ($res as $room) {
             $this->assertInstanceOf("\App\Proj\Room", $room);
         }
     }

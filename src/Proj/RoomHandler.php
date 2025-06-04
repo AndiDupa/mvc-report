@@ -6,6 +6,7 @@
  */
 
 namespace App\Proj;
+
 use App\Proj\Room;
 
 class RoomHandler
@@ -20,7 +21,7 @@ class RoomHandler
         $this->rooms = [];
 
         /** @var array<string, array<string, mixed>> $roomsData contains data for room including string and arrays */
-        foreach($roomsData as $room => $data) {
+        foreach ($roomsData as $room => $data) {
             $this->rooms[$room] = new Room($room, $data);
         }
     }
