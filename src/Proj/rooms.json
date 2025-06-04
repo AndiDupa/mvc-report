@@ -2,18 +2,20 @@
     "bedroom": {
         "room": "Bedroom",
         "desc": "This is a familiar area. It just so happens to be your bedroom! But something isn't right... You should explore the area and see if you can figure out what's off about this place...",
-        "image": "img/proj_rooms/image_1.png",
+        "image": "img/proj_rooms/image_1_with_key.png",
         "items": ["key"],
-        "directions": {
-            "north": "hallway"
-        },
         "actions": {
             "look around": "Around you is your room. 'It's messy because I've been busy with school projects', you think to yourself... sure... Also, there seems to be something shimmering on the floor.",
             "look at floor": "You see a small key.",
+            "look at tv": "On the drawers, you spot various knick knacks, a TV, and games consoles. Nothing of use here.",
+            "look at fan": "It sure is getting warmer outside now!",
+            "look at guitar": "A sick guitar is hung on the wall, with a sick little Ando Bambino sticker on it.",
+            "look at shelf": "On the shelf, you see various little knick knacks, movies from your childhood, and vinyl records of The Format and Sam Means.",
             "pick up key": {
                 "add": "key",
                 "remove": "key",
-                "msg": "You pick up the key."
+                "msg": "You pick up the key.",
+                "msgImage": "img/proj_rooms/image_1.png"
             },
             "open door": {
                 "req": "key",
@@ -30,6 +32,13 @@
         "actions": {
             "look around": "The hallway is very dark... Very mysterious... Very... Spooky...",
             "look up": "Theres nothing here... Wait... there's what seems to be a plushie dangling from a string on the ceiling!?",
+            "look at door": "The ominous door stands before you... you hear a scary noise coming from the inside...",
+            "knock on door": "The beast responds with 'Teeheehee... say the magic word to be granted entry... the only way to rid of me is with kindness! Sure would be a shame if there was a plushie hanging around somewhere... That would certainly do me in...'",
+            "say please": {
+                "add": "plushie",
+                "remove": "plushie",
+                "msg": "A plushie materializes in your hands... It looks like a duck? Maybe you could use this to open the door."
+            },
             "go south": {
                 "req": "",
                 "next": "bedroom",
@@ -40,7 +49,6 @@
                 "next": "bedroom",
                 "msg": "You enter your bedroom again."
             },
-            "look at door": "The ominous door stands before you... you hear a scary noise coming from the inside...",
             "open door": {
                 "req": "plushie",
                 "next": "bathroom",
@@ -68,6 +76,17 @@
                 "add": "light",
                 "remove": "light"
             },
+            "look at switch": {
+                "msg": "Just a normal light switch.",
+                "msgImage": "img/proj_rooms/image_light.png",
+                "add": "light",
+                "remove": "light"
+            },
+            "flip light switch": {
+                "req": "light",
+                "next": "lightbathroom",
+                "msg": "You flip the light switch, revealing that the HAS A PORTAL IN IT!!!!!!"
+            },
             "flip switch": {
                 "req": "light",
                 "next": "lightbathroom",
@@ -91,7 +110,7 @@
         "image": "img/proj_rooms/image_portal.png",
         "items": [],
         "actions": {
-            "look around": "The bathroom is dark and spooky... what the actual floppy sloppy...",
+            "look around": "WOAAAH IT'S A WIZARDS PORTAL!!! A WIZARDS PORTAL!!! A WIZARDS PORTAL!!! Shall you enter it adventurer?...",
             "look at portal": "IT'S A WIZARDS PORTAL??? Will you enter it?...",
             "enter portal": {
                 "req": "light",
@@ -142,11 +161,7 @@
         "room": "Dungeon",
         "desc": "YOU'RE A WINNER! You might not be able to do anything with the money, since you're locked in a dungeon and all, but at least you have a sick plushie and fat stacks!",
         "image": "img/proj_rooms/image_chest.png",
-        "items": [],
-        "directions": {
-            "south": "bedroom",
-            "east": "bathroom"
-        }
+        "items": []
     },
     "test": {
         "room": "Test",

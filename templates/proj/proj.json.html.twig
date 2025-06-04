@@ -13,6 +13,7 @@
             </p>
             <br>
 
+            <h2>1. Rum data.</h2>
             <label>Denna sida visar all rum-data i spelets rooms.json fil</label>
             <a class="submit large white-background link-no-decor" href="{{ path('project_json_all_rooms') }}">
                 <p>Alla rum</p>
@@ -20,8 +21,8 @@
 
             <br>
 
-            <label>Här kan du söka bland rum-namnen</label>
-
+            <h2>2. Sök bland rum</h2>
+            <label>Här kan du söka bland rum-namnen.</label>
             <form class="fill-available" method="POST" action="{{ path('project_json_search') }}">
                 <input type="text" name="room" class="large"><br>
 
@@ -32,6 +33,7 @@
 
             <br>
 
+            <h2>3. Se session data</h2>
             <label>Här kan du se vad som finns i session för spelet.</label>
             <a class="submit large white-background link-no-decor" href="{{ path('project_json_session') }}">
                 <p>Session data</p>
@@ -39,6 +41,7 @@
 
             <br>
 
+            <h2>4. Nollställ spel-session data.</h2>
             <label>Här kan du nollställa session-variablerna för spelet.</label>
             <a class="submit large white-background link-no-decor" href="{{ path('project_json_reset') }}">
                 <p>Nollställ</p>
@@ -46,6 +49,7 @@
 
             <br>
 
+            <h2>5. Ändra spel-session data.</h2>
             <form class="fill-available" method="POST" action="{{ path('project_json_set') }}">
                 <label>Här kan du skriva in vilket rum du vill vara i spelet.</label>
                 <input type="text" name="room" class="large"><br>
