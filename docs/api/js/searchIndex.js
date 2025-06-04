@@ -476,6 +476,71 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Controller-ProductController.html#method_showProductByMinimumValue"
         },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController",
+            "name": "ProjectApiController",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApiController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AprojJson\u0028\u0029",
+            "name": "projJson",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApiController.html#method_projJson"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AprojJsonAllRooms\u0028\u0029",
+            "name": "projJsonAllRooms",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApiController.html#method_projJsonAllRooms"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AprojJsonSearch\u0028\u0029",
+            "name": "projJsonSearch",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApiController.html#method_projJsonSearch"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AprojJsonSession\u0028\u0029",
+            "name": "projJsonSession",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApiController.html#method_projJsonSession"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AprojJsonAllItems\u0028\u0029",
+            "name": "projJsonAllItems",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApiController.html#method_projJsonAllItems"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectApiController\u003A\u003AprojJsonSet\u0028\u0029",
+            "name": "projJsonSet",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectApiController.html#method_projJsonSet"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController",
+            "name": "ProjectController",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectController.html"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003Ahome\u0028\u0029",
+            "name": "home",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectController.html#method_home"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AprojAbout\u0028\u0029",
+            "name": "projAbout",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectController.html#method_projAbout"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003Agame\u0028\u0029",
+            "name": "game",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectController.html#method_game"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003AgameReset\u0028\u0029",
+            "name": "gameReset",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectController.html#method_gameReset"
+        },                {
+            "fqsen": "\\App\\Controller\\ProjectController\u003A\u003Achange\u0028\u0029",
+            "name": "change",
+            "summary": "",
+            "url": "classes/App-Controller-ProjectController.html#method_change"
+        },                {
             "fqsen": "\\App\\Controller\\Session",
             "name": "Session",
             "summary": "",
@@ -736,6 +801,116 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Kernel.html"
         },                {
+            "fqsen": "\\App\\Proj\\GameHandler",
+            "name": "GameHandler",
+            "summary": "",
+            "url": "classes/App-Proj-GameHandler.html"
+        },                {
+            "fqsen": "\\App\\Proj\\GameHandler\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Proj-GameHandler.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Proj\\GameHandler\u003A\u003Aaction\u0028\u0029",
+            "name": "action",
+            "summary": "",
+            "url": "classes/App-Proj-GameHandler.html#method_action"
+        },                {
+            "fqsen": "\\App\\Proj\\GameHandler\u003A\u003AhasItem\u0028\u0029",
+            "name": "hasItem",
+            "summary": "",
+            "url": "classes/App-Proj-GameHandler.html#method_hasItem"
+        },                {
+            "fqsen": "\\App\\Proj\\GameHandler\u003A\u003A\u0024rooms",
+            "name": "rooms",
+            "summary": "",
+            "url": "classes/App-Proj-GameHandler.html#property_rooms"
+        },                {
+            "fqsen": "\\App\\Proj\\GameHandler\u003A\u003A\u0024roomHandler",
+            "name": "roomHandler",
+            "summary": "",
+            "url": "classes/App-Proj-GameHandler.html#property_roomHandler"
+        },                {
+            "fqsen": "\\App\\Proj\\Room",
+            "name": "Room",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html"
+        },                {
+            "fqsen": "\\App\\Proj\\Room\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Proj\\Room\u003A\u003AactionExists\u0028\u0029",
+            "name": "actionExists",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html#method_actionExists"
+        },                {
+            "fqsen": "\\App\\Proj\\Room\u003A\u003AanyActionExists\u0028\u0029",
+            "name": "anyActionExists",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html#method_anyActionExists"
+        },                {
+            "fqsen": "\\App\\Proj\\Room\u003A\u003AgetAction\u0028\u0029",
+            "name": "getAction",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html#method_getAction"
+        },                {
+            "fqsen": "\\App\\Proj\\Room\u003A\u003AgetString\u0028\u0029",
+            "name": "getString",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html#method_getString"
+        },                {
+            "fqsen": "\\App\\Proj\\Room\u003A\u003AgetActions\u0028\u0029",
+            "name": "getActions",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html#method_getActions"
+        },                {
+            "fqsen": "\\App\\Proj\\Room\u003A\u003A\u0024name",
+            "name": "name",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html#property_name"
+        },                {
+            "fqsen": "\\App\\Proj\\Room\u003A\u003A\u0024desc",
+            "name": "desc",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html#property_desc"
+        },                {
+            "fqsen": "\\App\\Proj\\Room\u003A\u003A\u0024image",
+            "name": "image",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html#property_image"
+        },                {
+            "fqsen": "\\App\\Proj\\Room\u003A\u003A\u0024actions",
+            "name": "actions",
+            "summary": "",
+            "url": "classes/App-Proj-Room.html#property_actions"
+        },                {
+            "fqsen": "\\App\\Proj\\RoomHandler",
+            "name": "RoomHandler",
+            "summary": "",
+            "url": "classes/App-Proj-RoomHandler.html"
+        },                {
+            "fqsen": "\\App\\Proj\\RoomHandler\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "",
+            "url": "classes/App-Proj-RoomHandler.html#method___construct"
+        },                {
+            "fqsen": "\\App\\Proj\\RoomHandler\u003A\u003AroomName\u0028\u0029",
+            "name": "roomName",
+            "summary": "",
+            "url": "classes/App-Proj-RoomHandler.html#method_roomName"
+        },                {
+            "fqsen": "\\App\\Proj\\RoomHandler\u003A\u003AgetRooms\u0028\u0029",
+            "name": "getRooms",
+            "summary": "",
+            "url": "classes/App-Proj-RoomHandler.html#method_getRooms"
+        },                {
+            "fqsen": "\\App\\Proj\\RoomHandler\u003A\u003A\u0024rooms",
+            "name": "rooms",
+            "summary": "",
+            "url": "classes/App-Proj-RoomHandler.html#property_rooms"
+        },                {
             "fqsen": "\\App\\Repository\\BookRepository",
             "name": "BookRepository",
             "summary": "",
@@ -795,6 +970,11 @@ Search.appendIndex(
             "name": "App",
             "summary": "",
             "url": "namespaces/app.html"
+        },                {
+            "fqsen": "\\App\\Proj",
+            "name": "Proj",
+            "summary": "",
+            "url": "namespaces/app-proj.html"
         },                {
             "fqsen": "\\App\\Repository",
             "name": "Repository",

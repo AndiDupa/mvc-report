@@ -42,7 +42,7 @@ class RoomHandlerTest extends TestCase
         $res = $roomHandler->roomName("bedroom");
 
         $this->assertInstanceOf("\App\Proj\Room", $res);
-        $this->assertEquals($res->image, "img/proj_rooms/image_1.png");
+        $this->assertEquals($res->image, "img/proj_rooms/image_1_with_key.png");
     }
 
     /**
