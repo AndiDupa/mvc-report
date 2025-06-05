@@ -116,7 +116,6 @@ class ProjectApiController extends AbstractController
         $room = strtolower((string) $request->request->get("room"));
         $inventory = strtolower((string) $request->request->get("inventory"));
 
-        $arrInventory = [];
         $data = [];
 
         if ($inventory === "" || $room === "") {
